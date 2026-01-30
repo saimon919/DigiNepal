@@ -1,11 +1,11 @@
-
 import { useEffect, useState } from 'react';
 import { ShoppingBag } from 'lucide-react';
 import { useCartStore } from '../store/useCartStore';
 import { Link } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
 
 interface Product {
-    id: number;
+    id: string;
     name: string;
     price: number;
     image: string;
@@ -17,10 +17,20 @@ export default function Store() {
     const addToCart = useCartStore(state => state.addToCart);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:3001/api/products')
-            .then(res => res.json())
-            .then(data => setProducts(data))
-            .catch(err => console.error("Failed to fetch products", err));
+        const fetchProducts = async () => {
+            const { data, error } = await supabase
+                .from('products')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error("Failed to fetch products", error);
+            } else {
+                setProducts(data || []);
+            }
+        };
+
+        fetchProducts();
     }, []);
 
     return (
