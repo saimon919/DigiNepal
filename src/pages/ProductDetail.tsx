@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ChevronLeft, Download, Zap } from 'lucide-react';
 import { useCartStore } from '../store/useCartStore';
+import { supabase } from '../lib/supabase';
 
 export default function ProductDetail() {
     const { id } = useParams();
@@ -12,23 +12,26 @@ export default function ProductDetail() {
     const addToCart = useCartStore(state => state.addToCart);
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/products')
-            .then(res => res.json())
-            .then(products => {
-                const found = products.find((p: any) => p.id === Number(id));
-                if (found) {
-                    setProduct(found);
-                    setMainImage(found.image);
-                } else {
-                    setProduct(null);
-                }
-                setLoading(false);
-            })
-            .catch(err => {
-                console.error("Detail Fetch Error:", err);
-                setLoading(false);
+        const fetchProduct = async () => {
+            if (!id) return;
+
+            const { data, error } = await supabase
+                .from('products')
+                .select('*')
+                .eq('id', id)
+                .single();
+
+            if (error) {
+                console.error("Detail Fetch Error:", error);
                 setProduct(null);
-            });
+            } else {
+                setProduct(data);
+                setMainImage(data.image);
+            }
+            setLoading(false);
+        };
+
+        fetchProduct();
     }, [id]);
 
     if (loading) return (
