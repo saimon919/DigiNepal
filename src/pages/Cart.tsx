@@ -1,9 +1,9 @@
-
 import { useState } from 'react';
 import { useCartStore } from '../store/useCartStore';
 import { useAuthStore } from '../store/useAuthStore';
 import { Trash2, Minus, Plus, ShoppingBag, Upload, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
 
 export default function Cart() {
     const { cart, removeFromCart, addToCart, decrementQuantity, total, clearCart } = useCartStore();
@@ -16,18 +16,24 @@ export default function Cart() {
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files?.[0]) return;
         setUploading(true);
-        const formData = new FormData();
-        formData.append('file', e.target.files[0]);
+        const file = e.target.files[0];
+        const fileExt = file.name.split('.').pop();
+        const fileName = `receipt-${Date.now()}.${fileExt}`;
 
         try {
-            const res = await fetch('http://127.0.0.1:3001/api/upload', {
-                method: 'POST',
-                body: formData
-            });
-            const data = await res.json();
-            setScreenshotUrl(data.url);
-        } catch (err) {
-            alert("Upload failed. Try again.");
+            const { error: uploadError } = await supabase.storage
+                .from('assets')
+                .upload(fileName, file);
+
+            if (uploadError) throw uploadError;
+
+            const { data: { publicUrl } } = supabase.storage
+                .from('assets')
+                .getPublicUrl(fileName);
+
+            setScreenshotUrl(publicUrl);
+        } catch (err: any) {
+            alert("Upload failed: " + err.message);
         } finally {
             setUploading(false);
         }
@@ -39,31 +45,25 @@ export default function Cart() {
             return;
         }
 
-        const orderData = {
-            customerName: user?.name || 'Guest',
-            customerEmail: user?.email || 'guest@example.com',
-            items: cart,
-            total: total(),
-            screenshot: screenshotUrl,
-        };
-
         setUploading(true);
         try {
-            const res = await fetch('http://127.0.0.1:3001/api/orders', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(orderData)
-            });
-            if (res.ok) {
-                setStep('completed');
-                clearCart();
-            } else {
-                const errorData = await res.json();
-                alert("Server Error: " + (errorData.message || "Could not save order."));
-            }
-        } catch (err) {
+            const { error } = await supabase
+                .from('orders')
+                .insert([{
+                    customer_email: user?.email || 'guest@example.com',
+                    total: total(),
+                    screenshot: screenshotUrl,
+                    status: 'Pending',
+                    items: cart // Saving items directly in orders table
+                }]);
+
+            if (error) throw error;
+
+            setStep('completed');
+            clearCart();
+        } catch (err: any) {
             console.error("Submission Error:", err);
-            alert("Connection Error: Make sure your server is running on port 3001. (Try refreshing)");
+            alert("Failed to submit order: " + err.message);
         } finally {
             setUploading(false);
         }
@@ -132,8 +132,8 @@ export default function Cart() {
                             onClick={handleFinalSubmit}
                             title={!screenshotUrl ? "Please upload your payment screenshot first" : ""}
                             className={`w-full py-5 md:py-6 rounded-2xl font-black text-lg md:text-xl transition-all shadow-xl ${!screenshotUrl || uploading
-                                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed shadow-none'
-                                    : 'bg-primary text-white shadow-primary/20 hover:scale-[1.02]'
+                                ? 'bg-gray-100 text-gray-400 cursor-not-allowed shadow-none'
+                                : 'bg-primary text-white shadow-primary/20 hover:scale-[1.02]'
                                 }`}
                         >
                             {uploading ? 'Processing...' : 'Submit Order'}
