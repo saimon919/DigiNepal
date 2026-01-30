@@ -37,9 +37,9 @@ export default function AdminDashboard() {
     const { user } = useAuthStore();
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/products').then(res => res.json()).then(setProducts);
-        fetch('http://localhost:3001/api/users').then(res => res.json()).then(setUsersList);
-        fetch('http://localhost:3001/api/orders').then(res => res.json()).then(setOrders);
+        fetch('http://127.0.0.1:3001/api/products').then(res => res.json()).then(setProducts);
+        fetch('http://127.0.0.1:3001/api/users').then(res => res.json()).then(setUsersList);
+        fetch('http://127.0.0.1:3001/api/orders').then(res => res.json()).then(setOrders);
     }, []);
 
     // File Upload Handler
@@ -48,7 +48,7 @@ export default function AdminDashboard() {
         formData.append('file', file);
 
         try {
-            const res = await fetch('http://localhost:3001/api/upload', {
+            const res = await fetch('http://127.0.0.1:3001/api/upload', {
                 method: 'POST',
                 body: formData
             });
@@ -113,7 +113,7 @@ export default function AdminDashboard() {
             price: parseFloat(newProduct.price)
         };
 
-        const res = await fetch('http://localhost:3001/api/products', {
+        const res = await fetch('http://127.0.0.1:3001/api/products', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(product)
@@ -125,13 +125,13 @@ export default function AdminDashboard() {
     };
 
     const handleDelete = async (id: number) => {
-        await fetch(`http://localhost:3001/api/products/${id}`, { method: 'DELETE' });
+        await fetch(`http://127.0.0.1:3001/api/products/${id}`, { method: 'DELETE' });
         setProducts(products.filter(p => p.id !== id));
     };
 
     const handleApproveOrder = async (orderId: number) => {
         try {
-            const res = await fetch(`http://localhost:3001/api/orders/${orderId}/approve`, { method: 'PUT' });
+            const res = await fetch(`http://127.0.0.1:3001/api/orders/${orderId}/approve`, { method: 'PUT' });
             if (res.ok) {
                 setOrders(orders.map(o => o.id === orderId ? { ...o, status: 'Approved' } : o));
             }
@@ -257,8 +257,8 @@ export default function AdminDashboard() {
                 )}
 
                 {activeTab === 'Orders' && (
-                    <div className="bg-white rounded-3xl shadow-soft p-8">
-                        <h3 className="font-bold text-primary tracking-widest uppercase text-sm mb-8">Pending Payments</h3>
+                    <div className="bg-white rounded-3xl shadow-soft p-8 text-center sm:text-left">
+                        <h3 className="font-bold text-primary tracking-widest uppercase text-sm mb-8 px-2">Pending Payments</h3>
                         <div className="overflow-x-auto">
                             <table className="w-full min-w-[800px]">
                                 <thead>
@@ -268,13 +268,13 @@ export default function AdminDashboard() {
                                         <th className="pb-4">Total</th>
                                         <th className="pb-4">Screenshot</th>
                                         <th className="pb-4">Status</th>
-                                        <th className="pb-4 text-right">Action</th>
+                                        <th className="pb-4 text-right pr-4">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {orders.map(o => (
                                         <tr key={o.id} className="border-b last:border-0 hover:bg-gray-50 transition-colors">
-                                            <td className="py-6 font-mono text-sm">#{o.id.toString().slice(-6)}</td>
+                                            <td className="py-6 font-mono text-sm pl-2">#{o.id.toString().slice(-6)}</td>
                                             <td className="py-6 italic">{o.customerEmail}</td>
                                             <td className="py-6 font-bold text-primary">${o.total?.toFixed(2)}</td>
                                             <td className="py-6">
@@ -287,7 +287,7 @@ export default function AdminDashboard() {
                                                     {o.status}
                                                 </span>
                                             </td>
-                                            <td className="py-6 text-right">
+                                            <td className="py-6 text-right pr-4">
                                                 {o.status === 'Pending' && (
                                                     <button
                                                         onClick={() => handleApproveOrder(o.id)}
@@ -296,6 +296,43 @@ export default function AdminDashboard() {
                                                         <Check size={14} /> Approve
                                                     </button>
                                                 )}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === 'Customers' && (
+                    <div className="bg-white rounded-3xl shadow-soft p-8 text-center sm:text-left">
+                        <h3 className="font-bold text-primary tracking-widest uppercase text-sm mb-8 px-2">Customer List</h3>
+                        <div className="overflow-x-auto">
+                            <table className="w-full min-w-[700px]">
+                                <thead>
+                                    <tr className="text-left text-text-dim text-[10px] uppercase font-black border-b tracking-widest">
+                                        <th className="pb-4 pl-4">Customer ID</th>
+                                        <th className="pb-4">Email Address</th>
+                                        <th className="pb-4">Status</th>
+                                        <th className="pb-4 text-right pr-4">Role</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {usersList.map(u => (
+                                        <tr key={u.id} className="border-b last:border-0 hover:bg-gray-50 transition-colors">
+                                            <td className="py-6 pl-4 font-mono text-xs">USER-{u.id}</td>
+                                            <td className="py-6 font-bold text-text-main">{u.email}</td>
+                                            <td className="py-6">
+                                                <span className="flex items-center gap-2 text-[10px] font-black uppercase text-green-500">
+                                                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                                                    Active
+                                                </span>
+                                            </td>
+                                            <td className="py-6 text-right pr-4">
+                                                <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase ${u.role === 'admin' ? 'bg-primary text-white shadow-md' : 'bg-bg text-text-dim'}`}>
+                                                    {u.role}
+                                                </span>
                                             </td>
                                         </tr>
                                     ))}
