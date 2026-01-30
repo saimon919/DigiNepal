@@ -3,11 +3,12 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export interface Product {
-    id: number;
+    id: string;
     name: string;
     price: number;
     image: string;
     category: string;
+    downloadUrl?: string; // Added this to support direct download from cart if needed
 }
 
 interface CartItem extends Product {
@@ -17,8 +18,8 @@ interface CartItem extends Product {
 interface CartState {
     cart: CartItem[];
     addToCart: (product: Product) => void;
-    removeFromCart: (productId: number) => void;
-    decrementQuantity: (productId: number) => void;
+    removeFromCart: (productId: string) => void;
+    decrementQuantity: (productId: string) => void;
     clearCart: () => void;
     total: () => number;
 }
