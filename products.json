@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1769768915305,
+    "name": "Store management",
+    "price": 70,
+    "category": "Software/App",
+    "image": "http://localhost:3001/uploads/1769768896338-377899471.png",
+    "description": "app which will help you to manage your store",
+    "additionalImages": [
+      "http://localhost:3001/uploads/1769768906288-383973286.png",
+      "http://localhost:3001/uploads/1769768906306-926530115.png",
+      "http://localhost:3001/uploads/1769768906324-948711454.png",
+      "http://localhost:3001/uploads/1769768906345-120525122.png",
+      "http://localhost:3001/uploads/1769768906362-526455214.png",
+      "http://localhost:3001/uploads/1769768906377-951597025.png"
+    ],
+    "downloadUrl": "http://localhost:3001/uploads/1769768913707-862382610.exe"
+  },
+  {
+    "id": 1769769819786,
+    "name": "try",
+    "price": 0,
+    "category": "AI Thumbnail",
+    "image": "http://localhost:3001/uploads/1769769816037-932672829.png",
+    "description": "dfhfg",
+    "additionalImages": [],
+    "downloadUrl": "http://localhost:3001/uploads/1769769818884-676660850.png"
+  }
+]

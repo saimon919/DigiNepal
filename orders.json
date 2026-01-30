@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1769770566488,
+    "status": "Approved",
+    "date": "2026-01-30",
+    "customerName": "Guest",
+    "customerEmail": "guest@example.com",
+    "items": [
+      {
+        "id": 1769769819786,
+        "name": "try",
+        "price": 0,
+        "category": "AI Thumbnail",
+        "image": "http://localhost:3001/uploads/1769769816037-932672829.png",
+        "description": "dfhfg",
+        "additionalImages": [],
+        "downloadUrl": "http://localhost:3001/uploads/1769769818884-676660850.png",
+        "quantity": 1
+      }
+    ],
+    "total": 0,
+    "screenshot": "http://localhost:3001/uploads/1769770565373-354485669.png"
+  },
+  {
+    "id": 1769770931417,
+    "status": "Approved",
+    "date": "2026-01-30",
+    "customerName": "Admin",
+    "customerEmail": "admin@diginepal.com",
+    "items": [
+      {
+        "id": 1769769819786,
+        "name": "try",
+        "price": 0,
+        "category": "AI Thumbnail",
+        "image": "http://localhost:3001/uploads/1769769816037-932672829.png",
+        "description": "dfhfg",
+        "additionalImages": [],
+        "downloadUrl": "http://localhost:3001/uploads/1769769818884-676660850.png",
+        "quantity": 2
+      }
+    ],
+    "total": 0,
+    "screenshot": "http://localhost:3001/uploads/1769770929679-720810536.png"
+  }
+]
