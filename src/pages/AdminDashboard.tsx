@@ -144,7 +144,10 @@ export default function AdminDashboard() {
         <div className="flex flex-col lg:flex-row min-h-screen bg-[#F8F9FE]">
             {/* Sidebar / Bottom Nav on Mobile */}
             <aside className="fixed bottom-0 left-0 right-0 lg:left-0 lg:top-0 lg:bottom-0 lg:w-64 bg-white border-t lg:border-r border-gray-100 flex lg:flex-col items-center lg:items-start py-4 lg:py-8 px-6 lg:px-6 gap-8 z-50 h-20 lg:h-full overflow-x-auto no-scrollbar">
-                <div className="hidden lg:block text-primary font-black text-2xl mb-4 italic">DIGINEPAL</div>
+                <div className="hidden lg:flex items-center gap-3 text-primary font-black text-2xl mb-4 italic">
+                    <img src="/logo.png" alt="Logo" className="w-8 h-8 object-contain" />
+                    DIGINEPAL
+                </div>
                 <nav className="flex lg:flex-col items-center gap-2 w-full flex-1">
                     {[
                         { label: 'Dashboard', icon: <LayoutDashboard size={20} /> },
