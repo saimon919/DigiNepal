@@ -15,8 +15,8 @@ export default function Layout() {
 
                     {/* Logo */}
                     <Link to="/" className="font-display font-bold text-lg md:text-xl text-primary tracking-tight flex items-center gap-2 shrink-0">
-                        <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-xs">DN</div>
-                        <span className="hidden xs:block">DigiNepal</span>
+                        <img src="/logo.png" alt="Logo" className="w-8 h-8 md:w-10 md:h-10 object-contain rounded-lg" />
+                        <span className="hidden xs:block">Diginepal</span>
                     </Link>
 
                     {/* Links - Hidden on small mobile, scrollable on tablet */}
