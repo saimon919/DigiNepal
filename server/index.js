@@ -14,6 +14,7 @@ if (rootDir.endsWith('server')) rootDir = path.join(rootDir, '..');
 const uploadDir = path.resolve(rootDir, 'uploads');
 const productsFile = path.resolve(rootDir, 'products.json');
 const ordersFile = path.resolve(rootDir, 'orders.json');
+const usersFile = path.resolve(rootDir, 'users.json');
 
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 
@@ -28,18 +29,27 @@ if (fs.existsSync(ordersFile)) {
     try { orders = JSON.parse(fs.readFileSync(ordersFile, 'utf8')); } catch (e) { }
 }
 
+let users = [];
+if (fs.existsSync(usersFile)) {
+    try { users = JSON.parse(fs.readFileSync(usersFile, 'utf8')); } catch (e) { }
+} else {
+    // Initial Seed
+    users = [
+        { id: 1, name: 'Admin', email: 'admin@diginepal.com', password: 'admin', role: 'admin' },
+        { id: 2, name: 'User', email: 'user@diginepal.com', password: 'user', role: 'user' }
+    ];
+    fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
+}
+
 const saveProducts = () => {
     try { fs.writeFileSync(productsFile, JSON.stringify(products, null, 2)); } catch (e) { console.error("Save Products Failed", e); }
 };
 const saveOrders = () => {
     try { fs.writeFileSync(ordersFile, JSON.stringify(orders, null, 2)); } catch (e) { console.error("Save Orders Failed", e); }
 };
-
-// AUTH DATA
-let users = [
-    { id: 1, name: 'Admin', email: 'admin@diginepal.com', password: 'admin', role: 'admin' },
-    { id: 2, name: 'User', email: 'user@diginepal.com', password: 'user', role: 'user' }
-];
+const saveUsers = () => {
+    try { fs.writeFileSync(usersFile, JSON.stringify(users, null, 2)); } catch (e) { console.error("Save Users Failed", e); }
+};
 
 app.use(cors());
 app.use(express.json());
@@ -110,6 +120,10 @@ app.get('/api/orders/user/:email', (req, res) => {
     const userOrders = orders.filter(o => o.customerEmail === req.params.email);
     res.json(userOrders);
 });
+
+// Users
+app.get('/api/users', (req, res) => res.json(users));
+
 app.put('/api/orders/:id/approve', (req, res) => {
     const order = orders.find(o => o.id == req.params.id);
     if (order) {
