@@ -1,7 +1,7 @@
-
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
+import { supabase } from '../lib/supabase';
 
 export default function Login() {
     const [isSignup, setIsSignup] = useState(false);
@@ -10,38 +10,54 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const login = useAuthStore((state) => state.login);
+    const setAuth = useAuthStore((state) => state.setAuth);
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
 
-        const endpoint = isSignup ? '/api/signup' : '/api/login';
-        const payload = isSignup ? { name, email, password } : { email, password };
-
         try {
-            const res = await fetch(`http://localhost:3001${endpoint}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
+            if (isSignup) {
+                const { data, error: signupError } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: { name }
+                    }
+                });
 
-            const data = await res.json();
-
-            if (data.success) {
-                login(data.user);
-                // Correct redirection based on role
-                if (data.user.role === 'admin') {
-                    navigate('/admin');
-                } else {
-                    navigate('/');
+                if (signupError) throw signupError;
+                if (data.user) {
+                    const isAdmin = data.user.email === 'admin@diginepal.com';
+                    setAuth({
+                        id: data.user.id,
+                        email: data.user.email || '',
+                        role: isAdmin ? 'admin' : 'user',
+                        name: name
+                    });
+                    navigate(isAdmin ? '/admin' : '/');
                 }
             } else {
-                setError(data.message || 'Authentication failed');
+                const { data, error: loginError } = await supabase.auth.signInWithPassword({
+                    email,
+                    password,
+                });
+
+                if (loginError) throw loginError;
+                if (data.user) {
+                    const isAdmin = data.user.email === 'admin@diginepal.com';
+                    setAuth({
+                        id: data.user.id,
+                        email: data.user.email || '',
+                        role: isAdmin ? 'admin' : 'user',
+                        name: data.user.user_metadata?.name || data.user.email?.split('@')[0] || 'User'
+                    });
+                    navigate(isAdmin ? '/admin' : '/');
+                }
             }
-        } catch (err) {
-            setError('Connection error. Is the server running?');
+        } catch (err: any) {
+            setError(err.message || 'Authentication failed');
         }
     };
 
