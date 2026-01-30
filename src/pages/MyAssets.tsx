@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import { useAuthStore } from '../store/useAuthStore';
 import { Download, ShoppingBag, Clock, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
 
 export default function MyAssets() {
     const { user } = useAuthStore();
@@ -10,18 +10,24 @@ export default function MyAssets() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        if (user?.email) {
-            fetch(`http://127.0.0.1:3001/api/orders/user/${user.email}`)
-                .then(res => res.json())
-                .then(data => {
-                    setOrders(data);
-                    setLoading(false);
-                })
-                .catch(err => {
-                    console.error("Failed to fetch assets", err);
-                    setLoading(false);
-                });
-        }
+        const fetchAssets = async () => {
+            if (!user?.email) return;
+
+            const { data, error } = await supabase
+                .from('orders')
+                .select('*')
+                .eq('customer_email', user.email)
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error("Failed to fetch assets", error);
+            } else {
+                setOrders(data || []);
+            }
+            setLoading(false);
+        };
+
+        fetchAssets();
     }, [user]);
 
     if (loading) return <div className="text-center py-20 font-bold text-primary animate-pulse">Loading your library...</div>;
