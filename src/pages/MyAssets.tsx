@@ -11,13 +11,16 @@ export default function MyAssets() {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3001/api/orders/user/${user.email}`)
+            fetch(`http://127.0.0.1:3001/api/orders/user/${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     setOrders(data);
                     setLoading(false);
                 })
-                .catch(() => setLoading(false));
+                .catch(err => {
+                    console.error("Failed to fetch assets", err);
+                    setLoading(false);
+                });
         }
     }, [user]);
 
