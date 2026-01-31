@@ -1,6 +1,16 @@
-import { Mail, Send, Headphones, MessageSquare, Instagram, Music2, Share2, Ghost } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Send, Headphones, MessageSquare, Instagram, Music2, Share2, Ghost, CheckCircle } from 'lucide-react';
 
 export default function Contact() {
+    const [submitted, setSubmitted] = useState(false);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        setSubmitted(true);
+        // Reset after 5 seconds
+        setTimeout(() => setSubmitted(false), 5000);
+    };
+
     return (
         <div className="bg-white min-h-screen relative overflow-hidden font-sans">
             {/* Background Dotted Map Pattern */}
@@ -14,7 +24,6 @@ export default function Contact() {
                 {/* World Map SVG or Illustration Placeholder */}
                 <div className="absolute inset-0 flex items-center justify-center -translate-y-20 opacity-20">
                     <svg viewBox="0 0 1000 500" className="w-[1200px] h-auto fill-primary">
-                        {/* Simplified dotted world map logic could go here, or just use markers */}
                         <circle cx="200" cy="150" r="4" className="animate-pulse" />
                         <circle cx="450" cy="220" r="4" className="animate-pulse" />
                         <circle cx="780" cy="350" r="4" className="animate-pulse" />
@@ -38,7 +47,18 @@ export default function Contact() {
                     <h1 className="text-5xl md:text-7xl font-display font-black text-primary tracking-tighter">CONTACT US</h1>
                 </div>
 
-                <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-stretch justify-center gap-0 bg-white rounded-[3rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] border border-gray-50 overflow-hidden">
+                <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-stretch justify-center gap-0 bg-white rounded-[3rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)] border border-gray-50 overflow-hidden relative">
+
+                    {/* Success Message Overlay */}
+                    {submitted && (
+                        <div className="absolute inset-0 z-50 bg-white/90 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center">
+                            <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-6 animate-bounce">
+                                <CheckCircle size={40} />
+                            </div>
+                            <h2 className="text-3xl font-black text-primary mb-2">Message Sent!</h2>
+                            <p className="text-text-dim max-w-sm">Thank you for reaching out. Our team will get back to you within 24 hours.</p>
+                        </div>
+                    )}
 
                     {/* Left: Message Form */}
                     <div className="flex-[1.8] p-8 md:p-16">
@@ -47,22 +67,22 @@ export default function Contact() {
                             <p className="text-text-dim text-sm leading-relaxed max-w-md">Do you have a question? Complaints? or need any help to choose the right product from DigiNepal? Feel free to contact us.</p>
                         </div>
 
-                        <form className="space-y-8">
+                        <form onSubmit={handleSubmit} className="space-y-8">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-text-dim tracking-widest pl-1">First Name</label>
-                                    <input type="text" placeholder="Enter your first name" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
+                                    <input required type="text" placeholder="Enter your first name" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-text-dim tracking-widest pl-1">Last Name</label>
-                                    <input type="text" placeholder="Enter your last name" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
+                                    <input required type="text" placeholder="Enter your last name" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-text-dim tracking-widest pl-1">Email</label>
-                                    <input type="email" placeholder="Enter your email" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
+                                    <input required type="email" placeholder="Enter your email" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-text-dim tracking-widest pl-1">Contact Details</label>
@@ -78,11 +98,11 @@ export default function Contact() {
 
                             <div className="space-y-2">
                                 <label className="text-[10px] font-black uppercase text-text-dim tracking-widest pl-1">Email / Message</label>
-                                <textarea placeholder="Enter your message" className="w-full bg-bg rounded-3xl p-6 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium h-48 resize-none" />
+                                <textarea required placeholder="Enter your message" className="w-full bg-bg rounded-3xl p-6 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium h-48 resize-none" />
                             </div>
 
                             <div className="pt-4 text-center md:text-left">
-                                <button className="bg-primary text-white px-12 py-5 rounded-full font-black text-sm uppercase tracking-widest shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
+                                <button type="submit" className="bg-primary text-white px-12 py-5 rounded-full font-black text-sm uppercase tracking-widest shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
                                     Send Message
                                     <Send size={18} />
                                 </button>
@@ -138,6 +158,7 @@ export default function Contact() {
                                     { icon: <Ghost size={18} />, color: 'hover:bg-[#FFFC00] hover:text-black' },
                                     { icon: <Instagram size={18} />, color: 'hover:bg-[#E4405F]' },
                                     { icon: <Music2 size={18} />, color: 'hover:bg-[#000000]' },
+                                    { icon: <Music2 size={18} />, color: 'hover:bg-[#25D366]' },
                                     { icon: <Share2 size={18} />, color: 'hover:bg-blue-400' }
                                 ].map((social, i) => (
                                     <a key={i} className={`w-10 h-10 rounded-full bg-white/10 flex items-center justify-center transition-all cursor-pointer shadow-lg ${social.color}`}>
@@ -152,4 +173,3 @@ export default function Contact() {
         </div>
     );
 }
-
