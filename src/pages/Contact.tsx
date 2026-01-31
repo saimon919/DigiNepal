@@ -3,12 +3,20 @@ import { Mail, Send, Headphones, MessageSquare, Instagram, Music2, Share2, Ghost
 
 export default function Contact() {
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = async (e?: React.FormEvent | React.MouseEvent) => {
+        if (e) e.preventDefault();
+
+        setLoading(true);
+        // Simulate an API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
         setSubmitted(true);
-        // Reset after 5 seconds
-        setTimeout(() => setSubmitted(false), 5000);
+        setLoading(false);
+
+        // Reset after 8 seconds
+        setTimeout(() => setSubmitted(false), 8000);
     };
 
     return (
@@ -51,12 +59,21 @@ export default function Contact() {
 
                     {/* Success Message Overlay */}
                     {submitted && (
-                        <div className="absolute inset-0 z-50 bg-white/90 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center">
-                            <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-6 animate-bounce">
-                                <CheckCircle size={40} />
+                        <div className="absolute inset-0 z-50 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center animate-in fade-in zoom-in duration-300">
+                            <div className="w-24 h-24 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-6 shadow-xl shadow-green-200/50">
+                                <CheckCircle size={48} className="animate-[bounce_2s_infinite]" />
                             </div>
-                            <h2 className="text-3xl font-black text-primary mb-2">Message Sent!</h2>
-                            <p className="text-text-dim max-w-sm">Thank you for reaching out. Our team will get back to you within 24 hours.</p>
+                            <h2 className="text-4xl font-black text-primary mb-3">Message Received!</h2>
+                            <p className="text-text-dim text-lg max-w-sm leading-relaxed">
+                                We've got your message, Saimon! <br />
+                                Our team will get back to you at <strong>Pokhara</strong> office or via email within 24 hours.
+                            </p>
+                            <button
+                                onClick={() => setSubmitted(false)}
+                                className="mt-8 text-secondary font-bold hover:underline"
+                            >
+                                Send another message
+                            </button>
                         </div>
                     )}
 
@@ -91,7 +108,7 @@ export default function Contact() {
                                             <span>🇳🇵</span>
                                             <span>+977</span>
                                         </div>
-                                        <input type="tel" placeholder="Enter your number" className="flex-1 bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
+                                        <input required type="tel" placeholder="Enter your number" className="flex-1 bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
                                     </div>
                                 </div>
                             </div>
@@ -102,9 +119,13 @@ export default function Contact() {
                             </div>
 
                             <div className="pt-4 text-center md:text-left">
-                                <button type="submit" className="bg-primary text-white px-12 py-5 rounded-full font-black text-sm uppercase tracking-widest shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
-                                    Send Message
-                                    <Send size={18} />
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className={`bg-primary text-white px-12 py-5 rounded-full font-black text-sm uppercase tracking-widest shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                >
+                                    {loading ? 'Sending...' : 'Send Message'}
+                                    <Send size={18} className={loading ? 'animate-pulse' : ''} />
                                 </button>
                             </div>
                         </form>
@@ -145,7 +166,7 @@ export default function Contact() {
                                     </div>
                                     <div className="space-y-1">
                                         <p className="text-[10px] font-black uppercase tracking-widest text-white/40">Email :</p>
-                                        <p className="font-bold text-lg">sunarsaimon.43244@gmail.com</p>
+                                        <p className="font-bold text-lg text-sm truncate">sunarsaimon.43244@gmail.com</p>
                                     </div>
                                 </div>
                             </div>
