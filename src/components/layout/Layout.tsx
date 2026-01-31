@@ -24,7 +24,8 @@ export default function Layout() {
                         {[
                             { name: 'Home', path: '/' },
                             { name: 'Store', path: '/store' },
-                            { name: 'Library', path: '/my-assets' }
+                            { name: 'Library', path: '/my-assets' },
+                            { name: 'Contact', path: '/contact' }
                         ].map((item) => {
                             const isActive = location.pathname === item.path;
                             return (
