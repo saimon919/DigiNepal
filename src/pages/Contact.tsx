@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Send, Headphones, MessageSquare, Instagram, Music2, Share2, Ghost } from 'lucide-react';
+import { Mail, Send, Headphones, MessageSquare, Instagram, Music2, Share2, Ghost } from 'lucide-react';
 
 export default function Contact() {
     return (
