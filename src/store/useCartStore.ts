@@ -8,7 +8,7 @@ export interface Product {
     price: number;
     image: string;
     category: string;
-    downloadUrl?: string; // Added this to support direct download from cart if needed
+    download_url?: string; // Standardized to match Supabase snake_case
 }
 
 interface CartItem extends Product {
