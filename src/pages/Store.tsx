@@ -10,6 +10,7 @@ interface Product {
     price: number;
     image: string;
     category: string;
+    download_url?: string;
 }
 
 export default function Store() {
