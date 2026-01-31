@@ -299,7 +299,7 @@ export default function AdminDashboard() {
                                                     <span className="font-bold text-text-main">{p.name}</span>
                                                 </div>
                                             </td>
-                                            <td className="py-4 font-bold text-primary">${p.price}</td>
+                                            <td className="py-4 font-bold text-primary">Rs. {p.price}</td>
                                             <td className="py-4"><span className="text-[10px] bg-bg px-3 py-1 rounded-full font-black uppercase text-text-dim">{p.category}</span></td>
                                             <td className="py-4 text-right pr-4">
                                                 <button onClick={() => handleDelete(p.id)} className="text-gray-300 hover:text-red-500 p-2 hover:bg-red-50 rounded-xl transition-all">
@@ -334,7 +334,7 @@ export default function AdminDashboard() {
                                         <tr key={o.id} className="border-b last:border-0 hover:bg-gray-50 transition-colors">
                                             <td className="py-6 font-mono text-sm pl-2">#{o.id.toString().slice(-6)}</td>
                                             <td className="py-6 italic">{o.customer_email}</td>
-                                            <td className="py-6 font-bold text-primary">${o.total?.toFixed(2)}</td>
+                                            <td className="py-6 font-bold text-primary">Rs. {o.total?.toLocaleString()}</td>
                                             <td className="py-6">
                                                 <a href={o.screenshot} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-accent font-bold hover:underline">
                                                     <ExternalLink size={14} /> View Slip
@@ -417,7 +417,7 @@ export default function AdminDashboard() {
                                         <input className="w-full bg-bg rounded-2xl p-5 border-none outline-none focus:ring-4 focus:ring-primary/5 transition-all" value={newProduct.name} onChange={e => setNewProduct({ ...newProduct, name: e.target.value })} required placeholder="High-End Boots Pack..." />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-[10px] font-black uppercase tracking-widest text-text-dim pl-1">Price ($)</label>
+                                        <label className="text-[10px] font-black uppercase tracking-widest text-text-dim pl-1">Price (Rs.)</label>
                                         <input type="number" step="0.01" className="w-full bg-bg rounded-2xl p-5 border-none outline-none focus:ring-4 focus:ring-primary/5 transition-all" value={newProduct.price} onChange={e => setNewProduct({ ...newProduct, price: e.target.value })} required placeholder="49.99" />
                                     </div>
                                     <div className="space-y-2">
