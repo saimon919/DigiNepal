@@ -96,7 +96,7 @@ export default function MyAssets() {
 
                                     {order.status === 'Approved' ? (
                                         <a
-                                            href={item.downloadUrl}
+                                            href={item.download_url || item.downloadUrl}
                                             className="flex items-center justify-center gap-3 w-full bg-primary text-white py-3 px-4 rounded-xl font-bold text-xs shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all"
                                             download
                                             target="_blank"
