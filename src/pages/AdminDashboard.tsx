@@ -473,18 +473,34 @@ export default function AdminDashboard() {
                                     </div>
 
                                     {/* Digital File Slot */}
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-black uppercase tracking-widest text-text-dim pl-1">Digital Asset Slot (ZIP/BLEND/FBX)</label>
-                                        <div className={`relative h-20 rounded-2xl border-2 border-dashed flex items-center justify-center transition-all cursor-pointer ${newProduct.downloadUrl ? 'bg-green-50 border-green-200 text-green-600' : 'bg-bg border-gray-200 text-text-dim hover:border-primary/30'}`}>
-                                            <div className="flex items-center gap-3">
-                                                {newProduct.downloadUrl ? <CheckCircleIcon className="text-green-500" /> : <FileText size={20} />}
-                                                <span className="text-sm font-bold">
-                                                    {newProduct.downloadUrl ? 'Asset Attached Successfully!' : `Choose ${newProduct.category} File`}
-                                                </span>
+                                    <div className="space-y-4">
+                                        <div className="space-y-2">
+                                            <label className="text-[10px] font-black uppercase tracking-widest text-text-dim pl-1">Digital Asset Slot (ZIP/BLEND/FBX)</label>
+                                            <div className={`relative h-20 rounded-2xl border-2 border-dashed flex items-center justify-center transition-all cursor-pointer ${newProduct.downloadUrl ? 'bg-green-50 border-green-200 text-green-600' : 'bg-bg border-gray-200 text-text-dim hover:border-primary/30'}`}>
+                                                <div className="flex items-center gap-3">
+                                                    {newProduct.downloadUrl ? <CheckCircleIcon className="text-green-500" /> : <FileText size={20} />}
+                                                    <span className="text-sm font-bold">
+                                                        {newProduct.downloadUrl ? 'Asset Attached Successfully!' : `Choose ${newProduct.category} File`}
+                                                    </span>
+                                                </div>
+                                                <input type="file" accept={getFileAccept()} onChange={handleDigitalFileChange} className="absolute inset-0 opacity-0 cursor-pointer" title={`Upload ${newProduct.category}`} />
                                             </div>
-                                            <input type="file" accept={getFileAccept()} onChange={handleDigitalFileChange} className="absolute inset-0 opacity-0 cursor-pointer" title={`Upload ${newProduct.category}`} />
+                                            <p className="text-[9px] text-text-dim italic px-2 text-center">Allowed: {getFileAccept().replace(/,/g, ', ')} (Limit 50MB)</p>
                                         </div>
-                                        <p className="text-[9px] text-text-dim italic px-2">Allowed: {getFileAccept().replace(/,/g, ', ')}</p>
+
+                                        <div className="relative py-2">
+                                            <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-100"></div></div>
+                                            <div className="relative flex justify-center text-[10px] uppercase font-black text-text-dim"><span className="bg-white px-4">OR use external link</span></div>
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <input
+                                                className="w-full bg-bg rounded-2xl p-4 border-none outline-none focus:ring-4 focus:ring-primary/5 transition-all text-xs"
+                                                placeholder="Paste Google Drive / Dropbox link here..."
+                                                value={newProduct.downloadUrl}
+                                                onChange={e => setNewProduct({ ...newProduct, downloadUrl: e.target.value })}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
 
