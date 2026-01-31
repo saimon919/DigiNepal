@@ -20,7 +20,7 @@ export default function Layout() {
                     </Link>
 
                     {/* Links - Hidden on small mobile, scrollable on tablet */}
-                    <div className="flex items-center gap-1 md:gap-1 bg-bg/50 p-1 rounded-full overflow-x-auto no-scrollbar max-w-[200px] sm:max-w-none">
+                    <div className="flex items-center gap-1 md:gap-1 bg-bg/50 p-1 rounded-full overflow-x-auto no-scrollbar sm:max-w-none">
                         {[
                             { name: 'Home', path: '/' },
                             { name: 'Store', path: '/store' },
