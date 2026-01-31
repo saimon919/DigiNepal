@@ -25,7 +25,7 @@ export default function Contact() {
                             <circle cx="700" cy="195" r="5" className="fill-accent" />
                             <foreignObject x="650" y="210" width="100" height="40">
                                 <div className="bg-primary text-white text-[8px] font-bold px-2 py-1 rounded-md shadow-lg text-center">
-                                    Kathmandu, Nepal
+                                    Pokhara, Nepal
                                 </div>
                             </foreignObject>
                         </g>
@@ -105,7 +105,7 @@ export default function Contact() {
                                     </div>
                                     <div className="space-y-1">
                                         <p className="text-[10px] font-black uppercase tracking-widest text-white/40">Hotline :</p>
-                                        <p className="font-bold text-lg">+977 1 234 5678</p>
+                                        <p className="font-bold text-lg">+977 9867309193</p>
                                     </div>
                                 </div>
 
@@ -115,7 +115,7 @@ export default function Contact() {
                                     </div>
                                     <div className="space-y-1">
                                         <p className="text-[10px] font-black uppercase tracking-widest text-white/40">SMS / Whatsapp :</p>
-                                        <p className="font-bold text-lg">+977 9801234567</p>
+                                        <p className="font-bold text-lg">+977 9867309193</p>
                                     </div>
                                 </div>
 
@@ -125,7 +125,7 @@ export default function Contact() {
                                     </div>
                                     <div className="space-y-1">
                                         <p className="text-[10px] font-black uppercase tracking-widest text-white/40">Email :</p>
-                                        <p className="font-bold text-lg">help@diginepal.com</p>
+                                        <p className="font-bold text-lg">sunarsaimon.43244@gmail.com</p>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +138,6 @@ export default function Contact() {
                                     { icon: <Ghost size={18} />, color: 'hover:bg-[#FFFC00] hover:text-black' },
                                     { icon: <Instagram size={18} />, color: 'hover:bg-[#E4405F]' },
                                     { icon: <Music2 size={18} />, color: 'hover:bg-[#000000]' },
-                                    { icon: <Music2 size={18} />, color: 'hover:bg-[#25D366]' },
                                     { icon: <Share2 size={18} />, color: 'hover:bg-blue-400' }
                                 ].map((social, i) => (
                                     <a key={i} className={`w-10 h-10 rounded-full bg-white/10 flex items-center justify-center transition-all cursor-pointer shadow-lg ${social.color}`}>
@@ -153,3 +152,4 @@ export default function Contact() {
         </div>
     );
 }
+
