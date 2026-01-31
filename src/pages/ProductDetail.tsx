@@ -113,8 +113,8 @@ export default function ProductDetail() {
                             {product.name}
                         </h1>
                         <div className="flex items-center gap-6 text-2xl font-bold">
-                            <span className="text-primary">${product.price}</span>
-                            <span className="text-text-dim line-through opacity-50">${(product.price * 1.5).toFixed(2)}</span>
+                            <span className="text-primary">Rs. {product.price}</span>
+                            <span className="text-text-dim line-through opacity-50">Rs. {Math.round(product.price * 1.5)}</span>
                         </div>
                     </div>
 
