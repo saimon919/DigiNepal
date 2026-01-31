@@ -19,8 +19,8 @@ export default function Layout() {
                         <span className="hidden xs:block">Diginepal</span>
                     </Link>
 
-                    {/* Links - Hidden on small mobile, scrollable on tablet */}
-                    <div className="flex items-center gap-1 md:gap-1 bg-bg/50 p-1 rounded-full overflow-x-auto no-scrollbar sm:max-w-none">
+                    {/* Links - Optimized for full visibility */}
+                    <div className="flex items-center gap-1 bg-bg/50 p-1 rounded-full">
                         {[
                             { name: 'Home', path: '/' },
                             { name: 'Store', path: '/store' },
@@ -32,7 +32,7 @@ export default function Layout() {
                                 <Link
                                     key={item.name}
                                     to={item.path}
-                                    className={`px-3 md:px-5 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-bold transition-all whitespace-nowrap ${isActive ? 'bg-white shadow-sm text-primary' : 'text-text-dim hover:text-text-main'
+                                    className={`px-3 md:px-5 py-1.5 md:py-2 rounded-full text-[10px] md:text-sm font-bold transition-all whitespace-nowrap ${isActive ? 'bg-white shadow-sm text-primary' : 'text-text-dim hover:text-text-main'
                                         }`}
                                 >
                                     {item.name}
