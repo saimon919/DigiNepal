@@ -107,7 +107,7 @@ export default function Cart() {
                         <div className="space-y-4 text-center md:text-left w-full">
                             <div className="space-y-1">
                                 <p className="text-[10px] font-black uppercase text-text-dim tracking-widest">Payable Amount</p>
-                                <p className="text-3xl md:text-4xl font-black text-primary">${total().toFixed(2)}</p>
+                                <p className="text-3xl md:text-4xl font-black text-primary">Rs. {total().toLocaleString()}</p>
                             </div>
                             <div className="space-y-3">
                                 <label className="block text-xs md:text-sm font-bold text-text-main">Upload Payment Screenshot</label>
@@ -173,7 +173,7 @@ export default function Cart() {
                             <div className="flex-1">
                                 <h3 className="font-bold text-xl mb-1">{item.name}</h3>
                                 <p className="text-text-dim text-sm mb-3 uppercase tracking-wider font-semibold">{item.category}</p>
-                                <p className="text-primary font-bold text-lg">${item.price}</p>
+                                <p className="text-primary font-bold text-lg">Rs. {item.price}</p>
                             </div>
                             <div className="flex flex-col items-end gap-6">
                                 <button onClick={() => removeFromCart(item.id)} className="text-gray-300 hover:text-red-500 p-2 hover:bg-red-50 rounded-xl transition-all"><Trash2 size={20} /></button>
@@ -190,8 +190,8 @@ export default function Cart() {
                     <div className="bg-white rounded-[2.5rem] p-10 shadow-soft border border-gray-100 sticky top-30 text-center">
                         <h2 className="text-2xl font-bold mb-8 font-display">Summary</h2>
                         <div className="space-y-6 mb-10">
-                            <div className="flex justify-between text-text-dim font-medium"><span>Subtotal</span><span>${total().toFixed(2)}</span></div>
-                            <div className="pt-6 border-t border-dashed flex justify-between font-bold text-2xl text-primary"><span>Total</span><span>${total().toFixed(2)}</span></div>
+                            <div className="flex justify-between text-text-dim font-medium"><span>Subtotal</span><span>Rs. {total().toLocaleString()}</span></div>
+                            <div className="pt-6 border-t border-dashed flex justify-between font-bold text-2xl text-primary"><span>Total</span><span>Rs. {total().toLocaleString()}</span></div>
                         </div>
                         <button onClick={() => setStep('payment')} className="w-full bg-primary text-white py-5 rounded-2xl font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all">
                             Complete Checkout
