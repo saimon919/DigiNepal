@@ -54,7 +54,7 @@ export default function Store() {
                             <h3 className="font-black text-lg mb-1 truncate text-text-main pr-10">{product.name}</h3>
                             <div className="flex justify-between items-center mt-2">
                                 <p className="text-[10px] bg-bg px-3 py-1 rounded-full font-black uppercase text-text-dim tracking-widest">{product.category}</p>
-                                <p className="text-xl font-display font-black text-primary">${product.price}</p>
+                                <p className="text-xl font-display font-black text-primary">Rs. {product.price}</p>
                             </div>
                         </div>
                     </div>
