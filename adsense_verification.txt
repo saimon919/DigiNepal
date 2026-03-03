@@ -1,0 +1,3 @@
+# AdSense Verification
+
+This commit adds verification code for AdSense.
