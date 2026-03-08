@@ -133,7 +133,7 @@ export default function Layout() {
 
             {/* Content with Page Transitions */}
             <main className="flex-1 pt-32 pb-20 px-6 max-w-[1600px] mx-auto w-full relative z-10">
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait" initial={false}>
                     <motion.div
                         key={location.pathname}
                         initial={{ opacity: 0, y: 15 }}
