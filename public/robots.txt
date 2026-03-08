@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin
+Disallow: /my-assets
+
+# Allow all content pages
+Allow: /store
+Allow: /guides
+Allow: /about
+Allow: /contact
+Allow: /privacy-policy
+Allow: /terms
+Allow: /dmca
+
+Sitemap: https://diginepal.vercel.app/sitemap.xml

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Admin",
+    "email": "admin@diginepal.com",
+    "password": "admin",
+    "role": "admin"
+  },
+  {
+    "id": 2,
+    "name": "User",
+    "email": "user@diginepal.com",
+    "password": "user",
+    "role": "user"
+  }
+]

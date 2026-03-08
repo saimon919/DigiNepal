@@ -57,7 +57,7 @@ export default function AdminDashboard() {
         switch (newProduct.category) {
             case 'Software/App': return '.exe,.msi,.zip,.dmg';
             case '3D Model': return '.obj,.fbx,.glb,.gltf,.zip,.blend';
-            case 'AI Thumbnail': return '.png,.jpg,.jpeg';
+            case 'Books PDF': return '.pdf';
             default: return '*';
         }
     };
@@ -429,7 +429,7 @@ export default function AdminDashboard() {
                                         >
                                             <option value="3D Model">3D Model (.obj, .fbx, .glb)</option>
                                             <option value="Software/App">Software (.exe, .app)</option>
-                                            <option value="AI Thumbnail">AI Thumbnail (.png, .jpg)</option>
+                                            <option value="Books PDF">Books PDF (.pdf)</option>
                                         </select>
                                     </div>
                                     <div className="space-y-2">
