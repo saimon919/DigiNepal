@@ -10,6 +10,11 @@ import About from './pages/About';
 import AdminDashboard from './pages/AdminDashboard';
 import ProductDetail from './pages/ProductDetail';
 import MyAssets from './pages/MyAssets';
+import Guides from './pages/Guides';
+import GuideDetail from './pages/GuideDetail';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
+import DMCA from './pages/DMCA';
 import { useAuthStore } from './store/useAuthStore';
 
 // Protected Route Component
@@ -46,6 +51,11 @@ function App() {
                     <Route path="cart" element={<Cart />} />
                     <Route path="contact" element={<Contact />} />
                     <Route path="about" element={<About />} />
+                    <Route path="guides" element={<Guides />} />
+                    <Route path="guides/:slug" element={<GuideDetail />} />
+                    <Route path="privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="terms" element={<TermsConditions />} />
+                    <Route path="dmca" element={<DMCA />} />
                     <Route path="product/:id" element={<ProductDetail />} />
                     <Route
                         path="my-assets"
