@@ -133,13 +133,13 @@ export default function Layout() {
 
             {/* Content with Page Transitions */}
             <main className="flex-1 pt-32 pb-20 px-6 max-w-[1600px] mx-auto w-full relative z-10">
-                <AnimatePresence mode="wait" initial={false}>
+                <AnimatePresence initial={false}>
                     <motion.div
                         key={location.pathname}
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -15 }}
-                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                     >
                         <Outlet />
                     </motion.div>

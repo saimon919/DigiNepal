@@ -95,12 +95,7 @@ export default function ProductDetail() {
     ];
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="max-w-7xl mx-auto py-12 px-4 space-y-8 pb-32"
-        >
+        <div className="max-w-7xl mx-auto py-12 px-4 space-y-8 pb-32">
             {/* Breadcrumb / Back */}
             <Link to="/store" className="inline-flex items-center gap-2 text-text-dim hover:text-primary transition-colors mb-4 font-bold uppercase tracking-widest text-xs">
                 <ChevronLeft size={16} />
@@ -392,6 +387,6 @@ export default function ProductDetail() {
                     </div>
                 </div>
             </div>
-        </motion.div>
+        </div>
     );
 }

@@ -47,13 +47,7 @@ export default function Store() {
     });
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
-            className="px-4 md:px-0 space-y-10 pb-10"
-        >
+        <div className="px-4 md:px-0 space-y-10 pb-10">
             {/* Store Intro */}
             <div className="bg-white rounded-[3rem] p-8 md:p-12 shadow-soft border border-gray-100 space-y-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
@@ -172,6 +166,6 @@ export default function Store() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </motion.div>
+        </div>
     );
 }
