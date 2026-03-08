@@ -88,18 +88,18 @@ export default function Contact() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-text-dim tracking-widest pl-1">First Name</label>
-                                    <input required type="text" placeholder="Enter your first name" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
+                                    <input required type="text" id="first-name" name="first_name" placeholder="Enter your first name" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-text-dim tracking-widest pl-1">Last Name</label>
-                                    <input required type="text" placeholder="Enter your last name" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
+                                    <input required type="text" id="last-name" name="last_name" placeholder="Enter your last name" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-text-dim tracking-widest pl-1">Email</label>
-                                    <input required type="email" placeholder="Enter your email" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
+                                    <input required type="email" id="contact-email" name="email" placeholder="Enter your email" className="w-full bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black uppercase text-text-dim tracking-widest pl-1">Contact Details</label>
@@ -108,14 +108,14 @@ export default function Contact() {
                                             <span>🇳🇵</span>
                                             <span>+977</span>
                                         </div>
-                                        <input required type="tel" placeholder="Enter your number" className="flex-1 bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
+                                        <input required type="tel" id="contact-tel" name="phone" placeholder="Enter your number" className="flex-1 bg-bg rounded-2xl p-4 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium" />
                                     </div>
                                 </div>
                             </div>
 
                             <div className="space-y-2">
                                 <label className="text-[10px] font-black uppercase text-text-dim tracking-widest pl-1">Email / Message</label>
-                                <textarea required placeholder="Enter your message" className="w-full bg-bg rounded-3xl p-6 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium h-48 resize-none" />
+                                <textarea required id="contact-message" name="message" placeholder="Enter your message" className="w-full bg-bg rounded-3xl p-6 border-2 border-transparent focus:border-secondary/20 focus:bg-white outline-none transition-all text-sm font-medium h-48 resize-none" />
                             </div>
 
                             <div className="pt-4 text-center md:text-left">

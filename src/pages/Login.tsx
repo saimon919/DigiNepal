@@ -84,6 +84,8 @@ export default function Login() {
                                 <label className="block text-sm font-medium mb-1">Full Name</label>
                                 <input
                                     type="text"
+                                    id="full-name"
+                                    name="name"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     className="w-full p-4 rounded-xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none"
@@ -97,6 +99,8 @@ export default function Login() {
                             <label className="block text-sm font-medium mb-1">Email</label>
                             <input
                                 type="email"
+                                id="email"
+                                name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="w-full p-4 rounded-xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none"
@@ -108,6 +112,8 @@ export default function Login() {
                             <label className="block text-sm font-medium mb-1">Password</label>
                             <input
                                 type="password"
+                                id="password"
+                                name="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full p-4 rounded-xl bg-bg border-none focus:ring-2 focus:ring-primary/20 outline-none"

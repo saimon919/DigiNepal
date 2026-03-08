@@ -75,6 +75,8 @@ export default function Store() {
                         <Search size={20} className="text-primary" />
                         <input
                             type="text"
+                            id="search-input"
+                            name="q"
                             placeholder="Search assets by name..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
