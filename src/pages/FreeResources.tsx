@@ -1,4 +1,4 @@
-import { Download, FolderArchive, Terminal } from 'lucide-react';
+import { Download, FolderArchive, Zap, Globe, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 
@@ -39,100 +39,112 @@ const freeAssets = [
 
 export default function FreeResources() {
     return (
-        <div className="px-4 md:px-0 space-y-10 pb-10 relative font-mono text-white">
+        <div className="max-w-7xl mx-auto py-12 px-4 space-y-16 pb-32">
             <Helmet>
-                <title>Free Game Dev Assets & Resources | DigiNepal</title>
+                <title>Free Game Dev Assets | DigiNepal Public Cache</title>
                 <meta name="description" content="Download free 3D models, UI SFX, textures, and Unity scripts provided by the DigiNepal community. Perfect for prototyping and game jams." />
                 <link rel="canonical" href="https://diginepal.vercel.app/free-resources" />
             </Helmet>
-            {/* Background Ambient */}
-            <div className="fixed inset-0 pointer-events-none z-[-1]">
-                <div className="absolute top-[20%] left-[10%] w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px] mix-blend-screen" />
-                <div className="absolute bottom-[10%] right-[20%] w-[300px] h-[300px] bg-primary/10 rounded-full blur-[100px] mix-blend-screen" />
-            </div>
 
-            {/* Header / Intro */}
-            <div className="glass-panel hud-border p-8 md:p-12 relative overflow-hidden group">
-                <div className="scanline"></div>
-                <div className="relative z-10 w-full max-w-3xl space-y-6">
-                    <div className="flex items-center gap-3 text-secondary mb-2">
-                        <Terminal size={16} className="animate-pulse" />
-                        <span className="text-[10px] uppercase tracking-[0.3em] font-black">OPEN_SOURCE_CACHE</span>
+            {/* Tactical Header: Public Cache */}
+            <div className="flex flex-col lg:flex-row items-end justify-between gap-12 border-b border-white/5 pb-12">
+                <div className="space-y-6 text-center lg:text-left flex-1">
+                    <div className="flex items-center justify-center lg:justify-start gap-4 text-secondary">
+                        <Zap size={20} className="animate-pulse" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.5em] text-tactical">PUBLIC_CACHE_ACCESS :: UNRESTRICTED</span>
                     </div>
-                    
-                    <h1 className="text-4xl md:text-5xl font-display font-black text-white tracking-widest uppercase">
-                        Free_Resources
-                    </h1>
-                    
-                    <p className="text-text-dim text-sm leading-relaxed font-mono">
-                        Access community-contributed and promotional assets. These files are licensed under CC-0 or standard Royalty-Free licenses unless otherwise stated. Perfect for prototyping, learning, and jam projects.
+                    <h1 className="text-5xl md:text-8xl font-display font-black text-white tracking-tighter uppercase leading-none">FREE_RESOURCES</h1>
+                    <p className="text-base md:text-lg font-medium text-text-dim/60 uppercase tracking-[0.2em] max-w-2xl italic border-l-4 border-secondary/20 pl-8">
+                        Access community-contributed and promotional data packets. Licensed for prototyping, learning, and local neural grid testing.
                     </p>
-
-                    <div className="flex items-center gap-4 pt-4">
-                        <div className="bg-black/40 border border-primary/20 px-4 py-2 flex items-center gap-2">
-                            <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                            <span className="text-xs text-primary uppercase font-bold tracking-widest">{freeAssets.length} TARGETS ACQUIRED</span>
-                        </div>
-                    </div>
+                </div>
+                <div className="skeuo-panel bg-secondary/5 px-8 py-4 rounded-2xl border-secondary/20 shrink-0 text-center lg:text-right">
+                    <p className="text-[10px] font-black text-secondary/60 uppercase tracking-[0.4em] mb-1 text-tactical">CACHE_SIZE</p>
+                    <p className="text-3xl font-black text-white tracking-tighter uppercase">{freeAssets.length} DATA_PACKS</p>
                 </div>
             </div>
 
-            {/* Resources Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Resources Grid: Tactical Data Cartridges */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 {freeAssets.map((asset, idx) => (
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: idx * 0.1, ease: 'easeOut' }}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: idx * 0.1 }}
                         key={asset.id}
-                        className="glass-panel group relative border border-white/5 hover:border-primary/50 transition-colors duration-500 overflow-hidden"
+                        className="skeuo-panel p-1 rounded-[2.5rem] border-white/5 bg-deep/40 group overflow-hidden"
                     >
-                        {/* Decorative HUD Corners */}
-                        <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-primary opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
-                        <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-primary opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
-                        
-                        <div className="relative h-48 w-full overflow-hidden bg-black/50 border-b border-white/5">
-                            <motion.img 
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ duration: 0.5 }}
-                                src={asset.image} 
-                                alt={asset.title}
-                                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                            />
-                            <div className="absolute top-3 right-3 bg-black/80 px-2 py-1 text-[9px] uppercase tracking-widest border border-secondary/30 text-secondary">
-                                FREE
-                            </div>
-                        </div>
-
-                        <div className="p-5 space-y-4 relative">
-                            <div className="space-y-1">
-                                <h3 className="font-bold text-sm uppercase tracking-wider truncate group-hover:text-primary transition-colors">{asset.title}</h3>
-                                <p className="text-xs text-text-dim">{asset.type}</p>
-                            </div>
-
-                            <div className="flex items-center justify-between text-[10px] text-text-dim border-t border-white/10 pt-3">
-                                <div className="flex items-center gap-1.5">
-                                    <FolderArchive size={12} className="text-secondary" />
-                                    <span>{asset.size}</span>
+                        <div className="bg-deep/60 backdrop-blur-xl rounded-[2.3rem] p-6 space-y-8 h-full flex flex-col">
+                            <div className="skeuo-inset h-48 w-full rounded-2xl overflow-hidden relative">
+                                <img 
+                                    src={asset.image} 
+                                    alt={asset.title}
+                                    className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                                />
+                                <div className="absolute top-4 right-4 skeuo-panel bg-secondary text-deep px-3 py-1 text-[9px] font-black uppercase tracking-widest border-secondary/40 text-tactical">
+                                    FREE
                                 </div>
-                                <span>{asset.downloads.toLocaleString()} DLs</span>
+                                <div className="absolute inset-0 bg-gradient-to-t from-deep/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                             </div>
 
-                            <button className="w-full mt-2 py-2 flex items-center justify-center gap-2 bg-primary/10 border border-primary/30 text-primary uppercase text-xs tracking-widest font-bold group-hover:bg-primary group-hover:text-black transition-all">
-                                <Download size={14} />
-                                Download_File
+                            <div className="space-y-4 flex-1">
+                                <div className="space-y-2">
+                                    <h3 className="font-black text-xl text-white tracking-tighter uppercase leading-tight group-hover:text-primary transition-colors line-clamp-2">{asset.title}</h3>
+                                    <div className="skeuo-inset bg-white/5 px-3 py-1 rounded-md border-white/5 inline-block">
+                                        <span className="text-[9px] font-black text-text-dim/60 uppercase tracking-[0.2em] text-tactical">{asset.type}</span>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.3em] text-text-dim/40 border-t border-white/5 pt-4 text-tactical">
+                                    <div className="flex items-center gap-2">
+                                        <FolderArchive size={14} className="text-secondary" />
+                                        <span>{asset.size}</span>
+                                    </div>
+                                    <span>{asset.downloads.toLocaleString()} DLs</span>
+                                </div>
+                            </div>
+
+                            <button className="skeuo-panel bg-primary text-deep w-full py-4 rounded-xl flex items-center justify-center gap-4 font-black uppercase tracking-[0.4em] text-[10px] hover:scale-[1.02] transition-all text-tactical shadow-[0_0_20px_rgba(141,242,192,0.2)]">
+                                <Download size={16} strokeWidth={2.5} /> DOWNLOAD_PACKET
                             </button>
                         </div>
                     </motion.div>
                 ))}
             </div>
             
-            {/* Bottom HUD decoration */}
-            <div className="w-full border-t border-white/10 pt-6 flex justify-center">
-                <div className="flex items-center gap-4 text-text-dim text-[10px] uppercase font-mono tracking-widest">
-                    <span className="w-[100px] h-[1px] bg-gradient-to-r from-transparent to-primary/50" />
-                    END_OF_CACHE
-                    <span className="w-[100px] h-[1px] bg-gradient-to-l from-transparent to-primary/50" />
+            {/* End of Stream Telemetry */}
+            <div className="pt-20 text-center">
+                <div className="inline-flex flex-col items-center gap-6">
+                    <div className="flex items-center gap-8 text-text-dim/20">
+                        <div className="h-[1px] w-32 bg-gradient-to-r from-transparent to-white/10" />
+                        <Activity size={24} className="animate-pulse" />
+                        <div className="h-[1px] w-32 bg-gradient-to-l from-transparent to-white/10" />
+                    </div>
+                    <div className="space-y-2">
+                        <p className="text-[10px] font-black text-text-dim/40 uppercase tracking-[0.6em] text-tactical">END_OF_PUBLIC_STREAM</p>
+                        <p className="text-[8px] font-black text-primary/20 uppercase tracking-[0.8em] text-tactical">SYNCHRONIZING_NEXT_ARRAY...</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Support Callout */}
+            <div className="skeuo-panel p-1 rounded-[3rem] border-white/10 bg-deep/40 mt-12">
+                <div className="bg-deep/60 backdrop-blur-xl rounded-[3rem] p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left">
+                    <div className="space-y-6">
+                        <div className="flex items-center justify-center md:justify-start gap-4">
+                            <div className="skeuo-inset p-4 rounded-2xl border-primary/20">
+                                <Globe size={32} className="text-primary" />
+                            </div>
+                            <h3 className="text-3xl md:text-5xl font-display font-black text-white tracking-tighter uppercase leading-none">COMMUNITY_UPLINK</h3>
+                        </div>
+                        <p className="text-lg md:text-xl text-text-dim/60 font-medium max-w-2xl leading-relaxed italic border-l-4 border-primary/20 pl-8">
+                            Have a digital asset packet you'd like to contribute to the public cache? Initiate a submission protocol via our administrator uplink.
+                        </p>
+                    </div>
+                    <button className="skeuo-panel bg-primary text-deep px-14 py-6 rounded-2xl font-black uppercase tracking-[0.4em] text-xs hover:scale-105 transition-all text-tactical shadow-[0_0_40px_rgba(141,242,192,0.2)]">
+                        CONTRIBUTE_DATA
+                    </button>
                 </div>
             </div>
         </div>

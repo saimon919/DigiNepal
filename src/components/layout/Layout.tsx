@@ -1,31 +1,31 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, User as UserIcon, Terminal, Shield, Zap, Globe } from 'lucide-react';
+import { ShoppingBag, User as UserIcon, Terminal, Shield, Zap, Globe, Activity, LayoutDashboard, Database, BookOpen, FolderArchive } from 'lucide-react';
 import { useAuthStore } from '../../store/useAuthStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
 const footerLinks = {
-    marketplace: [
+    MARKETPLACE: [
         { label: 'Browse Store', path: '/store' },
         { label: 'Free Resources', path: '/free-resources' },
         { label: 'Creator Program', path: '/about' },
-        { label: '3D Models', path: '/store?category=3D' },
+        { label: 'Asset Library', path: '/store' },
     ],
-    resources: [
-        { label: 'Education Center', path: '/guides' },
-        { label: 'Unity Tutorials', path: '/guides?filter=unity' },
-        { label: 'AI Tools Guide', path: '/guides?filter=ai' },
-        { label: 'Digital Assets 101', path: '/guides' },
+    RESOURCES: [
+        { label: 'Data Cubes', path: '/guides' },
+        { label: 'Unity Sync', path: '/guides' },
+        { label: 'AI Protocols', path: '/guides' },
+        { label: 'Development Blog', path: '/guides' },
     ],
-    company: [
-        { label: 'Our Mission', path: '/about' },
-        { label: 'Contact Support', path: '/contact' },
-        { label: 'User Dashboard', path: '/my-assets' },
+    COMPANY: [
+        { label: 'Command Central', path: '/about' },
+        { label: 'Direct Uplink', path: '/contact' },
+        { label: 'Agent Dashboard', path: '/my-assets' },
     ],
-    legal: [
-        { label: 'Privacy Policy', path: '/privacy-policy' },
-        { label: 'Terms of Use', path: '/terms' },
-        { label: 'Copyright / DMCA', path: '/dmca' },
+    LEGAL_MANIFEST: [
+        { label: 'Privacy Protocol', path: '/privacy-policy' },
+        { label: 'Terms of Service', path: '/terms' },
+        { label: 'DMCA Notice', path: '/dmca' },
     ],
 };
 
@@ -42,157 +42,211 @@ export default function Layout() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const mobileNavItems = [
+        { name: 'HOME', path: '/', icon: <LayoutDashboard size={20} /> },
+        { name: 'STORE', path: '/store', icon: <ShoppingBag size={20} /> },
+        { name: 'LIBRARY', path: '/my-assets', icon: <Database size={20} /> },
+        { name: 'GUIDES', path: '/guides', icon: <BookOpen size={20} /> },
+        { name: 'FREE', path: '/free-resources', icon: <FolderArchive size={20} /> },
+    ];
+
     return (
-        <div className="min-h-screen flex flex-col relative bg-bg text-text-main scanline-container">
-            {/* HUD Scanline Overlay */}
-            <div className="scanline-moving" />
+        <div className="min-h-screen flex flex-col relative bg-deep text-text-main scanline-container overflow-x-hidden selection:bg-primary selection:text-deep">
+            {/* HUD Scanline & Noise Overlays */}
+            <div className="scanline-moving pointer-events-none" />
             
             {/* Global HUD Ambient Effects */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-                <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] animate-pulse-glow" />
-                <div className="absolute bottom-[-5%] left-[-5%] w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[100px] animate-pulse-glow" style={{ animationDelay: '3s' }} />
+                <div className="absolute top-[-10%] right-[-10%] w-[800px] h-[800px] rounded-full bg-primary/5 blur-[150px] animate-pulse" />
+                <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-secondary/5 blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
             </div>
 
-            {/* Navbar: HUD Interface Bar */}
+            {/* Navbar: Tactical Command Console */}
             <motion.nav
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 pointer-events-none"
+                className="fixed top-0 left-0 right-0 z-50 px-4 pt-6 md:pt-8 pointer-events-none"
             >
-                <div className="max-w-7xl mx-auto flex justify-center">
-                    <motion.div
-                        animate={{
-                            width: '100%',
-                            backgroundColor: scrolled ? 'rgba(15, 23, 42, 0.9)' : 'rgba(15, 23, 42, 0.7)',
-                            borderColor: scrolled ? 'rgba(34, 197, 94, 0.3)' : 'rgba(255, 255, 255, 0.05)',
-                        }}
-                        className="backdrop-blur-xl border rounded-[2rem] px-4 md:px-8 py-3 flex items-center justify-between shadow-glass pointer-events-auto transition-colors duration-500"
+                <div className="max-w-7xl mx-auto">
+                    <div
+                        className={`skeuo-panel p-1 rounded-[2rem] transition-all duration-700 pointer-events-auto overflow-hidden ${scrolled ? 'scale-[0.98] shadow-[0_30px_60px_rgba(0,0,0,0.5)]' : ''}`}
                     >
-                        {/* Status Readout Left */}
-                        <div className="hidden lg:flex items-center gap-4 mr-6">
-                            <div className="flex flex-col">
-                                <span className="text-[8px] font-black uppercase tracking-[0.2em] text-primary/60">System.Status</span>
-                                <span className="text-[10px] font-mono font-bold text-primary animate-pulse">ACTIVE_ONLINE</span>
+                        <div className="bg-deep/40 backdrop-blur-3xl rounded-[1.9rem] px-4 md:px-10 py-3 flex items-center justify-between border border-white/5">
+                            {/* Left: System Status (Hidden on Mobile) */}
+                            <div className="hidden xl:flex items-center gap-6">
+                                <div className="skeuo-inset px-4 py-2 rounded-xl flex items-center gap-3 bg-deep/60">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#8df2c0] animate-pulse" />
+                                    <span className="text-[9px] font-black font-mono text-primary/80 tracking-[0.4em] uppercase text-tactical">GRID_STABLE</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-text-dim/20">
+                                    <Activity size={14} className="animate-pulse" />
+                                    <span className="text-[9px] font-black uppercase tracking-[0.3em] text-tactical">0.04ms_LATENCY</span>
+                                </div>
                             </div>
-                            <div className="w-[1px] h-6 bg-white/10" />
-                        </div>
 
-                        {/* Brand Logo */}
-                        <Link to="/" className="flex items-center gap-3 group shrink-0">
-                            <div className="relative">
-                                <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full group-hover:bg-primary/40 transition-all" />
-                                <img src="/logo.png" alt="DigiNepal" className="relative w-8 h-8 md:w-10 md:h-10 object-contain rounded-xl invert brightness-200" />
-                            </div>
-                            <span className="font-display font-black text-lg md:text-xl tracking-tighter text-white group-hover:text-primary transition-colors">DIGINEPAL</span>
-                        </Link>
-
-                        {/* Nav Links */}
-                        <div className="hidden md:flex items-center gap-1 mx-8 bg-white/5 p-1 rounded-2xl border border-white/5">
-                            {[
-                                { name: 'DASHBOARD', path: '/' },
-                                { name: 'STORE', path: '/store' },
-                                { name: 'RESOURCES', path: '/free-resources' },
-                                { name: 'GUIDES', path: '/guides' },
-                            ].map((item) => {
-                                const isActive = location.pathname === item.path;
-                                return (
-                                    <Link
-                                        key={item.name}
-                                        to={item.path}
-                                        className={`relative px-5 py-2 rounded-xl text-[11px] font-black tracking-widest transition-all ${isActive ? 'text-primary' : 'text-text-dim hover:text-white'}`}
-                                    >
-                                        {isActive && (
-                                            <motion.div
-                                                layoutId="nav-active"
-                                                className="absolute inset-0 bg-primary/10 border border-primary/20 rounded-xl z-0"
-                                            />
-                                        )}
-                                        <span className="relative z-10">{item.name}</span>
-                                    </Link>
-                                );
-                            })}
-                        </div>
-
-                        {/* Actions */}
-                        <div className="flex items-center gap-4">
-                            <Link to="/cart" className="relative p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 transition-all group">
-                                <ShoppingBag size={18} className="text-text-dim group-hover:text-primary transition-colors" />
-                                <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-bg text-[8px] font-black rounded-full flex items-center justify-center border border-bg shadow-glow-strong">2</span>
+                            {/* Center: Branding */}
+                            <Link to="/" className="flex items-center gap-4 group shrink-0">
+                                <div className="relative w-10 h-10 md:w-12 md:h-12 skeuo-panel rounded-2xl flex items-center justify-center border-primary/20 bg-deep/40 group-hover:border-primary/50 transition-all overflow-hidden">
+                                    <div className="absolute inset-0 bg-primary/5 animate-pulse" />
+                                    <Terminal size={24} className="relative text-primary group-hover:scale-110 transition-transform" />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="font-display font-black text-xl md:text-3xl tracking-tighter text-white group-hover:text-primary transition-colors leading-none">DIGINEPAL</span>
+                                    <span className="text-[9px] font-black text-primary/40 tracking-[0.5em] uppercase text-tactical">CORE_TERMINAL</span>
+                                </div>
                             </Link>
 
-                            {isAuthenticated ? (
-                                <Link to={user?.role === 'admin' ? '/admin' : '/my-assets'} className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-bg transition-all">
-                                    <UserIcon size={18} />
-                                </Link>
-                            ) : (
-                                <Link to="/login" className="px-6 py-2.5 rounded-xl bg-primary text-bg text-xs font-black tracking-widest hover:shadow-glow-strong hover:scale-105 transition-all active:scale-95">
-                                    INITIALIZE
-                                </Link>
-                            )}
+                            {/* Right: Actions (Simplified for Mobile) */}
+                            <div className="flex items-center gap-6">
+                                {/* Desktop Nav */}
+                                <nav className="hidden md:flex items-center gap-2 skeuo-inset p-1.5 rounded-2xl bg-deep/60">
+                                    {[
+                                        { name: 'DASHBOARD', path: '/' },
+                                        { name: 'STORE', path: '/store' },
+                                        { name: 'RESOURCES', path: '/free-resources' },
+                                        { name: 'GUIDES', path: '/guides' },
+                                    ].map((item) => {
+                                        const isActive = location.pathname === item.path;
+                                        return (
+                                            <Link
+                                                key={item.name}
+                                                to={item.path}
+                                                className={`relative px-6 py-2.5 rounded-xl text-[10px] font-black tracking-[0.3em] transition-all text-tactical ${isActive ? 'text-primary' : 'text-text-dim/60 hover:text-white'}`}
+                                            >
+                                                {isActive && (
+                                                    <motion.div
+                                                        layoutId="nav-active-pill"
+                                                        className="absolute inset-0 skeuo-panel bg-primary/10 border-primary/30 rounded-xl z-0"
+                                                    />
+                                                )}
+                                                <span className="relative z-10">{item.name}</span>
+                                            </Link>
+                                        );
+                                    })}
+                                </nav>
+
+                                <div className="flex items-center gap-2 md:gap-4">
+                                    <Link to="/cart" className="relative skeuo-panel p-2.5 md:p-3.5 rounded-xl border-white/5 hover:border-primary/40 transition-all group hover:scale-105 active:scale-95 bg-deep/40 shadow-xl">
+                                        <ShoppingBag size={18} className="text-text-dim/60 group-hover:text-primary transition-colors" />
+                                        <span className="absolute -top-1 -right-1 w-4 h-4 md:w-5 md:h-5 bg-primary text-deep text-[8px] md:text-[10px] font-black rounded-full flex items-center justify-center border-2 border-deep shadow-[0_0_15px_rgba(141,242,192,0.4)]">2</span>
+                                    </Link>
+
+                                    {isAuthenticated ? (
+                                        <Link 
+                                            to={user?.role === 'admin' ? '/admin' : '/my-assets'} 
+                                            className="w-10 h-10 md:w-12 md:h-12 skeuo-panel rounded-xl flex items-center justify-center border-secondary/20 bg-deep/40 text-secondary hover:bg-secondary hover:text-deep transition-all hover:scale-105 active:scale-95 shadow-xl"
+                                        >
+                                            <UserIcon size={18} strokeWidth={2.5} />
+                                        </Link>
+                                    ) : (
+                                        <Link to="/login" className="skeuo-panel bg-primary text-deep px-5 md:px-8 py-2.5 md:py-3.5 rounded-xl text-[9px] md:text-[10px] font-black tracking-[0.4em] hover:shadow-[0_0_30px_rgba(141,242,192,0.3)] hover:scale-105 transition-all active:scale-95 text-tactical">
+                                            <span className="hidden sm:inline">INITIALIZE</span>
+                                            <span className="sm:hidden">GO</span>
+                                        </Link>
+                                    )}
+                                </div>
+                            </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
             </motion.nav>
 
+            {/* Mobile Navigation Dock (Bottom) */}
+            <motion.div 
+                initial={{ y: 100 }}
+                animate={{ y: 0 }}
+                className="fixed bottom-6 left-4 right-4 z-50 md:hidden"
+            >
+                <div className="skeuo-panel p-1 rounded-[2rem] shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+                    <div className="bg-deep/60 backdrop-blur-3xl rounded-[1.9rem] px-2 py-2 flex items-center justify-around border border-white/5">
+                        {mobileNavItems.map((item) => {
+                            const isActive = location.pathname === item.path;
+                            return (
+                                <Link 
+                                    key={item.name}
+                                    to={item.path}
+                                    className={`relative flex flex-col items-center gap-1 p-3 transition-all ${isActive ? 'text-primary' : 'text-text-dim/40'}`}
+                                >
+                                    {isActive && (
+                                        <motion.div 
+                                            layoutId="mobile-nav-active"
+                                            className="absolute inset-0 bg-primary/5 rounded-2xl border border-primary/20"
+                                        />
+                                    )}
+                                    <div className={`relative z-10 ${isActive ? 'scale-110 drop-shadow-[0_0_8px_rgba(141,242,192,0.5)]' : ''}`}>
+                                        {item.icon}
+                                    </div>
+                                    <span className="relative z-10 text-[7px] font-black tracking-[0.2em] text-tactical">{item.name}</span>
+                                </Link>
+                            );
+                        })}
+                    </div>
+                </div>
+            </motion.div>
+
             {/* Main Application Interface */}
-            <main className="flex-1 w-full max-w-[1440px] mx-auto px-4 pt-32 pb-20 relative z-10">
+            <main className="flex-1 w-full max-w-[1440px] mx-auto pt-32 pb-32 md:pt-44 md:pb-32 relative z-10 px-4 md:px-0 overflow-x-hidden">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={location.pathname}
-                        initial={{ opacity: 0, scale: 0.98, filter: 'blur(10px)' }}
-                        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-                        exit={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
-                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <Outlet />
                     </motion.div>
                 </AnimatePresence>
             </main>
 
-            {/* HUD Information Terminal (Footer) */}
-            <footer className="relative mt-auto border-t border-white/5 bg-surface/50 backdrop-blur-xl pt-16 pb-8">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
-                        {/* Brand Interface */}
-                        <div className="lg:col-span-2 space-y-6">
-                            <div className="space-y-4">
-                                <Link to="/" className="flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-primary/10 border border-primary/30 rounded-xl flex items-center justify-center">
-                                        <Terminal size={20} className="text-primary" />
+            {/* Tactical Information Console (Footer) */}
+            <footer className="relative mt-auto border-t border-white/5 bg-deep/40 backdrop-blur-3xl pt-24 pb-24 md:pb-12 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="responsive-grid mb-24 gap-16">
+                        {/* Core Brand Readout */}
+                        <div className="lg:col-span-2 space-y-10">
+                            <div className="space-y-6">
+                                <Link to="/" className="flex items-center gap-5 group">
+                                    <div className="w-16 h-16 skeuo-panel rounded-2xl flex items-center justify-center border-primary/30 bg-deep/60 group-hover:scale-105 transition-all">
+                                        <Terminal size={32} className="text-primary" />
                                     </div>
-                                    <span className="font-display font-black text-2xl tracking-tighter text-white">DIGINEPAL_CORE</span>
+                                    <div className="flex flex-col">
+                                        <span className="font-display font-black text-3xl md:text-4xl tracking-tighter text-white group-hover:text-primary transition-colors">DIGINEPAL_CORE</span>
+                                        <span className="text-[10px] font-black text-primary/60 tracking-[0.5em] uppercase text-tactical">ASSET_DISTRIBUTION_NODE</span>
+                                    </div>
                                 </Link>
-                                <p className="text-text-dim text-sm leading-relaxed max-w-sm">
-                                    Nepal's advanced digital asset distribution nodes. Providing high-fidelity 3D models, AI-optimized tools, and creative scripts for the global development grid.
+                                <p className="text-text-dim/60 text-lg leading-relaxed max-w-sm italic border-l-4 border-white/5 pl-8 font-medium">
+                                    Nepal's elite high-fidelity digital infrastructure. Engineering premium assets for the global creation grid since 2024.
                                 </p>
                             </div>
                             
                             <div className="flex flex-wrap gap-4">
-                                <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
-                                    <Shield size={14} className="text-primary" />
-                                    <span className="text-[10px] font-mono font-bold uppercase text-text-dim">Secured.v4</span>
-                                </div>
-                                <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
-                                    <Zap size={14} className="text-secondary" />
-                                    <span className="text-[10px] font-mono font-bold uppercase text-text-dim">Latency: 14ms</span>
-                                </div>
-                                <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
-                                    <Globe size={14} className="text-accent" />
-                                    <span className="text-[10px] font-mono font-bold uppercase text-text-dim">Region: NP-KTM</span>
-                                </div>
+                                {[
+                                    { icon: <Shield size={16} />, label: 'SECURE_P2P', color: 'text-primary' },
+                                    { icon: <Zap size={16} />, label: 'SYNC_14ms', color: 'text-secondary' },
+                                    { icon: <Globe size={16} />, label: 'NP-OPS_01', color: 'text-white/40' }
+                                ].map((badge, i) => (
+                                    <div key={i} className="skeuo-inset px-5 py-2.5 rounded-xl flex items-center gap-3 bg-deep/60 border-white/5">
+                                        <span className={badge.color}>{badge.icon}</span>
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-text-dim/40 text-tactical">{badge.label}</span>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
-                        {/* Link Terminals */}
+                        {/* Navigation Modules */}
                         {Object.entries(footerLinks).map(([title, links]) => (
-                            <div key={title} className="space-y-6">
-                                <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-primary">{title}</h4>
-                                <ul className="space-y-3">
+                            <div key={title} className="space-y-8">
+                                <h4 className="text-[10px] font-black uppercase tracking-[0.5em] text-primary/40 text-tactical flex items-center gap-3">
+                                    <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+                                    {title}
+                                </h4>
+                                <ul className="space-y-5">
                                     {links.map((link) => (
                                         <li key={link.label}>
-                                            <Link to={link.path} className="text-sm text-text-dim hover:text-white transition-colors flex items-center gap-2 group">
-                                                <span className="w-1.5 h-[1px] bg-white/20 group-hover:w-3 group-hover:bg-primary transition-all" />
+                                            <Link to={link.path} className="text-sm font-black uppercase tracking-widest text-text-dim/40 hover:text-white transition-all flex items-center gap-4 group">
+                                                <div className="w-1.5 h-1.5 bg-white/5 rounded-full group-hover:bg-primary group-hover:shadow-[0_0_8px_#8df2c0] transition-all" />
                                                 {link.label}
                                             </Link>
                                         </li>
@@ -202,21 +256,21 @@ export default function Layout() {
                         ))}
                     </div>
 
-                    {/* Meta Readout */}
-                    <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div className="flex flex-col gap-1">
-                            <p className="text-[10px] font-mono text-text-light uppercase tracking-widest leading-none">© {new Date().getFullYear()} DIGINEPAL OPS. ALL PARAMETERS RESERVED.</p>
-                            <p className="text-[9px] font-mono text-text-light/50 tracking-tighter">PROJECT_ID: DN-779-ALPHA | BUILT_IN_POKHARA_NP</p>
+                    {/* Meta Data Bar */}
+                    <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-10">
+                        <div className="space-y-2 text-center md:text-left">
+                            <p className="text-[10px] font-black text-text-dim/20 uppercase tracking-[0.4em] leading-none text-tactical">© 2024_DIGINEPAL_OPERATIONS_UNIT_779</p>
+                            <p className="text-[9px] font-black text-text-dim/10 tracking-[0.2em] uppercase">SYSTEM_LOCATION :: KATHMANDU_NEPAL_H01</p>
                         </div>
                         
-                        <div className="flex items-center gap-6">
-                             <div className="flex items-center gap-2 text-[10px] font-bold text-primary px-4 py-2 border border-primary/20 rounded-full bg-primary/5">
-                                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                                NODES_OPERATIONAL
+                        <div className="flex flex-col md:flex-row items-center gap-8">
+                             <div className="skeuo-inset px-6 py-3 rounded-2xl flex items-center gap-4 bg-deep/60 border-white/5">
+                                <div className="w-2 h-2 bg-primary rounded-full shadow-[0_0_12px_#8df2c0] animate-pulse" />
+                                <span className="text-[10px] font-black text-primary uppercase tracking-[0.4em] text-tactical">SYSTEM_NOMINAL_100%</span>
                              </div>
-                             <div className="hidden md:flex items-center gap-4">
-                                <a href="#" className="text-text-dim hover:text-primary transition-colors font-mono text-[10px]">X.COM</a>
-                                <a href="#" className="text-text-dim hover:text-primary transition-colors font-mono text-[10px]">DISCORD</a>
+                             <div className="flex items-center gap-8">
+                                <a href="#" className="text-text-dim/40 hover:text-primary transition-all font-black text-[10px] tracking-[0.4em] text-tactical">X_UPLINK</a>
+                                <a href="#" className="text-text-dim/40 hover:text-secondary transition-all font-black text-[10px] tracking-[0.4em] text-tactical">DISCORD_GRID</a>
                              </div>
                         </div>
                     </div>
@@ -225,4 +279,3 @@ export default function Layout() {
         </div>
     );
 }
-

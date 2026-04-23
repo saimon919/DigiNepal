@@ -1,190 +1,199 @@
-import { ShieldCheck, Server, Activity, Terminal } from 'lucide-react';
+import { ShieldCheck, Activity, Lock, Database, Cpu, FileText } from 'lucide-react';
+// import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 export default function TermsConditions() {
     return (
-        <div className="max-w-4xl mx-auto py-16 px-4 space-y-12 relative font-mono">
-            {/* Background elements */}
-            <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="max-w-5xl mx-auto py-12 px-4 space-y-16 pb-32">
+            <Helmet>
+                <title>Terms & Conditions | DigiNepal Tactical Service Agreement</title>
+                <meta name="description" content="Official terms of service and usage conditions for the DigiNepal digital asset grid. Authorization and licensing protocols for agents and creators." />
+            </Helmet>
 
-            {/* Header Readout */}
-            <div className="glass-panel hud-border p-8 md:p-12 relative z-10 text-center space-y-6">
-                <div className="flex items-center justify-center gap-3 text-secondary mb-4">
-                    <Server size={16} className="animate-pulse" />
-                    <span className="text-[10px] uppercase tracking-[0.3em] font-black">LEGAL_PROTOCOL_ACCESS</span>
+            {/* Tactical Legal Header */}
+            <div className="flex flex-col lg:flex-row items-end justify-between gap-12 border-b border-white/5 pb-12">
+                <div className="space-y-6 text-center lg:text-left flex-1">
+                    <div className="flex items-center justify-center lg:justify-start gap-4 text-secondary">
+                        <Lock size={20} className="animate-pulse" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.5em] text-tactical">LEGAL_PROTOCOL_ACCESS :: ENCRYPTED</span>
+                    </div>
+                    <h1 className="text-3xl sm:text-5xl md:text-8xl font-display font-black text-white tracking-tighter uppercase leading-none">TERMS_OF_SERVICE</h1>
+                    <p className="text-base md:text-lg font-medium text-text-dim/60 uppercase tracking-[0.2em] max-w-2xl italic border-l-4 border-secondary/20 pl-8">
+                        Official usage conditions and service agreements for the DigiNepal asset marketplace. Authorization required for all grid interactions.
+                    </p>
                 </div>
-                <h1 className="text-4xl md:text-6xl font-display font-black text-white tracking-widest uppercase">
-                    TERMS_&_CONDITIONS
-                </h1>
-                <div className="flex justify-center gap-8 pt-6 border-t border-white/5 text-[9px] uppercase tracking-widest text-text-dim">
-                    <span className="flex items-center gap-2"><Activity size={12} className="text-secondary" /> Last_Update: 2026.03.08</span>
-                    <span className="flex items-center gap-2 text-primary"><ShieldCheck size={12} /> Status: ENFORCED</span>
+                <div className="flex gap-8 text-center lg:text-right shrink-0">
+                    <div className="skeuo-inset px-6 py-4 rounded-xl border-white/5 bg-deep/40">
+                        <p className="text-[9px] font-black text-secondary/60 uppercase tracking-[0.4em] mb-1 text-tactical">LAST_UPDATE</p>
+                        <p className="text-lg font-black text-white tracking-widest uppercase">2026.04.23</p>
+                    </div>
+                    <div className="skeuo-inset px-6 py-4 rounded-xl border-white/5 bg-deep/40">
+                        <p className="text-[9px] font-black text-primary/60 uppercase tracking-[0.4em] mb-1 text-tactical">STATUS</p>
+                        <p className="text-lg font-black text-primary tracking-widest uppercase flex items-center gap-2">
+                            <ShieldCheck size={16} /> ENFORCED
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            {/* Legal Text Body */}
-            <div className="glass-panel hud-border p-8 md:p-12 space-y-12 relative z-10">
-                
-                <div className="flex items-center justify-between border-b border-white/5 pb-6">
-                    <h2 className="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-2">
-                        <Terminal size={20} className="text-primary" />
-                        Service_Agreement
-                    </h2>
-                    <span className="text-[10px] text-text-dim uppercase tracking-widest">Read_Only</span>
+            {/* Main Document Console */}
+            <div className="skeuo-panel p-2 rounded-[3.5rem] border-white/10 bg-deep/40 relative group overflow-hidden">
+                <div className="bg-deep/60 backdrop-blur-3xl rounded-[3.3rem] p-8 md:p-16 space-y-16 overflow-hidden relative">
+                    
+                    <div className="flex items-center justify-between border-b border-white/5 pb-8">
+                        <div className="flex items-center gap-4">
+                            <div className="skeuo-inset p-3 rounded-xl border-primary/20">
+                                <FileText size={24} className="text-primary" />
+                            </div>
+                            <div className="space-y-1">
+                                <h2 className="text-2xl font-black text-white uppercase tracking-tighter">SERVICE_AGREEMENT</h2>
+                                <p className="text-[10px] font-black text-text-dim/40 uppercase tracking-[0.4em] text-tactical">CORE_SYSTEM_DIRECTIVES</p>
+                            </div>
+                        </div>
+                        <div className="hidden sm:block skeuo-inset p-4 rounded-2xl opacity-20">
+                            <Database size={32} />
+                        </div>
+                    </div>
+
+                    <div className="space-y-20">
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">01</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Agreement_to_Terms</h3>
+                            </div>
+                            <div className="pl-16 space-y-6 text-lg text-text-dim/80 font-medium leading-relaxed italic border-l-2 border-white/5">
+                                <p>
+                                    By accessing and using the DigiNepal Tactical Grid ("the Platform"), you agree to be bound by these Terms and Conditions and all applicable neural regulations. If you do not authorize these terms, you are prohibited from using or accessing this node. DigiNepal is operated by its founders in Pokhara, Nepal.
+                                </p>
+                                <div className="skeuo-inset p-8 rounded-[2rem] bg-secondary/5 border-secondary/20">
+                                    <p className="text-secondary/80">
+                                        We reserve the right to revise these protocols at any time. By maintaining your connection to this website, you agree to be bound by the then-current version of these Terms.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">02</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Service_Description</h3>
+                            </div>
+                            <div className="pl-16 space-y-6 text-lg text-text-dim/80 font-medium leading-relaxed italic border-l-2 border-white/5">
+                                <p>
+                                    DigiNepal is an online digital marketplace that allows registered creators ("Sellers") to publish, list, and distribute digital products including 3D modules, texture arrays, scripts, and other tactical resources (collectively "Digital Assets"). Registered buyers ("Agents") may browse the grid and acquire Digital Assets for personal or commercial deployment.
+                                </p>
+                                <p>
+                                    DigiNepal acts as a nodal intermediary and is not the seller of record for individual Digital Assets. Each Seller is responsible for the integrity, legality, and quality of their listed data packets.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">03</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Agent_Accounts</h3>
+                            </div>
+                            <div className="pl-16 space-y-6 text-lg text-text-dim/80 font-medium leading-relaxed italic border-l-2 border-white/5">
+                                <p>To acquire or distribute data packets, you must initialize an account. You agree to:</p>
+                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                                    {[
+                                        'Provide accurate agent signature data.',
+                                        'Maintain nodal security and access keys.',
+                                        'Keep authorization credentials confidential.',
+                                        'Accept responsibility for all uplink activity.',
+                                        'Notify administration of unauthorized access.'
+                                    ].map((item, i) => (
+                                        <li key={i} className="skeuo-inset p-4 rounded-xl text-sm font-black text-white/60 tracking-widest uppercase border-white/5 flex items-center gap-4">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-primary" /> {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">04</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Asset_Acquisition</h3>
+                            </div>
+                            <div className="pl-16 space-y-10 border-l-2 border-white/5">
+                                <div className="space-y-4">
+                                    <h4 className="text-sm font-black text-primary/60 uppercase tracking-[0.4em] text-tactical">4.1_VALUATION_AND_PAYMENT</h4>
+                                    <p className="text-text-dim/60 font-medium italic">
+                                        All valuations are listed in Nepali Rupees (NPR / Rs.). Payment is executed securely via eSewa. By completing an acquisition, you authorize us to charge your selected payment node.
+                                    </p>
+                                </div>
+                                <div className="space-y-4">
+                                    <h4 className="text-sm font-black text-secondary/60 uppercase tracking-[0.4em] text-tactical">4.2_REFUND_PROTOCOL</h4>
+                                    <p className="text-text-dim/60 font-medium italic">
+                                        Due to the nature of digital distributions, all sales are final once a data packet download link has been authorized. Refunds are only issued for corrupt files or accidental duplicate acquisitions.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">05</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Intellectual_Property</h3>
+                            </div>
+                            <div className="pl-16 space-y-6 text-lg text-text-dim/80 font-medium leading-relaxed italic border-l-2 border-white/5">
+                                <p>
+                                    The DigiNepal platform — including its design, architecture, code, and branding — is the exclusive property of DigiNepal and is protected by Hymalayan intellectual property laws. You may not reproduce or create derivative works from our platform core.
+                                </p>
+                                <p>
+                                    Digital Assets remain the intellectual property of the Sellers. Acquisition grants a usage license only, not ownership of the underlying data.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">06</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Prohibited_Conduct</h3>
+                            </div>
+                            <div className="pl-16 space-y-6 text-lg text-text-dim/80 font-medium leading-relaxed italic border-l-2 border-white/5">
+                                <p>Agents are strictly prohibited from:</p>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                                    {[
+                                        'Using the grid for unlawful or destructive purposes.',
+                                        'Distributing malware or unauthorized data strings.',
+                                        'Attempting to bypass payment or security nodes.',
+                                        'Scraping data from the grid without authorization.',
+                                        'Reselling acquired assets without explicit permission.'
+                                    ].map((item, i) => (
+                                        <div key={i} className="flex gap-4 items-start">
+                                            <Activity size={18} className="text-secondary mt-1 shrink-0" />
+                                            <p className="text-sm font-black uppercase tracking-widest leading-relaxed">{item}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">07</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Liability_Limitation</h3>
+                            </div>
+                            <div className="pl-16 space-y-6 text-lg text-text-dim/80 font-medium leading-relaxed italic border-l-2 border-white/5">
+                                <p>
+                                    The platform is provided on an "as is" basis. DigiNepal makes no absolute warranties of grid stability. In no event shall DigiNepal or its affiliates be liable for any indirect or consequential damages arising from grid interaction.
+                                </p>
+                            </div>
+                        </section>
+                    </div>
                 </div>
+            </div>
 
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">01.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Agreement to Terms</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>
-                            By accessing and using DigiNepal ("the Platform," "we," "us," "our"), you agree to be bound by these Terms and Conditions and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site. DigiNepal is operated by its founders in Pokhara, Nepal.
-                        </p>
-                        <p className="border-l-2 border-secondary/50 pl-4 py-1">
-                            We reserve the right to revise these terms at any time without notice. By using this website, you agree to be bound by the then-current version of these Terms and Conditions.
-                        </p>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">02.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Description of Service</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>
-                            DigiNepal is an online digital marketplace that allows registered creators ("Sellers") to publish, list, and sell digital products including 3D assets, textures, scripts, audio files, design templates, and other creative digital goods (collectively "Digital Products"). Registered buyers ("Buyers") may browse the marketplace and purchase Digital Products for personal or commercial use as defined by the applicable license.
-                        </p>
-                        <p>
-                            DigiNepal acts as a platform intermediary and is not the seller of record for any individual Digital Product. Each Seller is responsible for the accuracy, legality, and quality of their listed products.
-                        </p>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">03.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">User Accounts</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>To purchase or sell products on DigiNepal, you must create an account. You agree to:</p>
-                        <ul className="list-disc list-inside space-y-2 marker:text-primary">
-                            <li>Provide accurate, current, and complete registration information.</li>
-                            <li>Maintain and promptly update your account information to keep it accurate.</li>
-                            <li>Keep your password confidential and not share it with any third party.</li>
-                            <li>Accept responsibility for all activities that occur under your account.</li>
-                            <li>Notify us immediately of any unauthorized use of your account.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">04.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Purchasing Digital Products</h2>
-                    </div>
-                    <div className="pl-8 space-y-6 text-text-dim text-sm leading-relaxed">
-                        <div>
-                            <h3 className="text-white font-bold mb-2 uppercase tracking-widest text-xs border-b border-white/10 pb-1 inline-block">4.1 Pricing and Payment</h3>
-                            <p>All prices are listed in Nepali Rupees (NPR / Rs.). Prices are set by individual Sellers. DigiNepal may charge a platform fee which is deducted from the Seller's earnings. Payment is processed securely via eSewa. By completing a purchase, you authorize us to charge your selected payment method.</p>
-                        </div>
-                        <div>
-                            <h3 className="text-white font-bold mb-2 uppercase tracking-widest text-xs border-b border-white/10 pb-1 inline-block">4.2 Refund Policy</h3>
-                            <p>Due to the nature of digital products, all sales are final once a download link has been issued. We may issue refunds at our sole discretion in cases where: (a) the product is substantially different from its description; (b) the product file is corrupt or non-functional; or (c) the same product was accidentally purchased twice. Refund requests must be submitted within 7 days of purchase via our Contact page.</p>
-                        </div>
-                        <div>
-                            <h3 className="text-white font-bold mb-2 uppercase tracking-widest text-xs border-b border-white/10 pb-1 inline-block">4.3 License Grant</h3>
-                            <p>Upon successful purchase, you are granted a non-exclusive, non-transferable, royalty-free license to use the Digital Product as specified in the product's license terms. Unless explicitly stated otherwise, you may use the asset in personal and commercial projects but may not resell, redistribute, or sublicense the files independently.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">05.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Seller Responsibilities</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>As a Seller on DigiNepal, you represent and warrant that:</p>
-                        <ul className="list-disc list-inside space-y-2 marker:text-secondary">
-                            <li>You own or have the legal right to sell the Digital Products you list.</li>
-                            <li>Your products do not infringe on any third-party intellectual property rights.</li>
-                            <li>Your products are accurately described and the listed files match the preview images.</li>
-                            <li>Your products are free from viruses, malware, or any malicious code.</li>
-                            <li>You have obtained all necessary permissions for any third-party content included in your products.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">06.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Intellectual Property</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>The DigiNepal platform itself — including its design, logo, code, content, and branding — is the exclusive property of DigiNepal and is protected by copyright, trademark, and other intellectual property laws. You may not copy, reproduce, distribute, or create derivative works from our platform content without written permission.</p>
-                        <p>Digital Products listed by Sellers remain the intellectual property of those Sellers. Purchasing a product grants you a usage license only, not ownership of the underlying intellectual property.</p>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">07.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Prohibited Conduct</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>You agree not to:</p>
-                        <ul className="list-disc list-inside space-y-2 marker:text-primary">
-                            <li>Use the platform for any unlawful purpose or in violation of any applicable laws.</li>
-                            <li>Upload or distribute malware, viruses, or any harmful software.</li>
-                            <li>Attempt to gain unauthorized access to any part of the platform or other users' accounts.</li>
-                            <li>Scrape, crawl, or otherwise collect data from the platform without permission.</li>
-                            <li>Circumvent any payment systems or pricing mechanisms.</li>
-                            <li>Post false, misleading, or defamatory content about products or other users.</li>
-                            <li>Resell or redistribute purchased Digital Products without the Seller's explicit permission.</li>
-                            <li>Use the platform to conduct money laundering or other financial crimes.</li>
-                        </ul>
-                    </div>
-                </section>
-                
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">08.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Third-Party Services</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>DigiNepal may contain links to third-party websites and may display advertisements from third-party networks including Google AdSense. We are not responsible for the content, privacy policies, or practices of third-party sites.</p>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">09.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Disclaimer & Limitation of Liability</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>The platform is provided on an "as is" and "as available" basis. DigiNepal makes no warranties, expressed or implied, and hereby disclaims all other warranties including merchantability, fitness for a particular purpose, or non-infringement.</p>
-                        <p className="border-l-2 border-secondary/50 pl-4 py-1">In no event shall DigiNepal, its directors, employees, or affiliates be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or goodwill, arising out of or related to your use of the platform. Our aggregate liability to you shall not exceed the amount you paid to DigiNepal in the 12 months preceding the claim.</p>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">10.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Contact</h2>
-                    </div>
-                    <div className="pl-8 space-y-4">
-                        <div className="bg-black/40 border border-primary/20 rounded-xl p-6 space-y-2 text-sm font-mono">
-                            <p className="text-primary font-bold uppercase tracking-widest">DigiNepal Legal</p>
-                            <p className="text-text-dim">Pokhara, Kaski, Nepal</p>
-                            <p className="text-text-dim">Email: <span className="text-white">sunarsaimon.43244@gmail.com</span></p>
-                            <p className="text-text-dim">Phone: <span className="text-white">+977 9867309193</span></p>
-                        </div>
-                    </div>
-                </section>
-
+            {/* Bottom Telemetry */}
+            <div className="pt-12 text-center">
+                <div className="flex items-center justify-center gap-4 text-text-dim/20">
+                    <div className="h-[1px] w-24 bg-gradient-to-r from-transparent to-white/10" />
+                    <Cpu size={20} />
+                    <span className="text-[9px] font-black uppercase tracking-[0.6em] text-tactical">END_OF_LEGAL_MANIFEST</span>
+                    <div className="h-[1px] w-24 bg-gradient-to-l from-transparent to-white/10" />
+                </div>
             </div>
         </div>
     );

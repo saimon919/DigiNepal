@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Clock, ArrowRight, Server, Activity, Terminal, ShieldAlert } from 'lucide-react';
+import { BookOpen, Clock, ArrowRight, Server, Terminal, ShieldAlert, Zap, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { guidesData } from '../data/guidesData';
 import AdBanner from '../components/AdBanner';
+import { Helmet } from 'react-helmet-async';
 
 export default function Guides() {
     const guides = Object.values(guidesData);
@@ -10,129 +11,160 @@ export default function Guides() {
     const otherGuides = guides.slice(1);
 
     return (
-        <div className="space-y-16 px-4 md:px-0 py-8 relative">
-            {/* Background elements */}
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="max-w-7xl mx-auto py-12 px-4 space-y-16 pb-32">
+            <Helmet>
+                <title>Tactical Briefings | DigiNepal Knowledge Base</title>
+                <meta name="description" content="Access instructional data packets for digital asset creation and deployment. Connect to the grid and elevate your development workflow protocols." />
+            </Helmet>
 
-            {/* Header */}
-            <div className="text-center max-w-3xl mx-auto space-y-6 relative z-10 glass-panel hud-border p-12">
-                <div className="flex items-center justify-center gap-3 text-primary mb-4">
-                    <Server size={16} className="animate-pulse" />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.3em]">Knowledge_Base_Access</span>
+            {/* Tactical Header */}
+            <div className="flex flex-col lg:flex-row items-end justify-between gap-12 border-b border-white/5 pb-12">
+                <div className="space-y-6 text-center lg:text-left flex-1">
+                    <div className="flex items-center justify-center lg:justify-start gap-4 text-secondary">
+                        <Server size={20} className="animate-pulse" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.5em] text-tactical">NEURAL_KNOWLEDGE_BASE_v4.0</span>
+                    </div>
+                    <h1 className="text-3xl sm:text-5xl md:text-8xl font-display font-black text-white tracking-tighter uppercase leading-none">DATA_CUBES</h1>
+                    <p className="text-base md:text-lg font-medium text-text-dim/60 uppercase tracking-[0.2em] max-w-2xl italic border-l-4 border-secondary/20 pl-8">
+                        High-level instructional data packets for creator and developer ops. Connect to the knowledge grid and elevate your deployment protocols.
+                    </p>
                 </div>
-                <h1 className="text-4xl md:text-6xl font-display font-black text-white tracking-tighter leading-tight uppercase">
-                    DATA_CUBES &amp; <span className="text-glow-blue">PROTOCOLS</span>
-                </h1>
-                <p className="text-lg text-text-dim max-w-xl mx-auto font-mono">
-                    Access high-level instructional packets for creator and developer ops. Connect to the grid and elevate your workflow.
-                </p>
-                
-                {/* HUD Readouts */}
-                <div className="flex justify-center gap-8 pt-6 border-t border-white/5 font-mono text-[9px] uppercase tracking-widest text-text-dim">
-                    <span className="flex items-center gap-2"><Activity size={12} className="text-primary" /> Active_Nodes: {guides.length}</span>
-                    <span className="flex items-center gap-2"><ShieldAlert size={12} className="text-secondary" /> Encryption: NONE</span>
+                <div className="flex gap-8 text-center lg:text-right shrink-0">
+                    <div className="skeuo-inset px-6 py-4 rounded-xl border-white/5 bg-deep/40">
+                        <p className="text-[9px] font-black text-secondary/60 uppercase tracking-[0.4em] mb-1 text-tactical">NODES_SYNCED</p>
+                        <p className="text-lg font-black text-white tracking-widest uppercase">{guides.length} PACKETS</p>
+                    </div>
+                    <div className="skeuo-inset px-6 py-4 rounded-xl border-white/5 bg-deep/40">
+                        <p className="text-[9px] font-black text-primary/60 uppercase tracking-[0.4em] mb-1 text-tactical">STATUS</p>
+                        <p className="text-lg font-black text-primary tracking-widest uppercase flex items-center gap-2">
+                            <ShieldAlert size={16} /> NOMINAL
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            {/* Featured Guide */}
+            {/* Featured Guide: Prime Module */}
             {featuredGuide && (
-                <Link
-                    to={`/guides/${featuredGuide.slug}`}
-                    className="block glass-panel hud-border overflow-hidden hover:border-primary/50 transition-all group relative z-10"
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-0">
-                        <div className="md:col-span-7 overflow-hidden relative">
-                            <div className="absolute inset-0 bg-primary/20 mix-blend-overlay z-10 group-hover:bg-transparent transition-all duration-700" />
-                            <img
-                                src={featuredGuide.image}
-                                alt={featuredGuide.title}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"
-                            />
-                            {/* Overlay tech grid */}
-                            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] z-20 pointer-events-none" />
-                        </div>
-                        <div className="md:col-span-5 p-8 md:p-12 flex flex-col justify-center space-y-6 relative border-l border-white/5">
-                            <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
-                                <Terminal className="text-primary" size={32} />
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <span className="bg-primary/20 border border-primary/30 text-primary px-3 py-1 rounded-sm text-[10px] font-black uppercase tracking-widest outline outline-1 outline-offset-2 outline-primary/10">Priority_Node</span>
-                                <span className="text-[10px] text-text-dim font-mono uppercase tracking-widest">{featuredGuide.category}</span>
-                            </div>
-                            <h2 className="text-3xl md:text-5xl font-display font-black text-white leading-tight uppercase group-hover:text-primary transition-colors">{featuredGuide.title}</h2>
-                            <p className="text-text-dim leading-relaxed font-medium">{featuredGuide.intro.substring(0, 150)}...</p>
-                            <div className="flex flex-col gap-4 pt-4 border-t border-white/5">
-                                <div className="flex items-center gap-4 text-[10px] font-mono text-text-dim uppercase tracking-widest">
-                                    <span className="flex items-center gap-1"><Clock size={12} /> {featuredGuide.readTime}</span>
-                                    <span>STATUS: READY</span>
+                    <Link
+                        to={`/guides/${featuredGuide.slug}`}
+                        className="block skeuo-panel p-1 rounded-[3.5rem] border-primary/20 bg-deep/40 hover:scale-[1.01] transition-all group overflow-hidden"
+                    >
+                        <div className="bg-deep/60 backdrop-blur-3xl rounded-[3.3rem] overflow-hidden">
+                            <div className="grid grid-cols-1 lg:grid-cols-12">
+                                <div className="lg:col-span-7 h-[400px] lg:h-[500px] relative overflow-hidden skeuo-inset rounded-[3rem] m-2">
+                                    <img
+                                        src={featuredGuide.image}
+                                        alt={featuredGuide.title}
+                                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 opacity-60 group-hover:opacity-100"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-deep via-transparent to-transparent hidden lg:block" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-deep via-transparent to-transparent lg:hidden" />
+                                    <div className="absolute top-8 left-8 skeuo-panel bg-primary text-deep px-4 py-1.5 rounded-lg font-black text-[10px] uppercase tracking-[0.4em] text-tactical">
+                                        PRIORITY_MODULE
+                                    </div>
                                 </div>
-                                <span className="text-primary font-black text-[11px] uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all">
-                                    Initialize Packet <ArrowRight size={14} />
-                                </span>
+                                <div className="lg:col-span-5 p-12 md:p-16 flex flex-col justify-center space-y-10 relative">
+                                    <div className="absolute top-10 right-10 opacity-10 group-hover:opacity-40 group-hover:text-primary transition-all">
+                                        <Terminal size={64} />
+                                    </div>
+                                    <div className="space-y-4">
+                                        <div className="flex items-center gap-3 text-secondary">
+                                            <Zap size={16} />
+                                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-tactical">{featuredGuide.category}</span>
+                                        </div>
+                                        <h2 className="text-4xl md:text-6xl font-display font-black text-white leading-none uppercase tracking-tighter group-hover:text-primary transition-colors">{featuredGuide.title}</h2>
+                                    </div>
+                                    <p className="text-lg text-text-dim/60 font-medium leading-relaxed italic border-l-4 border-white/5 pl-8 line-clamp-3">
+                                        {featuredGuide.intro}
+                                    </p>
+                                    <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
+                                        <div className="flex items-center gap-6">
+                                            <div className="skeuo-inset px-4 py-2 rounded-xl flex items-center gap-3 bg-deep/40 border-white/5">
+                                                <Clock size={16} className="text-primary/60" />
+                                                <span className="text-[10px] font-black uppercase text-white tracking-widest">{featuredGuide.readTime}</span>
+                                            </div>
+                                        </div>
+                                        <button className="skeuo-panel bg-primary text-deep px-10 py-5 rounded-2xl font-black uppercase tracking-[0.4em] text-xs group-hover:scale-105 transition-all text-tactical shadow-[0_0_30px_rgba(141,242,192,0.3)] flex items-center gap-4">
+                                            INITIALIZE_SYNC <ArrowRight size={18} strokeWidth={3} />
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </Link>
+                    </Link>
+                </motion.div>
             )}
 
             {/* Ad Banner */}
-            <AdBanner slot="horizontal" />
+            <div className="skeuo-inset p-4 rounded-[2rem] border-white/5 bg-deep/20">
+                <AdBanner slot="horizontal" />
+            </div>
 
-            {/* Guide Cards Grid */}
-            <div className="relative z-10">
-                <div className="flex items-center justify-between mb-8 pb-4 border-b border-primary/20">
-                    <h2 className="text-xl font-black text-white flex items-center gap-3 uppercase tracking-widest">
-                        <BookOpen size={20} className="text-primary" />
-                        Standard_Protocols
-                    </h2>
-                    <span className="text-[10px] font-mono text-primary uppercase">Sort: Auto</span>
+            {/* Guide Grid: Protocol Array */}
+            <div className="space-y-12">
+                <div className="flex items-center justify-between border-b border-white/5 pb-8">
+                    <div className="flex items-center gap-6">
+                        <div className="skeuo-inset p-3 rounded-xl border-secondary/20">
+                            <BookOpen size={24} className="text-secondary" />
+                        </div>
+                        <h3 className="text-2xl font-black text-white uppercase tracking-tighter">STANDARD_PROTOCOLS</h3>
+                    </div>
+                    <div className="hidden md:flex gap-4">
+                        <div className="skeuo-inset px-5 py-2 rounded-xl text-[10px] font-black uppercase text-text-dim/40 tracking-widest bg-deep/40 border-white/5 text-tactical">
+                            FILTER: ALL_MODULES
+                        </div>
+                    </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                     {otherGuides.map((guide, i) => (
                         <motion.div
                             key={guide.slug}
                             initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
                         >
                             <Link
                                 to={`/guides/${guide.slug}`}
-                                className="glass-panel hud-border overflow-hidden hover:border-secondary/50 transition-all group flex flex-col h-full bg-white/5"
+                                className="skeuo-panel p-1 rounded-[2.5rem] border-white/5 bg-deep/40 group overflow-hidden flex flex-col h-full"
                             >
-                                <div className="aspect-video overflow-hidden relative border-b border-white/10">
-                                    <div className="absolute inset-0 bg-bg/50 mix-blend-overlay z-10 group-hover:bg-transparent transition-all duration-500" />
-                                    <img
-                                        src={guide.image}
-                                        alt={guide.title}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-70"
-                                    />
-                                    <div className="absolute bottom-3 right-3 z-20 flex gap-1">
-                                        <div className="w-1 h-3 bg-primary animate-pulse" />
-                                        <div className="w-1 h-3 bg-primary/50" />
-                                        <div className="w-1 h-3 bg-primary/20" />
+                                <div className="bg-deep/60 backdrop-blur-xl rounded-[2.3rem] p-6 space-y-8 flex-1 flex flex-col">
+                                    <div className="skeuo-inset aspect-video rounded-2xl overflow-hidden relative border-white/5">
+                                        <img
+                                            src={guide.image}
+                                            alt={guide.title}
+                                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 opacity-60 group-hover:opacity-100"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-deep/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        <div className="absolute top-4 right-4 skeuo-panel bg-secondary/10 backdrop-blur-md px-3 py-1 rounded-lg border-secondary/20">
+                                            <span className="text-[9px] uppercase tracking-widest text-secondary font-black text-tactical">
+                                                {guide.category}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="p-6 flex flex-col flex-1 space-y-4">
-                                    <div className="flex items-center justify-between">
-                                        <span className="bg-secondary/10 border border-secondary/20 text-secondary px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest">
-                                            {guide.category}
-                                        </span>
-                                        <span className="text-[9px] font-mono text-text-dim flex items-center gap-1 uppercase">
-                                            <Clock size={10} /> {guide.readTime}
-                                        </span>
+
+                                    <div className="space-y-4 flex-1">
+                                        <h3 className="text-xl font-black text-white leading-tight uppercase group-hover:text-secondary transition-colors tracking-tighter line-clamp-2">
+                                            {guide.title}
+                                        </h3>
+                                        <p className="text-sm font-medium text-text-dim/60 leading-relaxed italic border-l-2 border-white/5 pl-6 line-clamp-3">
+                                            {guide.intro}
+                                        </p>
                                     </div>
-                                    <h3 className="text-lg font-black text-white leading-snug uppercase group-hover:text-secondary transition-colors">
-                                        {guide.title}
-                                    </h3>
-                                    <p className="text-sm font-medium text-text-dim leading-relaxed flex-1 line-clamp-3">
-                                        {guide.intro}...
-                                    </p>
-                                    <div className="pt-4 border-t border-white/5 flex items-center justify-between">
-                                        <span className="text-secondary font-black text-[10px] flex items-center gap-1.5 uppercase tracking-widest group-hover:gap-2.5 transition-all">
-                                            Access <ArrowRight size={12} />
-                                        </span>
-                                        <span className="text-[8px] font-mono text-text-dim uppercase">ID: 0x{guide.slug.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0).toString(16).toUpperCase()}</span>
+
+                                    <div className="pt-6 border-t border-white/5 flex items-center justify-between mt-auto">
+                                        <div className="flex items-center gap-3 text-text-dim/40">
+                                            <Clock size={14} />
+                                            <span className="text-[10px] font-black uppercase tracking-widest">{guide.readTime}</span>
+                                        </div>
+                                        <div className="flex items-center gap-3 text-secondary font-black uppercase tracking-[0.4em] text-[10px] group-hover:gap-5 transition-all text-tactical">
+                                            UPLINK <ArrowRight size={14} strokeWidth={3} />
+                                        </div>
                                     </div>
                                 </div>
                             </Link>
@@ -141,31 +173,46 @@ export default function Guides() {
                 </div>
             </div>
 
-            {/* Ad Banner */}
-            <AdBanner slot="horizontal" />
+            {/* Ad Banner (Bottom) */}
+            <div className="skeuo-inset p-4 rounded-[2rem] border-white/5 bg-deep/20">
+                <AdBanner slot="horizontal" />
+            </div>
 
-            {/* Global CTA */}
-            <div className="bg-primary p-[1px] rounded-[2rem] shadow-glow relative z-10 overflow-hidden">
-                <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(0,0,0,0.1)_25%,transparent_25%,transparent_50%,rgba(0,0,0,0.1)_50%,rgba(0,0,0,0.1)_75%,transparent_75%,transparent)] bg-[length:20px_20px] opacity-20 animate-slide"></div>
-                <div className="bg-bg rounded-[2rem] p-10 md:p-16 text-center space-y-6 relative z-20">
-                    <div className="inline-flex items-center justify-center p-4 bg-primary/10 rounded-full mb-4">
-                        <Terminal size={32} className="text-primary" />
+            {/* Global CTA: Grid Uplink */}
+            <div className="skeuo-panel p-1 rounded-[3.5rem] border-primary/20 bg-deep/40 mt-12 overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[120px] rounded-full" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 blur-[120px] rounded-full" />
+                
+                <div className="bg-deep/60 backdrop-blur-3xl rounded-[3.3rem] p-12 md:p-20 text-center space-y-10 relative">
+                    <div className="skeuo-inset w-24 h-24 rounded-full flex items-center justify-center mx-auto border-primary/20 bg-primary/5">
+                        <Terminal size={48} className="text-primary" />
                     </div>
-                    <h2 className="text-3xl md:text-5xl font-display font-black text-white tracking-tighter uppercase">READY_TO_ESTABLISH_CONNECTION?</h2>
-                    <p className="text-text-dim font-medium max-w-xl mx-auto text-lg">
-                        Join the network grid. Sync your local data banks to our marketplace and distribute your creative payloads globally.
-                    </p>
-                    <div className="pt-4">
+                    <div className="space-y-6">
+                        <h2 className="text-4xl md:text-7xl font-display font-black text-white tracking-tighter uppercase leading-none">READY_FOR_DEPLOYMENT?</h2>
+                        <p className="text-lg md:text-xl text-text-dim/60 font-medium max-w-2xl mx-auto italic border-l-4 border-primary/20 pl-8 inline-block">
+                            Initialize your creator signature and distribute your assets across the global neural grid. High-fidelity marketplace ready.
+                        </p>
+                    </div>
+                    <div className="pt-6">
                         <Link
                             to="/store"
-                            className="inline-flex items-center gap-2 bg-primary text-bg px-8 py-4 rounded-xl font-black uppercase tracking-[0.2em] hover:scale-105 hover:shadow-glow-strong transition-all text-xs"
+                            className="skeuo-panel bg-primary text-deep px-14 py-6 rounded-2xl font-black uppercase tracking-[0.6em] text-xs hover:scale-105 transition-all text-tactical shadow-[0_0_40px_rgba(141,242,192,0.3)] inline-flex items-center gap-6"
                         >
-                            Open Market Terminal <ArrowRight size={14} />
+                            ACCESS_MARKET_TERMINAL <ArrowRight size={20} strokeWidth={3} />
                         </Link>
                     </div>
+                </div>
+            </div>
+
+            {/* Bottom Telemetry */}
+            <div className="pt-12 text-center">
+                <div className="flex items-center justify-center gap-4 text-text-dim/20">
+                    <div className="h-[1px] w-24 bg-gradient-to-r from-transparent to-white/10" />
+                    <Cpu size={20} />
+                    <span className="text-[9px] font-black uppercase tracking-[0.6em] text-tactical">END_OF_KNOWLEDGE_STREAM</span>
+                    <div className="h-[1px] w-24 bg-gradient-to-l from-transparent to-white/10" />
                 </div>
             </div>
         </div>
     );
 }
-

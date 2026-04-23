@@ -1,189 +1,190 @@
-import { ShieldCheck, Server, Activity, Terminal } from 'lucide-react';
+import { ShieldCheck, Activity, Terminal, Lock, Database, Cpu } from 'lucide-react';
+// import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 export default function PrivacyPolicy() {
     return (
-        <div className="max-w-4xl mx-auto py-16 px-4 space-y-12 relative font-mono">
-            {/* Background elements */}
-            <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="max-w-5xl mx-auto py-12 px-4 space-y-16 pb-32">
+            <Helmet>
+                <title>Privacy Policy | DigiNepal Tactical Data Grid</title>
+                <meta name="description" content="Official data handling and privacy protocols for the DigiNepal tactical digital asset marketplace. Learn how we protect your agent signature and transaction telemetry." />
+            </Helmet>
 
-            {/* Header Readout */}
-            <div className="glass-panel hud-border p-8 md:p-12 relative z-10 text-center space-y-6">
-                <div className="flex items-center justify-center gap-3 text-secondary mb-4">
-                    <Server size={16} className="animate-pulse" />
-                    <span className="text-[10px] uppercase tracking-[0.3em] font-black">LEGAL_PROTOCOL_ACCESS</span>
+            {/* Tactical Legal Header */}
+            <div className="flex flex-col lg:flex-row items-end justify-between gap-12 border-b border-white/5 pb-12">
+                <div className="space-y-6 text-center lg:text-left flex-1">
+                    <div className="flex items-center justify-center lg:justify-start gap-4 text-secondary">
+                        <Lock size={20} className="animate-pulse" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.5em] text-tactical">LEGAL_PROTOCOL_ACCESS :: ENCRYPTED</span>
+                    </div>
+                    <h1 className="text-3xl sm:text-5xl md:text-8xl font-display font-black text-white tracking-tighter uppercase leading-none">PRIVACY_POLICY</h1>
+                    <p className="text-base md:text-lg font-medium text-text-dim/60 uppercase tracking-[0.2em] max-w-2xl italic border-l-4 border-secondary/20 pl-8">
+                        Official data handling and privacy protocols for the DigiNepal tactical asset marketplace. Enforced via neural grid synchronization.
+                    </p>
                 </div>
-                <h1 className="text-4xl md:text-6xl font-display font-black text-white tracking-widest uppercase">
-                    PRIVACY_POLICY
-                </h1>
-                <div className="flex justify-center gap-8 pt-6 border-t border-white/5 text-[9px] uppercase tracking-widest text-text-dim">
-                    <span className="flex items-center gap-2"><Activity size={12} className="text-secondary" /> Last_Update: 2026.03.08</span>
-                    <span className="flex items-center gap-2 text-primary"><ShieldCheck size={12} /> Status: ENFORCED</span>
+                <div className="flex gap-8 text-center lg:text-right shrink-0">
+                    <div className="skeuo-inset px-6 py-4 rounded-xl border-white/5 bg-deep/40">
+                        <p className="text-[9px] font-black text-secondary/60 uppercase tracking-[0.4em] mb-1 text-tactical">LAST_UPDATE</p>
+                        <p className="text-lg font-black text-white tracking-widest uppercase">2026.04.23</p>
+                    </div>
+                    <div className="skeuo-inset px-6 py-4 rounded-xl border-white/5 bg-deep/40">
+                        <p className="text-[9px] font-black text-primary/60 uppercase tracking-[0.4em] mb-1 text-tactical">STATUS</p>
+                        <p className="text-lg font-black text-primary tracking-widest uppercase flex items-center gap-2">
+                            <ShieldCheck size={16} /> ENFORCED
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            {/* Legal Text Body */}
-            <div className="glass-panel hud-border p-8 md:p-12 space-y-12 relative z-10">
-                
-                <div className="flex items-center justify-between border-b border-white/5 pb-6">
-                    <h2 className="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-2">
-                        <Terminal size={20} className="text-primary" />
-                        Data_Handling_Protocols
-                    </h2>
-                    <span className="text-[10px] text-text-dim uppercase tracking-widest">Read_Only</span>
+            {/* Main Document Console */}
+            <div className="skeuo-panel p-2 rounded-[3.5rem] border-white/10 bg-deep/40 relative group overflow-hidden">
+                <div className="bg-deep/60 backdrop-blur-3xl rounded-[3.3rem] p-8 md:p-16 space-y-16 overflow-hidden relative">
+                    
+                    <div className="flex items-center justify-between border-b border-white/5 pb-8">
+                        <div className="flex items-center gap-4">
+                            <div className="skeuo-inset p-3 rounded-xl border-primary/20">
+                                <Terminal size={24} className="text-primary" />
+                            </div>
+                            <div className="space-y-1">
+                                <h2 className="text-2xl font-black text-white uppercase tracking-tighter">DATA_HANDLING_PROTOCOLS</h2>
+                                <p className="text-[10px] font-black text-text-dim/40 uppercase tracking-[0.4em] text-tactical">CORE_SYSTEM_DIRECTIVES</p>
+                            </div>
+                        </div>
+                        <div className="hidden sm:block skeuo-inset p-4 rounded-2xl opacity-20">
+                            <Database size={32} />
+                        </div>
+                    </div>
+
+                    <div className="space-y-20">
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">01</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Introduction</h3>
+                            </div>
+                            <div className="pl-16 space-y-6 text-lg text-text-dim/80 font-medium leading-relaxed italic border-l-2 border-white/5">
+                                <p>
+                                    Welcome to DigiNepal ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy on the tactical grid. This Privacy Policy explains how we collect, use, disclose, and safeguard your telemetry data when you access our secure marketplace grid.
+                                </p>
+                                <div className="skeuo-inset p-8 rounded-[2rem] bg-secondary/5 border-secondary/20">
+                                    <p className="text-secondary/80">
+                                        Please analyze this protocol carefully. If you do not authorize these data synchronization terms, please abort your connection to the grid immediately.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">02</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Information_Acquisition</h3>
+                            </div>
+                            <div className="pl-16 space-y-10 border-l-2 border-white/5">
+                                <div className="space-y-6">
+                                    <h4 className="text-sm font-black text-primary/60 uppercase tracking-[0.4em] text-tactical">2.1_AGENT_TELEMETRY (PERSONAL DATA)</h4>
+                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {[
+                                            'ACCOUNT_SIGNATURE: Name, email, and access keys.',
+                                            'TRANSACTION_LOGS: Billing records and acquisition history.',
+                                            'COMM_UPLINKS: Metadata from contact and support requests.',
+                                            'CREATOR_PROFILES: Portfolio data and distribution payouts.'
+                                        ].map((item, i) => (
+                                            <li key={i} className="skeuo-inset p-4 rounded-xl text-sm font-black text-white/60 tracking-widest uppercase border-white/5 flex items-center gap-4">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-primary" /> {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div className="space-y-6">
+                                    <h4 className="text-sm font-black text-secondary/60 uppercase tracking-[0.4em] text-tactical">2.2_AUTOMATED_SCANNING (SYSTEM DATA)</h4>
+                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        {[
+                                            'IP_ADDRESS: Regional node identification.',
+                                            'DEVICE_SPECS: Operating system and browser fingerprint.',
+                                            'SESSION_DATA: Duration and interaction telemetry.',
+                                            'COOKIE_NODES: Local persistent data tokens.'
+                                        ].map((item, i) => (
+                                            <li key={i} className="skeuo-inset p-4 rounded-xl text-sm font-black text-white/60 tracking-widest uppercase border-white/5 flex items-center gap-4">
+                                                <div className="w-1.5 h-1.5 rounded-full bg-secondary" /> {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">03</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Usage_Directives</h3>
+                            </div>
+                            <div className="pl-16 space-y-6 text-lg text-text-dim/80 font-medium leading-relaxed italic border-l-2 border-white/5">
+                                <p>We utilize acquired telemetry strings to:</p>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                                    {[
+                                        'Maintain agent account stability and authorization.',
+                                        'Execute asset distribution and transaction confirmation.',
+                                        'Monitor grid performance and user interaction patterns.',
+                                        'Defend against unauthorized access and fraudulent uplinks.',
+                                        'Deliver optimized tactical resource recommendations.'
+                                    ].map((item, i) => (
+                                        <div key={i} className="flex gap-4 items-start">
+                                            <Activity size={18} className="text-primary mt-1 shrink-0" />
+                                            <p className="text-sm font-black uppercase tracking-widest leading-relaxed">{item}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">04</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Nodal_Security</h3>
+                            </div>
+                            <div className="pl-16 space-y-6 text-lg text-text-dim/80 font-medium leading-relaxed italic border-l-2 border-white/5">
+                                <div className="skeuo-panel p-10 rounded-[2.5rem] bg-deep/40 border-primary/20 flex flex-col md:flex-row items-center gap-10">
+                                    <div className="skeuo-inset p-6 rounded-2xl border-primary/20 bg-primary/5">
+                                        <ShieldCheck size={48} className="text-primary" />
+                                    </div>
+                                    <p>
+                                        We implement industry-standard security protocols including AES-256 encryption, secure RSA authentication, and regular grid integrity audits to safeguard your telemetry. However, no data uplink is absolute. Maintain personal key hygiene.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="space-y-8">
+                            <div className="flex items-center gap-6">
+                                <div className="skeuo-inset w-12 h-12 rounded-xl flex items-center justify-center font-black text-primary border-primary/20 bg-primary/5">05</div>
+                                <h3 className="text-2xl font-black text-white uppercase tracking-tighter">Contact_Administration</h3>
+                            </div>
+                            <div className="pl-16 space-y-6">
+                                <div className="skeuo-inset p-10 rounded-[2.5rem] bg-deep/40 border-white/5 grid md:grid-cols-2 gap-10">
+                                    <div className="space-y-4">
+                                        <h4 className="text-[10px] font-black text-primary/40 uppercase tracking-[0.4em] text-tactical">CENTRAL_DATA_CONTROLLER</h4>
+                                        <p className="text-xl font-black text-white tracking-tighter uppercase">DIGINEPAL_HQ</p>
+                                        <p className="text-sm text-text-dim/60 font-medium italic">Pokhara, Kaski, Nepal</p>
+                                    </div>
+                                    <div className="space-y-4">
+                                        <h4 className="text-[10px] font-black text-secondary/40 uppercase tracking-[0.4em] text-tactical">DIRECT_UPLINK</h4>
+                                        <p className="text-sm font-black text-white uppercase tracking-widest break-all">sunarsaimon.43244@gmail.com</p>
+                                        <p className="text-sm font-black text-white tracking-widest">+977 9867309193</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
+            </div>
 
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">01.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Introduction</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>
-                            Welcome to DigiNepal ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong>DigiNepal.com</strong> and use our digital marketplace services.
-                        </p>
-                        <p className="border-l-2 border-secondary/50 pl-4 py-1">
-                            Please read this policy carefully. If you do not agree with the terms of this privacy policy, please discontinue use of our site. We reserve the right to make changes to this policy at any time — the updated version will be indicated by an updated "Last Updated" date.
-                        </p>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">02.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Information We Collect</h2>
-                    </div>
-                    <div className="pl-8 space-y-6 text-text-dim text-sm leading-relaxed">
-                        <div>
-                            <h3 className="text-white font-bold mb-2 uppercase tracking-widest text-xs border-b border-white/10 pb-1 inline-block">2.1 Personal Data You Provide</h3>
-                            <ul className="list-disc list-inside space-y-2 mt-2 marker:text-primary">
-                                <li><strong>Account Registration:</strong> Name, email address, and password when you create an account.</li>
-                                <li><strong>Purchases:</strong> Billing name and payment information processed via our secure payment partners (eSewa). We do not store full card numbers.</li>
-                                <li><strong>Contact Forms:</strong> Your name, email, phone number, and message when you contact us.</li>
-                                <li><strong>Creator Profiles:</strong> If you register as a creator, we collect portfolio links, bio, and payout information.</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h3 className="text-white font-bold mb-2 uppercase tracking-widest text-xs border-b border-white/10 pb-1 inline-block">2.2 Automatically Collected Data</h3>
-                            <ul className="list-disc list-inside space-y-2 mt-2 marker:text-secondary">
-                                <li><strong>Log Data:</strong> IP address, browser type and version, pages visited, time and date of visit, time spent on pages.</li>
-                                <li><strong>Cookies:</strong> Small data files placed on your device. See Section 5 for details.</li>
-                                <li><strong>Device Information:</strong> Device type, operating system, and browser settings.</li>
-                                <li><strong>Usage Data:</strong> Pages viewed, search queries, products clicked, and cart activity.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">03.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">How We Use Your Information</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>We use the information we collect to:</p>
-                        <ul className="list-disc list-inside space-y-2 marker:text-primary">
-                            <li>Create and manage your account and authenticate your identity.</li>
-                            <li>Process transactions and send related order confirmations and download links.</li>
-                            <li>Provide you access to purchased digital assets via your Library.</li>
-                            <li>Respond to your customer service requests and inquiries.</li>
-                            <li>Send you marketing and promotional communications (with your consent).</li>
-                            <li>Analyze usage patterns to improve the platform's performance and user experience.</li>
-                            <li>Detect and prevent fraud, abuse, and violations of our Terms of Service.</li>
-                            <li>Comply with applicable legal obligations in Nepal and internationally.</li>
-                            <li>Serve targeted advertisements via Google AdSense based on browsing behavior (see Section 6).</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">04.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Sharing Your Information</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>
-                            We do not sell, trade, or rent your personal information to third parties. We may share your information in the following limited circumstances:
-                        </p>
-                        <ul className="list-disc list-inside space-y-2 marker:text-secondary">
-                            <li><strong>Service Providers:</strong> Third-party vendors who assist us in operating our website.</li>
-                            <li><strong>Advertising Partners:</strong> Google AdSense may use cookies and web beacons. You can opt out at <a href="https://www.google.com/settings/ads" className="text-primary hover:text-white transition-colors">Google Ad Settings</a>.</li>
-                            <li><strong>Legal Requirements:</strong> If required by law, court order, or government authority.</li>
-                            <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets.</li>
-                            <li><strong>With Your Consent:</strong> Any other sharing will only happen with your explicit consent.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">05.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Cookies Policy</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>We use cookies to enhance your experience. Here's what we use:</p>
-                        <ul className="list-disc list-inside space-y-2 marker:text-primary">
-                            <li><strong>Essential Cookies:</strong> Required for authentication, session management, and cart functionality.</li>
-                            <li><strong>Analytics Cookies:</strong> Used by tools like Google Analytics to understand site usage.</li>
-                            <li><strong>Advertising Cookies:</strong> Used by Google AdSense to deliver relevant advertisements.</li>
-                            <li><strong>Preference Cookies:</strong> Remember your settings and preferences for future visits.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">06.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Google AdSense & Advertising</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>
-                            DigiNepal uses Google AdSense to display advertisements. Google, as a third-party vendor, uses cookies (including the DoubleClick cookie) to serve ads based on users' prior visits to our site and other sites on the Internet.
-                        </p>
-                        <p>
-                            Google's use of advertising cookies enables it and its partners to serve ads. You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" className="text-primary hover:text-white transition-colors">Google Ad Settings</a> or <a href="https://www.aboutads.info" className="text-primary hover:text-white transition-colors">aboutads.info</a>.
-                        </p>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">07.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Data Security</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>
-                            We implement industry-standard security measures including SSL/TLS encryption, secure authentication, and regular security audits to protect your personal information. However, no method of transmission over the internet is 100% secure.
-                        </p>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">08.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Your Rights</h2>
-                    </div>
-                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
-                        <p>Depending on your jurisdiction, you may have the right to access, correct, or delete your personal data, and to withdraw consent for marketing.</p>
-                        <p>To exercise any of these rights, contact us at <strong className="text-white">sunarsaimon.43244@gmail.com</strong>.</p>
-                    </div>
-                </section>
-
-                <section className="space-y-4">
-                    <div className="flex items-center gap-4">
-                        <span className="text-primary font-black text-sm">09.</span>
-                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Contact Us</h2>
-                    </div>
-                    <div className="pl-8 space-y-4">
-                        <div className="bg-black/40 border border-primary/20 rounded-xl p-6 space-y-2 text-sm font-mono">
-                            <p className="text-primary font-bold uppercase tracking-widest">DigiNepal Data Controller</p>
-                            <p className="text-text-dim">Pokhara, Kaski, Nepal</p>
-                            <p className="text-text-dim">Email: <span className="text-white">sunarsaimon.43244@gmail.com</span></p>
-                            <p className="text-text-dim">Phone: <span className="text-white">+977 9867309193</span></p>
-                        </div>
-                    </div>
-                </section>
-
+            {/* Bottom Telemetry */}
+            <div className="pt-12 text-center">
+                <div className="flex items-center justify-center gap-4 text-text-dim/20">
+                    <div className="h-[1px] w-24 bg-gradient-to-r from-transparent to-white/10" />
+                    <Cpu size={20} />
+                    <span className="text-[9px] font-black uppercase tracking-[0.6em] text-tactical">END_OF_LEGAL_MANIFEST</span>
+                    <div className="h-[1px] w-24 bg-gradient-to-l from-transparent to-white/10" />
+                </div>
             </div>
         </div>
     );
