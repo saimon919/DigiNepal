@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ChevronLeft, Download, Zap, ChevronDown, Check } from 'lucide-react';
+import { ChevronLeft, Download, ChevronDown, Check, Terminal, ShoppingCart, Shield, X } from 'lucide-react';
 import { useCartStore } from '../store/useCartStore';
 import { supabase } from '../lib/supabase';
-import AdBanner from '../components/AdBanner';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 const compatibilityTools = [
     { name: 'Unity', version: '2021+', supported: true },
@@ -92,146 +92,145 @@ export default function ProductDetail() {
         { key: 'compatibility', label: 'Compatibility' },
         { key: 'license', label: 'License' },
         { key: 'faq', label: 'FAQ' },
-    ];
+    ];    return (
+        <div className="max-w-7xl mx-auto py-10 px-4 space-y-12 pb-32">
+            <Helmet>
+                <title>{product.name} | DigiNepal Premium Asset</title>
+                <meta name="description" content={product.description || `Secure and download ${product.name} from the DigiNepal marketplace.`} />
+            </Helmet>
 
-    return (
-        <div className="max-w-7xl mx-auto py-12 px-4 space-y-8 pb-32">
-            {/* Breadcrumb / Back */}
-            <Link to="/store" className="inline-flex items-center gap-2 text-text-dim hover:text-primary transition-colors mb-4 font-bold uppercase tracking-widest text-xs">
-                <ChevronLeft size={16} />
-                Back to Library
+            <div className="scanline" />
+
+            {/* Breadcrumb / Back Navigation */}
+            <Link to="/store" className="inline-flex items-center gap-3 text-text-dim hover:text-primary transition-all mb-4 font-black uppercase tracking-[0.3em] text-[10px] group">
+                <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                RETURN_TO_MARKET_NODE
             </Link>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-                {/* LEFT SIDE: Sticky Interactive Gallery */}
-                <div className="lg:col-span-7 sticky top-28 space-y-6">
-                    {/* Main Image Container */}
-                    <div className="bg-bg/50 backdrop-blur-3xl rounded-[3rem] p-4 md:p-12 border border-gray-100/50 flex items-center justify-center relative overflow-hidden h-[50vh] min-h-[400px] lg:h-[600px] shadow-soft group">
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-gradient-radial from-white/80 to-transparent pointer-events-none" />
-
-                        <div className="absolute top-8 left-8 flex flex-col gap-3 z-20">
-                            <span className="bg-white/80 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase border border-white flex items-center gap-2 shadow-sm">
-                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> High Quality
+                
+                {/* LEFT SIDE: Tactical Intelligence Gallery */}
+                <div className="lg:col-span-7 sticky top-28 space-y-8">
+                    <div className="glass-panel hud-border p-4 md:p-8 flex items-center justify-center relative overflow-hidden h-[45vh] min-h-[400px] lg:h-[550px] group">
+                        <div className="scanline" />
+                        
+                        {/* Status Indicators */}
+                        <div className="absolute top-6 left-6 flex flex-col gap-3 z-20">
+                            <span className="bg-primary/5 backdrop-blur-md px-4 py-1.5 border border-primary/20 text-[9px] font-black tracking-widest uppercase text-primary flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" /> ASSET_VERIFIED
                             </span>
                         </div>
 
-                        <div className="absolute top-8 right-8 z-20">
-                            <div className="bg-accent text-white px-5 py-2 rounded-full text-[10px] font-black tracking-widest shadow-xl shadow-accent/20">
-                                HOT
+                        <div className="absolute top-6 right-6 z-20">
+                            <div className="bg-secondary/10 border border-secondary/30 text-secondary px-5 py-2 text-[9px] font-black tracking-[0.3em]">
+                                HIGH_DEMAND
                             </div>
                         </div>
 
                         <AnimatePresence mode="wait">
                             <motion.img
                                 key={mainImage}
-                                initial={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
-                                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                                exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
-                                transition={{ duration: 0.4 }}
+                                initial={{ opacity: 0, scale: 0.9, filter: "brightness(0)" }}
+                                animate={{ opacity: 1, scale: 1, filter: "brightness(1)" }}
+                                exit={{ opacity: 0, scale: 1.1, filter: "brightness(0)" }}
+                                transition={{ duration: 0.6 }}
                                 src={mainImage}
                                 alt={product.name}
-                                className="max-w-full max-h-full object-contain relative z-10 drop-shadow-2xl"
+                                className="max-w-full max-h-full object-contain relative z-10 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
                             />
                         </AnimatePresence>
 
-                        <div className="absolute bottom-8 right-8 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <button className="bg-white/90 backdrop-blur-md border border-white/50 w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-transform text-primary">
-                                <span className="text-[10px] font-black">ZOOM</span>
-                            </button>
+                        <div className="absolute bottom-6 right-6 z-20 border border-white/5 bg-black/40 p-4 opacity-0 group-hover:opacity-100 transition-all">
+                            <span className="text-[8px] font-mono text-text-dim uppercase tracking-widest">ZOOM_PROTOCOL: ACTIVE</span>
                         </div>
                     </div>
 
-                    {/* Thumbnail Strip */}
-                    <div className="flex gap-4 overflow-x-auto pb-4 scroll-smooth no-scrollbar">
+                    {/* Sequential Thumbnail Buffer */}
+                    <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar border-b border-white/5">
                         {gallery.map((img, idx) => (
                             <button
                                 key={idx}
                                 onClick={() => setMainImage(img)}
-                                className={`w-24 shrink-0 aspect-square rounded-2xl overflow-hidden border-2 transition-all duration-300 ${mainImage === img ? 'border-primary ring-4 ring-primary/20 scale-105' : 'border-transparent opacity-50 hover:opacity-100 hover:scale-95 bg-bg'}`}
+                                className={`w-24 shrink-0 aspect-[4/3] bg-black/60 border-2 transition-all duration-500 overflow-hidden ${mainImage === img ? 'border-primary shadow-glow scale-105' : 'border-white/5 opacity-40 hover:opacity-100 hover:border-white/20'}`}
                             >
-                                <img src={img} className="w-full h-full object-cover" alt={`Thumbnail ${idx}`} />
+                                <img src={img} className="w-full h-full object-cover" alt={`Buffer ${idx}`} />
                             </button>
                         ))}
                     </div>
                 </div>
 
-                {/* RIGHT SIDE: Info, Pricing & Tabs */}
+                {/* RIGHT SIDE: Telemetry & Acquisition */}
                 <div className="lg:col-span-5 space-y-10">
                     <div className="space-y-6">
-                        <div className="flex items-center gap-2">
-                            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5">
-                                <Check size={12} strokeWidth={3} /> Curated Asset
+                        <div className="flex items-center gap-3">
+                            <span className="bg-white/5 text-primary border border-primary/20 px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] flex items-center gap-2">
+                                <Terminal size={10} /> CORE_MODULE
                             </span>
-                            <span className="bg-gray-100 text-text-dim px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
+                            <span className="bg-white/5 text-text-dim border border-white/10 px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em]">
                                 {product.category}
                             </span>
                         </div>
 
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-text-main leading-[1.1] tracking-tight">
+                        <h1 className="text-4xl md:text-5xl font-display font-black text-white leading-tight tracking-[0.1em] uppercase">
                             {product.name}
                         </h1>
 
-                        <div className="flex items-end gap-4">
-                            <span className="text-4xl font-display font-black text-primary">Rs. {product.price}</span>
-                            <span className="text-xl text-text-dim line-through opacity-50 font-bold mb-1">
-                                Rs. {Math.round(product.price * 1.5)}
+                        <div className="flex items-end gap-6 bg-black/40 p-6 border-l-2 border-primary">
+                            <div className="space-y-1">
+                                <p className="text-[9px] font-black text-primary tracking-widest uppercase">Acquisition_Cost</p>
+                                <span className="text-4xl font-display font-black text-white">Rs. {product.price.toLocaleString()}</span>
+                            </div>
+                            <span className="text-lg text-text-dim line-through opacity-30 font-bold mb-1">
+                                Rs. {Math.round(product.price * 1.4).toLocaleString()}
                             </span>
                         </div>
 
-                        <p className="text-lg text-text-dim leading-relaxed font-medium">
-                            {product.description || `A premium, professionally crafted digital asset pack, meticulously designed for game developers, 3D artists, and interactive media creators.`}
+                        <p className="text-sm text-text-dim leading-relaxed font-mono uppercase tracking-widest border-b border-white/5 pb-8">
+                            {product.description || `Tactical high-fidelity software asset optimized for production pipelines. Features advanced PBR integration and seamless deployment readiness.`}
                         </p>
 
-                        <div className="grid grid-cols-2 gap-4 py-6 border-y border-gray-100">
-                            <div className="space-y-1.5">
-                                <p className="text-[10px] font-black text-text-dim uppercase tracking-widest">Included Formats</p>
-                                <p className="font-bold text-sm">BLEND, FBX, OBJ</p>
+                        <div className="grid grid-cols-2 gap-8 py-6 border-b border-white/5">
+                            <div className="space-y-2">
+                                <p className="text-[9px] font-black text-primary uppercase tracking-widest">DATA_FORMATS</p>
+                                <p className="font-bold text-xs text-white tracking-widest font-mono">BLEND, FBX, OBJ</p>
                             </div>
-                            <div className="space-y-1.5">
-                                <p className="text-[10px] font-black text-text-dim uppercase tracking-widest">License Type</p>
-                                <p className="font-bold text-sm">Commercial / Royalty-Free</p>
+                            <div className="space-y-2">
+                                <p className="text-[9px] font-black text-primary uppercase tracking-widest">CLEARANCE</p>
+                                <p className="font-bold text-xs text-white tracking-widest font-mono text-secondary">ROYALTY_FREE_COM</p>
                             </div>
                         </div>
 
-                        {/* Sticky Buy Box (Mobile) / Standard (Desktop) */}
-                        <div className="flex gap-4 fixed bottom-0 left-0 right-0 p-4 bg-white/80 backdrop-blur-xl border-t border-gray-200 z-50 lg:relative lg:bg-transparent lg:border-none lg:p-0 lg:z-auto">
-                            <button className="h-16 aspect-square bg-bg text-text-main rounded-2xl font-black text-sm hover:bg-gray-200 transition-all active:scale-[0.98] shadow-sm flex items-center justify-center shrink-0 border border-gray-100">
-                                FAV
-                            </button>
+                        {/* Transaction Interface */}
+                        <div className="flex gap-4 pt-4 lg:relative">
                             <button
                                 onClick={() => addToCart(product)}
-                                className="h-16 flex-1 bg-text-main text-white rounded-2xl font-black tracking-wide text-lg hover:bg-black hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-3 shadow-xl shadow-black/10"
+                                className="h-20 flex-1 bg-primary text-black font-black tracking-[0.5em] text-sm hover:bg-white transition-all duration-300 shadow-glow flex items-center justify-center gap-4 group"
                             >
-                                ADD TO CART
+                                <ShoppingCart size={20} />
+                                INITIATE_ACQUISITION
                             </button>
                         </div>
 
-                        <div className="flex items-center justify-between pt-2">
-                            <div className="flex items-center gap-2 text-[10px] font-black text-text-dim uppercase tracking-widest">
-                                <Download size={14} className="text-green-500" /> Instant Download
+                        <div className="flex items-center justify-between pt-6 border-t border-white/5">
+                            <div className="flex items-center gap-3 text-[9px] font-black text-text-dim uppercase tracking-[0.2em]">
+                                <Download size={14} className="text-primary" /> INSTANT_DL
                             </div>
-                            <div className="flex items-center gap-2 text-[10px] font-black text-text-dim uppercase tracking-widest">
-                                <Zap size={14} className="text-accent" /> 24/7 Support
+                            <div className="flex items-center gap-3 text-[9px] font-black text-text-dim uppercase tracking-[0.2em]">
+                                <Shield size={14} className="text-secondary" /> DATA_SECURE
                             </div>
                         </div>
                     </div>
 
-                    {/* AdBanner in Sidebar */}
-                    <div className="py-4">
-                        <AdBanner slot="in-article" />
-                    </div>
-
-                    {/* Rich Content Tabs */}
-                    <div className="space-y-6 pt-4" id="product-details">
-                        {/* Tab Headers */}
-                        <div className="flex flex-wrap gap-2 border-b border-gray-100 pb-0">
+                    {/* Tactical Documentation Tabs */}
+                    <div className="space-y-4 pt-10">
+                        <div className="flex flex-wrap gap-2 border-b border-white/5 pb-0 overflow-x-auto no-scrollbar">
                             {tabs.map(tab => (
                                 <button
                                     key={tab.key}
                                     onClick={() => setActiveTab(tab.key)}
-                                    className={`px-5 py-3 text-sm font-black transition-all -mb-px border-b-2 ${activeTab === tab.key
-                                        ? 'border-primary text-primary'
-                                        : 'border-transparent text-text-dim hover:text-text-main hover:border-gray-200'
+                                    className={`px-6 py-4 text-[10px] font-black tracking-[0.2em] uppercase transition-all -mb-px border-b-2 ${activeTab === tab.key
+                                        ? 'border-primary text-primary bg-primary/5'
+                                        : 'border-transparent text-text-dim hover:text-white hover:bg-white/5'
                                         }`}
                                 >
                                     {tab.label}
@@ -239,146 +238,124 @@ export default function ProductDetail() {
                             ))}
                         </div>
 
-                        {/* Tab Content with AnimatePresence */}
-                        <div className="bg-bg/30 rounded-[2rem] p-6 md:p-8 min-h-[400px]">
+                        <div className="glass-panel p-8 min-h-[350px] relative overflow-hidden bg-black/20">
+                            <div className="scanline" />
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={activeTab}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 10 }}
                                     transition={{ duration: 0.3 }}
+                                    className="font-mono text-xs uppercase tracking-widest leading-loose text-text-dim"
                                 >
                                     {activeTab === 'description' && (
                                         <div className="space-y-6">
-                                            <div className="space-y-4 text-text-main leading-relaxed font-medium">
-                                                <p>
-                                                    {product.description || `This is a premium, studio-quality digital asset pack designed for professional game developers, 3D artists, and interactive experience creators. Every element has been crafted with meticulous attention to detail, following Physically Based Rendering (PBR) standards to ensure realistic and visually stunning results across all supported rendering environments.`}
-                                                </p>
-                                                <p>
-                                                    This pack is the result of extensive research into real-world references and modern game design trends. All meshes feature clean topology with proper flow for deformation (where applicable), and all UV maps are non-overlapping with efficient texture space utilization. The included PBR textures are provided at 4K resolution, with downscaled 2K and 1K versions also included for mobile or performance-sensitive projects.
-                                                </p>
-                                                <p>
-                                                    Whether you are building an open-world game, a first-person shooter, an architectural visualization, or a cinematic sequence, this asset pack provides the visual foundation you need. The modular design philosophy applied to this pack means components snap together perfectly on a 1-meter grid, enabling rapid scene construction without gaps or misalignments.
-                                                </p>
-                                            </div>
+                                            <p className="border-l-2 border-primary/20 pl-6">
+                                                {product.description || `This high-fidelity digital module has been engineered according to industrial PBR (Physically Based Rendering) standards. The architecture focuses on performance efficiency and visual fidelity across all major game engines and visualization platforms.`}
+                                            </p>
+                                            <p className="border-l-2 border-white/5 pl-6">
+                                                All meshes undergo rigorous topology validation. Non-overlapping UV maps ensure optimal lightmap density and texture resolution utilization.
+                                            </p>
                                         </div>
                                     )}
 
                                     {activeTab === 'features' && (
-                                        <div className="space-y-6">
-                                            <ul className="grid grid-cols-1 gap-4">
-                                                {[
-                                                    'PBR textures at 4K resolution (Albedo, Normal, Roughness, Metallic, AO)',
-                                                    'Clean, optimized mesh topology — game-ready polygon counts',
-                                                    'Non-overlapping UV maps with efficient texture space',
-                                                    'Modular components — snap together on a 1m grid',
-                                                    'FBX, OBJ, and BLEND formats included',
-                                                    'Multiple LOD levels for dynamic performance scaling',
-                                                    'Pre-configured materials for Unity (URP/HDRP) and Unreal Engine (UE5)',
-                                                    'Commercial license included — use in unlimited personal and commercial projects',
-                                                ].map((feature, i) => (
-                                                    <li key={i} className="flex items-start gap-4 text-text-main font-medium">
-                                                        <div className="w-6 h-6 bg-primary/10 text-primary rounded-full flex items-center justify-center shrink-0 mt-px">
-                                                            <Check size={14} strokeWidth={3} />
-                                                        </div>
-                                                        <span className="leading-relaxed">{feature}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
+                                        <ul className="space-y-4">
+                                            {[
+                                                '4K NEURAL PBR TEXTURES',
+                                                'CLEAN TOPOLOGY: ENGINE_READY',
+                                                'NON-OVERLAPPING UV PIPELINE',
+                                                'MODULAR 1M GRID SNAP ALIGNMENT',
+                                                'MULTI_LOD DYNAMIC SCALING',
+                                                'UNITY & UNREAL PRESET MATERIALS',
+                                            ].map((feature, i) => (
+                                                <li key={i} className="flex items-center gap-4 text-white hover:text-primary transition-colors">
+                                                    <span className="w-1.5 h-1.5 bg-primary rounded-none shadow-glow shrink-0" />
+                                                    {feature}
+                                                </li>
+                                            ))}
+                                        </ul>
                                     )}
 
                                     {activeTab === 'compatibility' && (
-                                        <div className="space-y-6">
-                                            <p className="text-text-main font-medium leading-relaxed">
-                                                This asset has been tested and verified to work correctly with the following platforms and software versions.
-                                            </p>
-                                            <div className="grid grid-cols-1 gap-3">
-                                                {compatibilityTools.map((tool) => (
-                                                    <div
-                                                        key={tool.name}
-                                                        className={`flex items-center justify-between p-4 rounded-2xl border ${tool.supported ? 'border-primary/20 bg-primary/5' : 'border-gray-200 bg-white'
-                                                            }`}
-                                                    >
-                                                        <div>
-                                                            <p className="font-black text-text-main">{tool.name}</p>
-                                                            <p className="text-xs font-bold text-text-dim mt-0.5">{tool.version}</p>
-                                                        </div>
-                                                        <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${tool.supported ? 'bg-primary text-white shadow-md' : 'bg-gray-100 text-text-dim'
-                                                            }`}>
-                                                            {tool.supported ? 'Supported' : 'Untested'}
-                                                        </span>
+                                        <div className="grid grid-cols-1 gap-4">
+                                            {compatibilityTools.map((tool) => (
+                                                <div
+                                                    key={tool.name}
+                                                    className={`flex items-center justify-between p-5 border ${tool.supported ? 'border-primary/20 bg-primary/5' : 'border-white/5 bg-black/40'}`}
+                                                >
+                                                    <div>
+                                                        <p className="font-black text-white text-[10px] tracking-widest">{tool.name}::CORE</p>
+                                                        <p className="text-[9px] font-bold text-text-dim mt-1">{tool.version}</p>
                                                     </div>
-                                                ))}
-                                            </div>
+                                                    <span className={`px-4 py-1.5 text-[8px] font-black uppercase tracking-widest ${tool.supported ? 'bg-primary text-black' : 'bg-white/5 text-text-dim border border-white/10'}`}>
+                                                        {tool.supported ? 'AUTHORIZED' : 'UNKNOWN'}
+                                                    </span>
+                                                </div>
+                                            ))}
                                         </div>
                                     )}
 
                                     {activeTab === 'license' && (
                                         <div className="space-y-6">
-                                            <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 space-y-6">
-                                                <h3 className="font-display font-black text-text-main text-2xl">Royalty-Free Commercial License</h3>
-                                                <p className="text-text-main font-medium leading-relaxed">
-                                                    Upon purchase, you are granted a non-exclusive, perpetual, worldwide license to use this digital asset in personal and commercial projects. This includes games, applications, films, visualizations, and any other interactive or non-interactive media.
-                                                </p>
-                                                <div className="space-y-4 p-4 bg-green-50/50 rounded-2xl border border-green-100">
-                                                    <h4 className="font-black text-green-800 flex items-center gap-2 uppercase tracking-wide text-xs">
-                                                        <Check size={16} /> Permitted Uses
-                                                    </h4>
-                                                    <ul className="space-y-2 text-sm text-green-900 list-disc list-inside font-medium">
-                                                        <li>Use in unlimited personal and commercial projects</li>
-                                                        <li>Use in games sold on Steam, App Store, Google Play, etc.</li>
-                                                        <li>Modify the asset to fit your project</li>
-                                                        <li>Use in client work and freelance projects</li>
-                                                    </ul>
-                                                </div>
-                                                <div className="space-y-4 p-4 bg-red-50/50 rounded-2xl border border-red-100">
-                                                    <h4 className="font-black text-red-800 flex items-center gap-2 uppercase tracking-wide text-xs">
-                                                        <span className="text-lg">×</span> Restricted Uses
-                                                    </h4>
-                                                    <ul className="space-y-2 text-sm text-red-900 list-disc list-inside font-medium">
-                                                        <li>Resell, redistribute, or sublicense original asset files</li>
-                                                        <li>Include raw files in a product sold to end users</li>
-                                                        <li>Claim original authorship or copyright</li>
-                                                    </ul>
+                                            <div className="border border-white/5 p-6 space-y-6 bg-black/40">
+                                                <h3 className="font-black text-primary text-sm tracking-[0.3em]">LICENSE_PROTOCOL::ROYALTY_FREE</h3>
+                                                <div className="space-y-4">
+                                                    <div className="bg-primary/5 p-4 border border-primary/20 space-y-4">
+                                                        <h4 className="font-black text-primary text-[10px] tracking-widest uppercase flex items-center gap-3">
+                                                            <Check size={14} /> AUTHORIZED_ACTION
+                                                        </h4>
+                                                        <ul className="space-y-2 text-[9px] text-text-dim">
+                                                            <li>:: COMMERCIAL_USE: UNLIMITED</li>
+                                                            <li>:: GLOBAL_REPOST_AUTH</li>
+                                                            <li>:: MODIFICATION: ENABLED</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div className="bg-red-500/5 p-4 border border-red-500/20 space-y-4">
+                                                        <h4 className="font-black text-red-500 text-[10px] tracking-widest uppercase flex items-center gap-3">
+                                                            <X size={14} /> RESTRICTED_ACTION
+                                                        </h4>
+                                                        <ul className="space-y-2 text-[9px] text-text-dim">
+                                                            <li>:: RAW_FILE_REDISTRIBUTION</li>
+                                                            <li>:: COPYRIGHT_CLAIM_ATTEMPT</li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     )}
 
                                     {activeTab === 'faq' && (
-                                        <div className="space-y-4">
-                                            <div className="space-y-3">
-                                                {faqs.map((faq, i) => (
-                                                    <div key={i} className="border border-gray-200 rounded-2xl overflow-hidden bg-white shadow-sm">
-                                                        <button
-                                                            onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                                                            className="w-full flex items-center justify-between p-5 text-left hover:bg-gray-50 transition-colors"
-                                                        >
-                                                            <span className="font-black text-text-main pr-4">{faq.q}</span>
-                                                            <ChevronDown
-                                                                size={18}
-                                                                className={`text-primary shrink-0 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}
-                                                            />
-                                                        </button>
-                                                        <AnimatePresence>
-                                                            {openFaq === i && (
-                                                                <motion.div
-                                                                    initial={{ height: 0, opacity: 0 }}
-                                                                    animate={{ height: "auto", opacity: 1 }}
-                                                                    exit={{ height: 0, opacity: 0 }}
-                                                                    className="overflow-hidden"
-                                                                >
-                                                                    <div className="px-5 pb-5 text-text-dim text-sm font-medium leading-relaxed border-t border-gray-100 pt-4">
-                                                                        {faq.a}
-                                                                    </div>
-                                                                </motion.div>
-                                                            )}
-                                                        </AnimatePresence>
-                                                    </div>
-                                                ))}
-                                            </div>
+                                        <div className="space-y-3">
+                                            {faqs.map((faq, i) => (
+                                                <div key={i} className="border border-white/5 bg-black/40 overflow-hidden">
+                                                    <button
+                                                        onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                                                        className="w-full flex items-center justify-between p-5 text-left hover:bg-white/5 transition-all"
+                                                    >
+                                                        <span className="font-black text-white text-[10px] pr-4 tracking-widest">{faq.q}</span>
+                                                        <ChevronDown
+                                                            size={16}
+                                                            className={`text-primary shrink-0 transition-transform duration-500 ${openFaq === i ? 'rotate-180' : ''}`}
+                                                        />
+                                                    </button>
+                                                    <AnimatePresence>
+                                                        {openFaq === i && (
+                                                            <motion.div
+                                                                initial={{ height: 0, opacity: 0 }}
+                                                                animate={{ height: "auto", opacity: 1 }}
+                                                                exit={{ height: 0, opacity: 0 }}
+                                                                className="overflow-hidden border-t border-white/5"
+                                                            >
+                                                                <div className="p-6 text-text-dim text-[10px] font-mono leading-loose tracking-widest">
+                                                                    {faq.a}
+                                                                </div>
+                                                            </motion.div>
+                                                        )}
+                                                    </AnimatePresence>
+                                                </div>
+                                            ))}
                                         </div>
                                     )}
                                 </motion.div>

@@ -1,139 +1,189 @@
+import { ShieldCheck, Server, Activity, Terminal } from 'lucide-react';
+
 export default function PrivacyPolicy() {
     return (
-        <div className="max-w-4xl mx-auto py-16 px-4 space-y-12">
-            <div className="space-y-4">
-                <span className="bg-secondary/20 text-primary px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase">Legal</span>
-                <h1 className="text-4xl md:text-6xl font-display font-black text-primary leading-tight">Privacy Policy</h1>
-                <p className="text-text-dim">Last updated: March 8, 2026</p>
+        <div className="max-w-4xl mx-auto py-16 px-4 space-y-12 relative font-mono">
+            {/* Background elements */}
+            <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-secondary/5 rounded-full blur-[120px] pointer-events-none" />
+
+            {/* Header Readout */}
+            <div className="glass-panel hud-border p-8 md:p-12 relative z-10 text-center space-y-6">
+                <div className="flex items-center justify-center gap-3 text-secondary mb-4">
+                    <Server size={16} className="animate-pulse" />
+                    <span className="text-[10px] uppercase tracking-[0.3em] font-black">LEGAL_PROTOCOL_ACCESS</span>
+                </div>
+                <h1 className="text-4xl md:text-6xl font-display font-black text-white tracking-widest uppercase">
+                    PRIVACY_POLICY
+                </h1>
+                <div className="flex justify-center gap-8 pt-6 border-t border-white/5 text-[9px] uppercase tracking-widest text-text-dim">
+                    <span className="flex items-center gap-2"><Activity size={12} className="text-secondary" /> Last_Update: 2026.03.08</span>
+                    <span className="flex items-center gap-2 text-primary"><ShieldCheck size={12} /> Status: ENFORCED</span>
+                </div>
             </div>
 
-            <div className="bg-white rounded-3xl p-8 md:p-12 shadow-soft space-y-10 border border-gray-100 prose max-w-none">
+            {/* Legal Text Body */}
+            <div className="glass-panel hud-border p-8 md:p-12 space-y-12 relative z-10">
+                
+                <div className="flex items-center justify-between border-b border-white/5 pb-6">
+                    <h2 className="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-2">
+                        <Terminal size={20} className="text-primary" />
+                        Data_Handling_Protocols
+                    </h2>
+                    <span className="text-[10px] text-text-dim uppercase tracking-widest">Read_Only</span>
+                </div>
 
                 <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-text-main">1. Introduction</h2>
-                    <p className="text-text-dim leading-relaxed">
-                        Welcome to DigiNepal ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong>DigiNepal.com</strong> and use our digital marketplace services.
-                    </p>
-                    <p className="text-text-dim leading-relaxed">
-                        Please read this policy carefully. If you do not agree with the terms of this privacy policy, please discontinue use of our site. We reserve the right to make changes to this policy at any time — the updated version will be indicated by an updated "Last Updated" date.
-                    </p>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-text-main">2. Information We Collect</h2>
-                    <p className="text-text-dim leading-relaxed">We collect information in the following ways:</p>
-                    <h3 className="text-lg font-bold text-text-main">2.1 Personal Data You Provide</h3>
-                    <ul className="list-disc list-inside space-y-2 text-text-dim">
-                        <li><strong>Account Registration:</strong> Name, email address, and password when you create an account.</li>
-                        <li><strong>Purchases:</strong> Billing name and payment information processed via our secure payment partners (eSewa). We do not store full card numbers.</li>
-                        <li><strong>Contact Forms:</strong> Your name, email, phone number, and message when you contact us.</li>
-                        <li><strong>Creator Profiles:</strong> If you register as a creator, we collect portfolio links, bio, and payout information.</li>
-                    </ul>
-                    <h3 className="text-lg font-bold text-text-main">2.2 Automatically Collected Data</h3>
-                    <ul className="list-disc list-inside space-y-2 text-text-dim">
-                        <li><strong>Log Data:</strong> IP address, browser type and version, pages visited, time and date of visit, time spent on pages.</li>
-                        <li><strong>Cookies:</strong> Small data files placed on your device. See Section 5 for details.</li>
-                        <li><strong>Device Information:</strong> Device type, operating system, and browser settings.</li>
-                        <li><strong>Usage Data:</strong> Pages viewed, search queries, products clicked, and cart activity.</li>
-                    </ul>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-text-main">3. How We Use Your Information</h2>
-                    <p className="text-text-dim leading-relaxed">We use the information we collect to:</p>
-                    <ul className="list-disc list-inside space-y-2 text-text-dim">
-                        <li>Create and manage your account and authenticate your identity.</li>
-                        <li>Process transactions and send related order confirmations and download links.</li>
-                        <li>Provide you access to purchased digital assets via your Library.</li>
-                        <li>Respond to your customer service requests and inquiries.</li>
-                        <li>Send you marketing and promotional communications (with your consent).</li>
-                        <li>Analyze usage patterns to improve the platform's performance and user experience.</li>
-                        <li>Detect and prevent fraud, abuse, and violations of our Terms of Service.</li>
-                        <li>Comply with applicable legal obligations in Nepal and internationally.</li>
-                        <li>Serve targeted advertisements via Google AdSense based on browsing behavior (see Section 6).</li>
-                    </ul>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-text-main">4. Sharing Your Information</h2>
-                    <p className="text-text-dim leading-relaxed">
-                        We do not sell, trade, or rent your personal information to third parties. We may share your information in the following limited circumstances:
-                    </p>
-                    <ul className="list-disc list-inside space-y-2 text-text-dim">
-                        <li><strong>Service Providers:</strong> Third-party vendors who assist us in operating our website (e.g., Supabase for database, Vercel for hosting, eSewa for payments). These providers are contractually obligated to keep your information confidential.</li>
-                        <li><strong>Advertising Partners:</strong> Google AdSense may use cookies and web beacons to serve ads based on your prior visits to our website and other sites. You can opt out at <a href="https://www.google.com/settings/ads" className="text-primary underline">Google Ad Settings</a>.</li>
-                        <li><strong>Legal Requirements:</strong> If required by law, court order, or government authority.</li>
-                        <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction.</li>
-                        <li><strong>With Your Consent:</strong> Any other sharing will only happen with your explicit consent.</li>
-                    </ul>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-text-main">5. Cookies Policy</h2>
-                    <p className="text-text-dim leading-relaxed">
-                        We use cookies to enhance your experience on DigiNepal. Cookies are small text files stored on your device. Here's what we use:
-                    </p>
-                    <ul className="list-disc list-inside space-y-2 text-text-dim">
-                        <li><strong>Essential Cookies:</strong> Required for authentication, session management, and cart functionality.</li>
-                        <li><strong>Analytics Cookies:</strong> Used by tools like Google Analytics to understand site usage and improve user experience.</li>
-                        <li><strong>Advertising Cookies:</strong> Used by Google AdSense to deliver relevant advertisements. These may track your browsing across websites.</li>
-                        <li><strong>Preference Cookies:</strong> Remember your settings and preferences for future visits.</li>
-                    </ul>
-                    <p className="text-text-dim leading-relaxed">
-                        You can control cookies through your browser settings. Disabling certain cookies may affect the functionality of the website.
-                    </p>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-text-main">6. Google AdSense & Third-Party Advertising</h2>
-                    <p className="text-text-dim leading-relaxed">
-                        DigiNepal uses Google AdSense to display advertisements. Google, as a third-party vendor, uses cookies (including the DoubleClick cookie) to serve ads based on users' prior visits to our site and other sites on the Internet.
-                    </p>
-                    <p className="text-text-dim leading-relaxed">
-                        Google's use of advertising cookies enables it and its partners to serve ads based on your visit to our site and/or other sites on the Internet. You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" className="text-primary underline">Google Ad Settings</a> or <a href="https://www.aboutads.info" className="text-primary underline">aboutads.info</a>.
-                    </p>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-text-main">7. Data Security</h2>
-                    <p className="text-text-dim leading-relaxed">
-                        We implement industry-standard security measures including SSL/TLS encryption, secure authentication, and regular security audits to protect your personal information. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.
-                    </p>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-text-main">8. Your Rights</h2>
-                    <p className="text-text-dim leading-relaxed">Depending on your jurisdiction, you may have the right to:</p>
-                    <ul className="list-disc list-inside space-y-2 text-text-dim">
-                        <li>Access the personal information we hold about you.</li>
-                        <li>Request correction of inaccurate data.</li>
-                        <li>Request deletion of your personal data ("right to be forgotten").</li>
-                        <li>Object to or restrict processing of your data.</li>
-                        <li>Data portability – receive your data in a structured format.</li>
-                        <li>Withdraw consent for marketing communications at any time.</li>
-                    </ul>
-                    <p className="text-text-dim leading-relaxed">To exercise any of these rights, contact us at <strong>sunarsaimon.43244@gmail.com</strong>.</p>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-text-main">9. Children's Privacy</h2>
-                    <p className="text-text-dim leading-relaxed">
-                        DigiNepal is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If we learn that we have collected information from a child under 13 without parental consent, we will delete that information promptly.
-                    </p>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-text-main">10. Contact Us</h2>
-                    <p className="text-text-dim leading-relaxed">
-                        If you have questions or concerns about this Privacy Policy, please contact us:
-                    </p>
-                    <div className="bg-bg rounded-2xl p-6 space-y-2">
-                        <p className="font-bold text-text-main">DigiNepal</p>
-                        <p className="text-text-dim">Pokhara, Kaski, Nepal</p>
-                        <p className="text-text-dim">Email: sunarsaimon.43244@gmail.com</p>
-                        <p className="text-text-dim">Phone: +977 9867309193</p>
+                    <div className="flex items-center gap-4">
+                        <span className="text-primary font-black text-sm">01.</span>
+                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Introduction</h2>
+                    </div>
+                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
+                        <p>
+                            Welcome to DigiNepal ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong>DigiNepal.com</strong> and use our digital marketplace services.
+                        </p>
+                        <p className="border-l-2 border-secondary/50 pl-4 py-1">
+                            Please read this policy carefully. If you do not agree with the terms of this privacy policy, please discontinue use of our site. We reserve the right to make changes to this policy at any time — the updated version will be indicated by an updated "Last Updated" date.
+                        </p>
                     </div>
                 </section>
+
+                <section className="space-y-4">
+                    <div className="flex items-center gap-4">
+                        <span className="text-primary font-black text-sm">02.</span>
+                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Information We Collect</h2>
+                    </div>
+                    <div className="pl-8 space-y-6 text-text-dim text-sm leading-relaxed">
+                        <div>
+                            <h3 className="text-white font-bold mb-2 uppercase tracking-widest text-xs border-b border-white/10 pb-1 inline-block">2.1 Personal Data You Provide</h3>
+                            <ul className="list-disc list-inside space-y-2 mt-2 marker:text-primary">
+                                <li><strong>Account Registration:</strong> Name, email address, and password when you create an account.</li>
+                                <li><strong>Purchases:</strong> Billing name and payment information processed via our secure payment partners (eSewa). We do not store full card numbers.</li>
+                                <li><strong>Contact Forms:</strong> Your name, email, phone number, and message when you contact us.</li>
+                                <li><strong>Creator Profiles:</strong> If you register as a creator, we collect portfolio links, bio, and payout information.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 className="text-white font-bold mb-2 uppercase tracking-widest text-xs border-b border-white/10 pb-1 inline-block">2.2 Automatically Collected Data</h3>
+                            <ul className="list-disc list-inside space-y-2 mt-2 marker:text-secondary">
+                                <li><strong>Log Data:</strong> IP address, browser type and version, pages visited, time and date of visit, time spent on pages.</li>
+                                <li><strong>Cookies:</strong> Small data files placed on your device. See Section 5 for details.</li>
+                                <li><strong>Device Information:</strong> Device type, operating system, and browser settings.</li>
+                                <li><strong>Usage Data:</strong> Pages viewed, search queries, products clicked, and cart activity.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="space-y-4">
+                    <div className="flex items-center gap-4">
+                        <span className="text-primary font-black text-sm">03.</span>
+                        <h2 className="text-lg font-black text-white uppercase tracking-widest">How We Use Your Information</h2>
+                    </div>
+                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
+                        <p>We use the information we collect to:</p>
+                        <ul className="list-disc list-inside space-y-2 marker:text-primary">
+                            <li>Create and manage your account and authenticate your identity.</li>
+                            <li>Process transactions and send related order confirmations and download links.</li>
+                            <li>Provide you access to purchased digital assets via your Library.</li>
+                            <li>Respond to your customer service requests and inquiries.</li>
+                            <li>Send you marketing and promotional communications (with your consent).</li>
+                            <li>Analyze usage patterns to improve the platform's performance and user experience.</li>
+                            <li>Detect and prevent fraud, abuse, and violations of our Terms of Service.</li>
+                            <li>Comply with applicable legal obligations in Nepal and internationally.</li>
+                            <li>Serve targeted advertisements via Google AdSense based on browsing behavior (see Section 6).</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section className="space-y-4">
+                    <div className="flex items-center gap-4">
+                        <span className="text-primary font-black text-sm">04.</span>
+                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Sharing Your Information</h2>
+                    </div>
+                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
+                        <p>
+                            We do not sell, trade, or rent your personal information to third parties. We may share your information in the following limited circumstances:
+                        </p>
+                        <ul className="list-disc list-inside space-y-2 marker:text-secondary">
+                            <li><strong>Service Providers:</strong> Third-party vendors who assist us in operating our website.</li>
+                            <li><strong>Advertising Partners:</strong> Google AdSense may use cookies and web beacons. You can opt out at <a href="https://www.google.com/settings/ads" className="text-primary hover:text-white transition-colors">Google Ad Settings</a>.</li>
+                            <li><strong>Legal Requirements:</strong> If required by law, court order, or government authority.</li>
+                            <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets.</li>
+                            <li><strong>With Your Consent:</strong> Any other sharing will only happen with your explicit consent.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section className="space-y-4">
+                    <div className="flex items-center gap-4">
+                        <span className="text-primary font-black text-sm">05.</span>
+                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Cookies Policy</h2>
+                    </div>
+                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
+                        <p>We use cookies to enhance your experience. Here's what we use:</p>
+                        <ul className="list-disc list-inside space-y-2 marker:text-primary">
+                            <li><strong>Essential Cookies:</strong> Required for authentication, session management, and cart functionality.</li>
+                            <li><strong>Analytics Cookies:</strong> Used by tools like Google Analytics to understand site usage.</li>
+                            <li><strong>Advertising Cookies:</strong> Used by Google AdSense to deliver relevant advertisements.</li>
+                            <li><strong>Preference Cookies:</strong> Remember your settings and preferences for future visits.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section className="space-y-4">
+                    <div className="flex items-center gap-4">
+                        <span className="text-primary font-black text-sm">06.</span>
+                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Google AdSense & Advertising</h2>
+                    </div>
+                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
+                        <p>
+                            DigiNepal uses Google AdSense to display advertisements. Google, as a third-party vendor, uses cookies (including the DoubleClick cookie) to serve ads based on users' prior visits to our site and other sites on the Internet.
+                        </p>
+                        <p>
+                            Google's use of advertising cookies enables it and its partners to serve ads. You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" className="text-primary hover:text-white transition-colors">Google Ad Settings</a> or <a href="https://www.aboutads.info" className="text-primary hover:text-white transition-colors">aboutads.info</a>.
+                        </p>
+                    </div>
+                </section>
+
+                <section className="space-y-4">
+                    <div className="flex items-center gap-4">
+                        <span className="text-primary font-black text-sm">07.</span>
+                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Data Security</h2>
+                    </div>
+                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
+                        <p>
+                            We implement industry-standard security measures including SSL/TLS encryption, secure authentication, and regular security audits to protect your personal information. However, no method of transmission over the internet is 100% secure.
+                        </p>
+                    </div>
+                </section>
+
+                <section className="space-y-4">
+                    <div className="flex items-center gap-4">
+                        <span className="text-primary font-black text-sm">08.</span>
+                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Your Rights</h2>
+                    </div>
+                    <div className="pl-8 space-y-4 text-text-dim text-sm leading-relaxed">
+                        <p>Depending on your jurisdiction, you may have the right to access, correct, or delete your personal data, and to withdraw consent for marketing.</p>
+                        <p>To exercise any of these rights, contact us at <strong className="text-white">sunarsaimon.43244@gmail.com</strong>.</p>
+                    </div>
+                </section>
+
+                <section className="space-y-4">
+                    <div className="flex items-center gap-4">
+                        <span className="text-primary font-black text-sm">09.</span>
+                        <h2 className="text-lg font-black text-white uppercase tracking-widest">Contact Us</h2>
+                    </div>
+                    <div className="pl-8 space-y-4">
+                        <div className="bg-black/40 border border-primary/20 rounded-xl p-6 space-y-2 text-sm font-mono">
+                            <p className="text-primary font-bold uppercase tracking-widest">DigiNepal Data Controller</p>
+                            <p className="text-text-dim">Pokhara, Kaski, Nepal</p>
+                            <p className="text-text-dim">Email: <span className="text-white">sunarsaimon.43244@gmail.com</span></p>
+                            <p className="text-text-dim">Phone: <span className="text-white">+977 9867309193</span></p>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </div>
     );

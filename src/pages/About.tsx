@@ -1,151 +1,155 @@
-import { Target, Heart, Zap, Users, Globe, Award, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Target, Zap, Shield, Globe, Award, Database, Terminal, Server, Activity } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const teamValues = [
     {
-        icon: <Zap size={32} />,
-        title: 'Speed',
-        desc: 'Instant downloads, zero friction. We believe that when a creator has found the perfect asset, nothing should stand between them and building their vision. Our infrastructure is optimized to deliver files the moment a purchase is confirmed.',
+        icon: <Zap size={24} />,
+        title: 'Speed::Latency_Zero',
+        desc: 'Instant downloads, zero friction. We believe that when a creator has found the perfect asset, nothing should stand between them and building their vision. Our infrastructure is optimized for immediate data deployment.',
+        color: 'text-primary',
+        bg: 'bg-primary/10'
     },
     {
-        icon: <Heart size={32} />,
-        title: 'Community',
-        desc: 'Built by creators, for creators. DigiNepal grew out of a Pokhara-based collective of game developers and 3D artists who were frustrated by the lack of a regional platform that understood their needs, their pricing realities, and their culture.',
+        icon: <Target size={24} />,
+        title: 'Quality::Verified',
+        desc: 'Curated, not crowded. We manually review every asset before it goes live. Our curation team checks for clean topology, proper UV mapping, and real compatibility — so you never waste cycles on a broken file.',
+        color: 'text-secondary',
+        bg: 'bg-secondary/10'
     },
     {
-        icon: <Target size={32} />,
-        title: 'Quality',
-        desc: 'Curated, not crowded. We manually review every asset before it goes live. Our curation team checks for clean topology, proper UV mapping, accurate description, and real software compatibility — so you never waste money on a broken file.',
+        icon: <Shield size={24} />,
+        title: 'Security::Enforced',
+        desc: 'Built by creators, for creators. DigiNepal was born out of a Pokhara-based collective of high-fidelity artists. We prioritize the security of intellectual property and the reliability of digital transactions.',
+        color: 'text-accent',
+        bg: 'bg-accent/10'
     },
 ];
 
 const milestones = [
-    { year: 'Vision', title: 'Why We Started', desc: 'The platform was conceived in Pokhara by a small group of Nepali game developers struggling to find local digital assets without international fees.' },
-    { year: 'Action', title: 'Building the Platform', desc: 'We set out to build a platform that connects talented Nepali 3D artists and developers directly with a global audience.' },
-    { year: 'Launch', title: 'Going Live', desc: 'DigiNepal launches with integrated local payment gateways, making it easy for Nepali creators and buyers to transact.' },
-    { year: 'Future', title: 'Global Reach', desc: 'Our ongoing mission is to expand the reach of Nepal\'s creative class, providing world-class assets to developers worldwide.' },
+    { year: 'VISION', title: 'Origin::Core', desc: 'Conceived in Pokhara by a small group of developers struggling with international digital conversion and transaction friction.' },
+    { year: 'ACTION', title: 'Phase::Build', desc: 'Architecting a platform that connects Nepali 3D artists and developers directly with the global development grid.' },
+    { year: 'LAUNCH', title: 'Status::Live', desc: 'DigiNepal launches with integrated local payment gateways, enabling seamless NPR/Digital Asset exchange.' },
+    { year: 'FUTURE', title: 'Objective::Global', desc: 'Expanding the reach of Nepal\'s digital class, providing world-class assets to developers worldwide.' },
 ];
 
 export default function About() {
     return (
-        <div className="space-y-20">
-            {/* Hero */}
-            <section className="text-center max-w-4xl mx-auto space-y-6 py-20">
-                <span className="bg-secondary/20 text-primary px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase">Our Story</span>
-                <h1 className="text-5xl md:text-7xl font-display font-black text-primary leading-tight">
-                    Empowering Nepal's <br /> Digital Future.
+        <div className="max-w-6xl mx-auto py-16 px-4 space-y-24 relative font-mono">
+            <Helmet>
+                <title>About DigiNepal | Nepal's Leading 3D Asset Marketplace</title>
+                <meta name="description" content="Learn about the origin and mission of DigiNepal — built by creators, for creators, to bring world-class assets to Nepal's digital future." />
+            </Helmet>
+
+            <div className="scanline" />
+
+            {/* Tactical Header */}
+            <section className="text-center space-y-8 relative z-10 py-10">
+                <div className="flex items-center justify-center gap-3 text-secondary mb-4">
+                    <Server size={16} className="animate-pulse" />
+                    <span className="text-[10px] uppercase tracking-[0.4em] font-black">MISSION_MANIFEST_v4.0</span>
+                </div>
+                <h1 className="text-5xl md:text-8xl font-display font-black text-white tracking-widest uppercase leading-tight">
+                    DIGINEPAL_<span className="text-primary">CORE</span>
                 </h1>
-                <p className="text-xl text-text-dim max-w-2xl mx-auto">
-                    DigiNepal is more than a marketplace. It's a movement to bring world-class digital assets to local creators — and to bring Nepali creativity to the world.
+                <p className="text-sm md:text-xl text-text-dim max-w-2xl mx-auto font-mono uppercase tracking-[0.2em] leading-relaxed">
+                    Empowering Nepal's Digital Frontier with high-fidelity asset distributions and tactical creative resources.
                 </p>
-            </section>
-
-            {/* Grid Story */}
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="md:col-span-2 bg-white rounded-4xl p-10 shadow-soft h-[500px] flex items-end relative overflow-hidden group">
-                    <img
-                        src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1200&q=80"
-                        alt="Nepal Landscape"
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                    <div className="relative z-10 text-white">
-                        <h3 className="text-3xl font-bold mb-2">Our Roots</h3>
-                        <p className="text-white/80 max-w-lg">
-                            Born in the shadow of the Himalayas, DigiNepal was built by artists who believed that geography should never limit creative opportunity. Nepali talent is world-class — it just needed a platform worthy of it.
-                        </p>
-                    </div>
-                </div>
-
-                <div className="bg-primary text-white rounded-4xl p-10 shadow-soft flex flex-col justify-center gap-8">
-                    <Target size={48} className="text-accent" />
-                    <div>
-                        <h3 className="text-2xl font-bold mb-3">Our Mission</h3>
-                        <p className="text-white/70 leading-relaxed">
-                            To democratize access to high-fidelity 3D assets for every Nepali developer and artist — while creating sustainable, passive income streams for the country's rapidly growing creative class.
-                        </p>
-                    </div>
-                    <Link to="/store" className="inline-flex items-center gap-2 text-accent font-bold text-sm hover:gap-3 transition-all">
-                        Browse the Store <ArrowRight size={16} />
-                    </Link>
+                <div className="flex justify-center gap-8 pt-10 border-t border-white/5 text-[9px] uppercase tracking-widest text-text-dim">
+                    <span className="flex items-center gap-2"><Activity size={12} className="text-primary" /> System: ACTIVE</span>
+                    <span className="flex items-center gap-2"><Globe size={12} className="text-secondary" /> Nodes: GLOBAL</span>
                 </div>
             </section>
 
-            {/* Long-form Story */}
-            <section className="bg-white rounded-3xl p-8 md:p-14 shadow-soft border border-gray-100 space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <div className="space-y-5">
-                        <h2 className="text-3xl font-display font-black text-text-main">Why We Built DigiNepal</h2>
-                        <p className="text-text-dim leading-relaxed">
-                            It started with frustration. In 2023, a group of indie game developers based in Pokhara were working on their first commercial game. They needed 3D assets — modular dungeon kits, character rigs, particle effects. The global marketplaces had plenty of options, but paying in USD meant 30–40% effective price increases due to conversion rates and international transaction fees. Selling internationally meant navigating complex tax structures and payment systems that weren't designed for Nepalese bank accounts.
-                        </p>
-                        <p className="text-text-dim leading-relaxed">
-                            Meanwhile, skilled Nepali 3D artists were sitting on incredible portfolios with no way to monetize them locally. They were selling through international platforms, taking currency hits, and watching their earnings diminish through layers of fees. The talent was there. The demand was there. What was missing was the platform.
-                        </p>
-                        <p className="text-text-dim leading-relaxed">
-                            DigiNepal was built to close that gap. By integrating eSewa for seamless NPR transactions, building a curation team that understands the Nepali game development ecosystem, and creating pricing guidelines appropriate to local markets — we created a platform where both buyers and sellers can thrive.
-                        </p>
-                    </div>
-                    <div className="space-y-5">
-                        <h2 className="text-3xl font-display font-black text-text-main">Our Vision for the Future</h2>
-                        <p className="text-text-dim leading-relaxed">
-                            DigiNepal's long-term vision extends far beyond a simple marketplace. We are building the infrastructure for a thriving Nepali digital economy in the creative sector. This means investing in creator education through our Guides section, building mentorship programs that connect experienced artists with newcomers, and establishing partnerships with Nepali game studios, architecture firms, and educational institutions.
-                        </p>
-                        <p className="text-text-dim leading-relaxed">
-                            We believe that Nepal's unique cultural and geographic heritage — from the intricately carved temples of Kathmandu Valley to the dramatic landscape of the Himalayas — provides an unparalleled source of artistic inspiration that the global game development community hasn't fully discovered yet. DigiNepal wants to be the platform that introduces Nepali aesthetics to game worlds, films, and virtual experiences worldwide.
-                        </p>
-                        <p className="text-text-dim leading-relaxed">
-                            Every purchase made on DigiNepal directly funds a Nepali creator's livelihood. Every asset downloaded by a game studio in Germany, a indie developer in Brazil, or an architect in Japan is a vote of confidence in Nepali creativity. That's what motivates us to keep building, curating, and growing.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            {/* Milestones */}
-            <section className="space-y-8">
-                <h2 className="text-3xl font-display font-black text-text-main text-center">Our Journey</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {milestones.map((m, i) => (
-                        <div key={i} className="bg-white rounded-3xl p-7 shadow-soft border border-gray-100 space-y-3 hover:shadow-lg transition-all">
-                            <span className="text-4xl font-display font-black text-primary/20">{m.year}</span>
-                            <h3 className="text-lg font-bold text-text-main">{m.title}</h3>
-                            <p className="text-sm text-text-dim leading-relaxed">{m.desc}</p>
+            {/* Origin Nodes */}
+            <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative z-10">
+                <div className="lg:col-span-8 glass-panel hud-border p-1 hover:border-primary/40 transition-all duration-700 group overflow-hidden h-[400px]">
+                    <div className="relative w-full h-full overflow-hidden">
+                        <img
+                            src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1200&q=80"
+                            alt="Nepal Landscape"
+                            className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-1000 grayscale group-hover:grayscale-0"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                        <div className="absolute bottom-10 left-10 space-y-2">
+                            <h3 className="text-3xl font-black text-white uppercase tracking-widest">Himalayan_Roots</h3>
+                            <p className="text-xs text-text-dim max-w-md uppercase tracking-wider font-mono">
+                                Born in the shadow of the mountains, built by artists who believe geography should never limit digital opportunity.
+                            </p>
                         </div>
-                    ))}
+                    </div>
+                </div>
+
+                <div className="lg:col-span-4 glass-panel hud-border bg-primary/5 p-10 flex flex-col justify-center space-y-8 relative overflow-hidden group">
+                    <div className="scanline" />
+                    <Target size={48} className="text-primary animate-pulse" />
+                    <div className="space-y-4">
+                        <h3 className="text-xl font-black text-white uppercase tracking-widest">Protocol::Mission</h3>
+                        <p className="text-xs text-text-dim leading-loose uppercase font-mono">
+                            To democratize access to high-fidelity assets for every Nepali developer while creating sustainable passive income for the creative class.
+                        </p>
+                    </div>
                 </div>
             </section>
 
-            {/* Values */}
-            <section className="space-y-8">
-                <h2 className="text-3xl font-display font-black text-text-main text-center">Our Values</h2>
+            {/* Core Values Terminal */}
+            <section className="space-y-12 relative z-10">
+                <div className="flex items-center gap-4">
+                    <Terminal size={24} className="text-primary" />
+                    <h2 className="text-2xl font-black text-white uppercase tracking-widest">Core_Operating_Values</h2>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {teamValues.map((item, idx) => (
-                        <div key={idx} className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition-all border border-gray-100">
-                            <div className="w-14 h-14 bg-bg rounded-2xl flex items-center justify-center text-primary mb-6">
+                        <div key={idx} className="glass-panel p-10 space-y-8 border border-white/5 hover:border-primary/30 transition-all group">
+                            <div className={`w-14 h-14 ${item.bg} ${item.color} flex items-center justify-center rounded-none border border-white/10 group-hover:border-primary transition-colors`}>
                                 {item.icon}
                             </div>
-                            <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                            <p className="text-text-dim leading-relaxed text-sm">{item.desc}</p>
+                            <div className="space-y-4">
+                                <h3 className="text-lg font-black text-white uppercase tracking-widest">{item.title}</h3>
+                                <p className="text-xs text-text-dim leading-relaxed uppercase font-mono">{item.desc}</p>
+                            </div>
                         </div>
                     ))}
                 </div>
             </section>
 
-            {/* Stats Bar */}
-            <section className="bg-primary rounded-3xl p-10 md:p-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-white text-center">
+            {/* Chronological Manifest */}
+            <section className="glass-panel hud-border p-10 md:p-16 space-y-12 relative z-10 bg-surface/40">
+                <div className="flex items-center justify-between border-b border-white/5 pb-8">
+                    <h2 className="text-2xl font-black text-white uppercase tracking-widest flex items-center gap-3">
+                        <Database size={24} className="text-secondary" /> Deployment_History
+                    </h2>
+                    <span className="text-[10px] text-text-dim uppercase font-mono">READ_ONLY</span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                    {milestones.map((m, i) => (
+                        <div key={i} className="space-y-4 relative">
+                            <div className="text-4xl font-black text-primary/10 font-display absolute -top-8 -left-2 select-none">{m.year}</div>
+                            <div className="relative pt-2">
+                                <h3 className="font-black text-white uppercase tracking-widest text-sm mb-2">{m.title}</h3>
+                                <p className="text-[11px] text-text-dim leading-relaxed uppercase font-mono">{m.desc}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Telemetry Bar */}
+            <section className="glass-panel hud-border p-12 bg-primary/10 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center relative z-10">
+                <div className="scanline" />
                 {[
-                    { icon: <Users size={28} />, value: 'Community', label: 'Driven Platform' },
-                    { icon: <Globe size={28} />, value: 'Global', label: 'Availability' },
-                    { icon: <Award size={28} />, value: 'Curated', label: 'Quality Assets' },
-                    { icon: <Heart size={28} />, value: 'Supportive', label: 'Creator Ecosystem' },
+                    { icon: <Award size={20} />, value: 'QUALITY', label: 'Manual Curation' },
+                    { icon: <Globe size={20} />, value: 'NODES', label: 'Global Access' },
+                    { icon: <Shield size={20} />, value: 'SECURE', label: 'Encrypted Trans' },
+                    { icon: <Database size={20} />, value: 'ASSETS', label: 'Verified Library' },
                 ].map((s, i) => (
-                    <div key={i} className="space-y-2">
-                        <div className="flex justify-center text-accent">{s.icon}</div>
-                        <p className="text-2xl md:text-3xl lg:text-4xl font-display font-black">{s.value}</p>
-                        <p className="text-white/60 text-xs uppercase tracking-widest font-bold">{s.label}</p>
+                    <div key={i} className="space-y-3">
+                        <div className="flex justify-center text-primary mb-2 opacity-50">{s.icon}</div>
+                        <p className="text-3xl font-black text-white tracking-widest uppercase">{s.value}</p>
+                        <p className="text-[9px] text-text-dim uppercase tracking-[0.3em] font-black">{s.label}</p>
                     </div>
                 ))}
             </section>
         </div>
     );
 }
+

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuthStore } from '../store/useAuthStore';
-import { Download, ShoppingBag, Clock, CheckCircle } from 'lucide-react';
+import { Download, ShoppingBag, Clock, CheckCircle, Terminal, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
@@ -48,66 +48,84 @@ export default function MyAssets() {
     }
 
     return (
-        <div className="max-w-6xl mx-auto py-12 px-4">
-            <h1 className="text-4xl font-display font-bold mb-10 tracking-tight">My Digital Assets</h1>
+        <div className="max-w-7xl mx-auto py-10 px-4">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8 border-b border-white/5 pb-8 relative">
+                <div className="scanline" />
+                <div className="space-y-4">
+                    <div className="flex items-center gap-2 text-primary">
+                        <Terminal size={14} />
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em]">Module::User_Library</span>
+                    </div>
+                    <h1 className="text-5xl font-display font-black text-white tracking-widest uppercase leading-none">DATA_VAULT</h1>
+                    <p className="text-xs font-mono text-text-dim uppercase tracking-widest">Accessing authorized digital asset distributions for agent: {user?.email}</p>
+                </div>
+                <div className="text-left md:text-right">
+                    <p className="text-[8px] font-mono text-text-dim uppercase mb-1">Total_Protocols</p>
+                    <p className="text-2xl font-black text-white tracking-widest uppercase">{orders.length} OPERATIONS</p>
+                </div>
+            </div>
 
             <div className="space-y-12">
                 {orders.map((order) => (
-                    <div key={order.id} className="bg-white rounded-[2.5rem] p-8 shadow-soft border border-gray-50 relative overflow-hidden">
-                        {/* Order Header */}
-                        <div className="flex flex-col md:flex-row justify-between mb-8 pb-6 border-b border-dashed gap-4">
-                            <div>
-                                <p className="text-[10px] font-black uppercase text-text-dim tracking-widest">Order ID</p>
-                                <p className="font-mono text-sm">#{order.id.toString().slice(-6)}</p>
-                            </div>
-                            <div>
-                                <p className="text-[10px] font-black uppercase text-text-dim tracking-widest">Status</p>
-                                <div className="flex items-center gap-2">
-                                    {order.status === 'Approved' ? (
-                                        <span className="flex items-center gap-1.5 text-green-500 font-bold text-xs">
-                                            <CheckCircle size={14} /> Payment Verified
-                                        </span>
-                                    ) : (
-                                        <span className="flex items-center gap-1.5 text-orange-400 font-bold text-xs uppercase tracking-tighter">
-                                            <Clock size={14} /> Verification Pending...
-                                        </span>
-                                    )}
+                    <div key={order.id} className="glass-panel hud-border p-8 md:p-10 relative overflow-hidden group">
+                        <div className="scanline" />
+                        
+                        {/* Order Header Telemetry */}
+                        <div className="flex flex-col lg:flex-row justify-between mb-10 pb-8 border-b border-white/5 gap-8">
+                            <div className="flex gap-10">
+                                <div className="space-y-2">
+                                    <p className="text-[9px] font-black uppercase text-primary tracking-[0.2em]">IDENTIFIER</p>
+                                    <p className="font-mono text-xs text-white tracking-widest">OP_#{order.id.toString().slice(-8).toUpperCase()}</p>
+                                </div>
+                                <div className="space-y-2">
+                                    <p className="text-[9px] font-black uppercase text-primary tracking-[0.2em]">CLEARANCE_STATUS</p>
+                                    <div className="flex items-center gap-2">
+                                        {order.status === 'Approved' ? (
+                                            <span className="flex items-center gap-2 text-primary font-black text-[10px] uppercase tracking-widest">
+                                                <CheckCircle size={14} /> AUTHORIZED_ACCESS
+                                            </span>
+                                        ) : (
+                                            <span className="flex items-center gap-2 text-secondary font-black text-[10px] uppercase tracking-widest animate-pulse">
+                                                <Clock size={14} /> VERIFICATION_IN_PROGRESS
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
-                            <div className="md:text-right">
-                                <p className="text-[10px] font-black uppercase text-text-dim tracking-widest">Total Paid</p>
-                                <p className="font-bold text-primary">${order.total?.toFixed(2)}</p>
+                            <div className="lg:text-right space-y-2">
+                                <p className="text-[9px] font-black uppercase text-primary tracking-[0.2em]">TRANSACTION_VALUE</p>
+                                <p className="font-black text-white text-xl tracking-widest">Rs. {order.total?.toLocaleString()}</p>
                             </div>
                         </div>
 
                         {/* Items Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {order.items.map((item: any, idx: number) => (
-                                <div key={idx} className="bg-bg rounded-3xl p-5 group">
-                                    <div className="flex items-center gap-4 mb-4">
-                                        <div className="w-16 h-16 rounded-2xl overflow-hidden shrink-0 border-2 border-white shadow-md">
-                                            <img src={item.image} className="w-full h-full object-cover" />
+                                <div key={idx} className="bg-black/60 border border-white/5 p-6 space-y-6 relative group hover:border-primary/40 transition-all duration-500">
+                                    <div className="flex items-center gap-6">
+                                        <div className="w-20 h-20 bg-black overflow-hidden border border-white/10 shrink-0 group-hover:border-primary/30 transition-all">
+                                            <img src={item.image} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                            <p className="font-bold text-sm truncate">{item.name}</p>
-                                            <p className="text-[10px] font-black uppercase text-text-dim">{item.category}</p>
+                                        <div className="flex-1 min-w-0 space-y-1">
+                                            <p className="font-black text-sm text-white tracking-widest uppercase truncate">{item.name}</p>
+                                            <p className="text-[9px] font-black uppercase text-primary tracking-widest bg-primary/5 border border-primary/10 inline-block px-2 py-0.5 rounded-full">{item.category}</p>
                                         </div>
                                     </div>
 
                                     {order.status === 'Approved' ? (
                                         <a
                                             href={item.download_url || item.downloadUrl}
-                                            className="flex items-center justify-center gap-3 w-full bg-primary text-white py-3 px-4 rounded-xl font-bold text-xs shadow-lg shadow-primary/20 hover:scale-105 active:scale-95 transition-all"
+                                            className="flex items-center justify-center gap-3 w-full bg-primary text-black py-4 px-6 font-black uppercase tracking-[0.2em] text-[10px] hover:bg-white transition-all shadow-glow active:scale-95"
                                             download
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            <Download size={16} /> Download Asset
+                                            <Download size={14} /> DOWNLOAD_ASSET.zip
                                         </a>
                                     ) : (
-                                        <button disabled className="flex items-center justify-center gap-3 w-full bg-gray-200 text-gray-400 py-3 px-4 rounded-xl font-bold text-xs cursor-not-allowed">
-                                            <Clock size={16} /> Locked (Pending)
-                                        </button>
+                                        <div className="flex items-center justify-center gap-3 w-full bg-white/5 text-white/20 border border-white/10 py-4 px-6 font-black uppercase tracking-[0.2em] text-[10px] cursor-not-allowed">
+                                            <Shield size={14} /> ENCRYPTED_LOCK
+                                        </div>
                                     )}
                                 </div>
                             ))}

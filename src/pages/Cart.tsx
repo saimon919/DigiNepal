@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useCartStore } from '../store/useCartStore';
 import { useAuthStore } from '../store/useAuthStore';
-import { Trash2, Minus, Plus, ShoppingBag, Upload, Clock } from 'lucide-react';
+import { Minus, Plus, ShoppingBag, Upload, Clock, Terminal, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 
@@ -71,20 +71,28 @@ export default function Cart() {
 
     if (step === 'completed') {
         return (
-            <div className="max-w-4xl mx-auto py-12 px-4 md:py-20 text-center space-y-8 animate-in zoom-in-95 duration-500">
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center mx-auto">
-                    <Clock size={40} className="md:w-12 md:h-12" />
+            <div className="max-w-4xl mx-auto py-20 text-center space-y-10 animate-in zoom-in-95 duration-700 relative">
+                <div className="scanline" />
+                <div className="w-24 h-24 bg-primary/10 text-primary rounded-none border border-primary/30 flex items-center justify-center mx-auto relative group">
+                    <Clock size={48} className="animate-pulse" />
+                    <div className="absolute -top-1 -left-1 w-2 h-2 border-t border-l border-primary" />
+                    <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b border-r border-primary" />
                 </div>
-                <div className="space-y-4">
-                    <h1 className="text-3xl md:text-5xl font-display font-black text-primary leading-tight">ORDER PENDING</h1>
-                    <p className="text-sm md:text-xl text-text-dim max-w-lg mx-auto px-4">
-                        Your payment screenshot has been submitted! We are verifying it manually.
-                        Once verified, your digital assets will be available in your library.
+                <div className="space-y-6">
+                    <h1 className="text-4xl md:text-6xl font-display font-black text-white tracking-[0.2em] uppercase">
+                        TRANSACTION_PENDING
+                    </h1>
+                    <p className="text-sm md:text-lg text-text-dim max-w-xl mx-auto font-mono uppercase tracking-widest leading-relaxed">
+                        Your payment telemetry has been submitted for manual verification. 
+                        Digital authorization will be granted once the eSewa receipt is cleared.
                     </p>
                 </div>
-                <div className="flex justify-center gap-4 px-4">
-                    <Link to="/store" className="w-full sm:w-auto bg-primary text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl font-black text-sm md:text-lg hover:gradient-blue transition-all shadow-xl shadow-primary/20">
-                        Continue Shopping
+                <div className="pt-10 flex flex-col sm:flex-row justify-center gap-6">
+                    <Link to="/my-assets" className="px-10 py-5 bg-white text-black font-black uppercase tracking-widest text-xs hover:bg-primary transition-all shadow-glow">
+                        VIEW_DATA_LIBRARY
+                    </Link>
+                    <Link to="/store" className="px-10 py-5 bg-black/40 border border-primary/30 text-primary font-black uppercase tracking-widest text-xs hover:border-primary transition-all">
+                        DEPLOY_MARKET_NODE
                     </Link>
                 </div>
             </div>
@@ -93,32 +101,44 @@ export default function Cart() {
 
     if (step === 'payment') {
         return (
-            <div className="max-w-3xl mx-auto py-6 md:py-12 px-4">
-                <div className="bg-white rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 shadow-soft border border-gray-100 space-y-6 md:space-y-8">
-                    <div className="text-center space-y-2">
-                        <h2 className="text-2xl md:text-3xl font-display font-black">Scan & Pay with eSewa</h2>
-                        <p className="text-xs md:text-sm text-text-dim">Pay the total amount and upload the screenshot below.</p>
+            <div className="max-w-4xl mx-auto py-10 px-4">
+                <div className="glass-panel hud-border p-8 md:p-12 space-y-10 relative overflow-hidden">
+                    <div className="scanline" />
+                    
+                    <div className="text-center space-y-4 relative z-10">
+                        <div className="flex items-center justify-center gap-3 text-secondary mb-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-ping" />
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em]">Secure_Payment_Protocol</span>
+                        </div>
+                        <h2 className="text-4xl font-display font-black text-white tracking-widest uppercase">ESEWA_TERMINAL</h2>
+                        <p className="text-xs font-mono text-text-dim uppercase tracking-widest">Execute transfer and upload receipt screenshot below.</p>
                     </div>
 
-                    <div className="flex flex-col lg:flex-row gap-6 md:gap-10 items-center justify-center bg-bg p-4 md:p-8 rounded-[2rem]">
-                        <div className="w-full max-w-[240px] md:w-64 bg-white p-3 md:p-4 rounded-3xl shadow-lg border-2 border-primary/10">
-                            <img src="/esewa-qr.png" alt="eSewa QR" className="w-full h-auto rounded-xl" />
+                    <div className="grid md:grid-cols-2 gap-10 items-center justify-center bg-black/60 p-8 md:p-12 border border-white/5 relative z-10">
+                        <div className="w-full max-w-[280px] bg-white p-4 rounded-none border border-primary relative mx-auto group">
+                            <img src="/esewa-qr.png" alt="eSewa QR" className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700" />
+                            <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-primary" />
+                            <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-primary" />
                         </div>
-                        <div className="space-y-4 text-center md:text-left w-full">
-                            <div className="space-y-1">
-                                <p className="text-[10px] font-black uppercase text-text-dim tracking-widest">Payable Amount</p>
-                                <p className="text-3xl md:text-4xl font-black text-primary">Rs. {total().toLocaleString()}</p>
+
+                        <div className="space-y-8 w-full">
+                            <div className="space-y-2">
+                                <p className="text-[10px] font-black uppercase text-primary tracking-[0.3em]">Total_Payable_Value</p>
+                                <p className="text-5xl font-black text-white tracking-tighter">Rs. {total().toLocaleString()}</p>
                             </div>
-                            <div className="space-y-3">
-                                <label className="block text-xs md:text-sm font-bold text-text-main">Upload Payment Screenshot</label>
-                                <div className={`relative h-32 md:h-40 w-full max-w-[320px] mx-auto md:mx-0 rounded-2xl border-2 border-dashed flex flex-col items-center justify-center transition-all cursor-pointer overflow-hidden ${screenshotUrl ? 'bg-green-50 border-green-200' : 'bg-white border-gray-200 hover:border-primary/40'}`}>
+                            
+                            <div className="space-y-4">
+                                <label className="block text-[10px] font-black text-text-dim uppercase tracking-widest">Awaiting_Receipt_Upload</label>
+                                <div className={`relative h-48 w-full rounded-none border border-dashed flex flex-col items-center justify-center transition-all cursor-pointer overflow-hidden ${screenshotUrl ? 'border-primary bg-primary/5' : 'border-white/10 bg-black/40 hover:border-primary/50'}`}>
                                     {screenshotUrl ? (
-                                        <img src={screenshotUrl} className="w-full h-full object-cover" />
+                                        <img src={screenshotUrl} className="w-full h-full object-cover opacity-60" />
                                     ) : (
-                                        <>
-                                            <Upload className="text-text-dim mb-2" size={28} />
-                                            <span className="text-[10px] md:text-xs font-bold text-text-dim">{uploading ? 'Uploading...' : 'Click to Upload Screenshot'}</span>
-                                        </>
+                                        <div className="flex flex-col items-center gap-4">
+                                            <Upload className="text-primary animate-bounce" size={32} />
+                                            <span className="text-[10px] font-black text-text-dim uppercase tracking-widest leading-none">
+                                                {uploading ? 'UPLOADING_DATA...' : 'SELECT_IMAGE_FILE'}
+                                            </span>
+                                        </div>
                                     )}
                                     <input type="file" accept="image/*" onChange={handleFileUpload} className="absolute inset-0 opacity-0 cursor-pointer" />
                                 </div>
@@ -126,19 +146,23 @@ export default function Cart() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col sm:flex-row gap-6 pt-6 relative z-10">
                         <button
                             disabled={!screenshotUrl || uploading}
                             onClick={handleFinalSubmit}
-                            title={!screenshotUrl ? "Please upload your payment screenshot first" : ""}
-                            className={`w-full py-5 md:py-6 rounded-2xl font-black text-lg md:text-xl transition-all shadow-xl ${!screenshotUrl || uploading
-                                ? 'bg-gray-100 text-gray-400 cursor-not-allowed shadow-none'
-                                : 'bg-primary text-white shadow-primary/20 hover:scale-[1.02]'
+                            className={`flex-1 py-6 font-black uppercase tracking-[0.4em] text-sm transition-all ${!screenshotUrl || uploading
+                                ? 'bg-white/5 text-white/20 border border-white/10 cursor-not-allowed'
+                                : 'bg-primary text-black hover:bg-white hover:shadow-glow'
                                 }`}
                         >
-                            {uploading ? 'Processing...' : 'Submit Order'}
+                            {uploading ? 'PROCESSING_AUTH...' : 'SUBMIT_TRANSACTION'}
                         </button>
-                        <button onClick={() => setStep('cart')} className="text-xs md:text-sm text-text-dim font-bold hover:text-primary transition-colors py-2">Go Back to Cart</button>
+                        <button 
+                            onClick={() => setStep('cart')} 
+                            className="px-10 py-6 bg-black/40 border border-white/10 text-text-dim font-black uppercase tracking-widest text-[10px] hover:text-white transition-all"
+                        >
+                            ABORT_PROCESS
+                        </button>
                     </div>
                 </div>
             </div>
@@ -147,55 +171,104 @@ export default function Cart() {
 
     if (cart.length === 0) {
         return (
-            <div className="max-w-2xl mx-auto py-20 text-center space-y-6">
-                <div className="w-20 h-20 bg-bg rounded-full flex items-center justify-center mx-auto text-text-dim border">
-                    <ShoppingBag size={40} />
+            <div className="max-w-2xl mx-auto py-32 text-center space-y-8 animate-in fade-in duration-1000">
+                <div className="w-24 h-24 bg-black/40 rounded-none border border-white/5 flex items-center justify-center mx-auto text-text-dim relative">
+                    <ShoppingBag size={48} className="opacity-20" />
+                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20" />
+                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20" />
                 </div>
-                <h1 className="text-3xl font-display font-bold">Your cart is empty</h1>
-                <p className="text-text-dim text-lg">Looks like you haven't added any digital assets yet.</p>
-                <Link to="/store" className="inline-block bg-primary text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-primary/20 hover:scale-105 hover:bg-primary/90 transition-all">
-                    Start Shopping
+                <div className="space-y-4">
+                    <h1 className="text-4xl font-display font-black text-white tracking-widest uppercase">CART_STATUS: EMPTY</h1>
+                    <p className="text-sm font-mono text-text-dim uppercase tracking-widest max-w-xs mx-auto">No digital assets detected in local buffer storage.</p>
+                </div>
+                <Link to="/store" className="inline-block bg-primary text-black px-12 py-5 font-black uppercase tracking-[0.2em] text-xs hover:bg-white transition-all shadow-glow">
+                    INITIATE_PROCUREMENT
                 </Link>
             </div>
         );
     }
 
     return (
-        <div className="max-w-5xl mx-auto py-12 px-4">
-            <h1 className="text-4xl font-display font-bold mb-10 tracking-tight">Shopping Cart</h1>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                <div className="lg:col-span-2 space-y-6">
+        <div className="max-w-6xl mx-auto py-10 px-4">
+            <div className="flex items-end justify-between mb-12 gap-8 border-b border-white/5 pb-8">
+                <div className="space-y-4">
+                    <div className="flex items-center gap-2 text-primary">
+                        <Terminal size={14} />
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em]">Module::User_Cart</span>
+                    </div>
+                    <h1 className="text-5xl font-display font-black text-white tracking-widest uppercase leading-none">ORDER_MANIFEST</h1>
+                </div>
+                <div className="hidden md:block text-right">
+                    <p className="text-[8px] font-mono text-text-dim uppercase mb-1">Items_Detected</p>
+                    <p className="text-2xl font-black text-white tracking-widest uppercase">{cart.length} UNITS</p>
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+                <div className="lg:col-span-3 space-y-6">
                     {cart.map((item) => (
-                        <div key={item.id} className="bg-white rounded-[2rem] p-6 shadow-sm flex items-center gap-6 border border-gray-100 hover:shadow-md transition-shadow group">
-                            <div className="w-28 h-28 rounded-2xl overflow-hidden bg-bg shrink-0">
-                                <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                        <div key={item.id} className="glass-panel p-6 flex flex-col sm:flex-row items-center gap-8 relative group hover:border-primary/40 transition-all duration-500 overflow-hidden">
+                            <div className="scanline" />
+                            
+                            <div className="w-full sm:w-32 h-32 overflow-hidden bg-black/60 border border-white/5 relative group-hover:border-primary/20 shrink-0">
+                                <img src={item.image} alt={item.name} className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
                             </div>
-                            <div className="flex-1">
-                                <h3 className="font-bold text-xl mb-1">{item.name}</h3>
-                                <p className="text-text-dim text-sm mb-3 uppercase tracking-wider font-semibold">{item.category}</p>
-                                <p className="text-primary font-bold text-lg">Rs. {item.price}</p>
-                            </div>
-                            <div className="flex flex-col items-end gap-6">
-                                <button onClick={() => removeFromCart(item.id)} className="text-gray-300 hover:text-red-500 p-2 hover:bg-red-50 rounded-xl transition-all"><Trash2 size={20} /></button>
-                                <div className="flex items-center gap-4 bg-gray-50 rounded-2xl p-1 border">
-                                    <button onClick={() => decrementQuantity(item.id)} className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white text-text-dim"><Minus size={16} /></button>
-                                    <span className="font-bold w-4 text-center text-sm">{item.quantity}</span>
-                                    <button onClick={() => addToCart(item)} className="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-white text-text-dim"><Plus size={16} /></button>
+                            
+                            <div className="flex-1 space-y-4 text-center sm:text-left w-full">
+                                <div className="space-y-1">
+                                    <div className="flex items-center justify-center sm:justify-start gap-2">
+                                        <span className="text-[8px] font-mono text-primary py-0.5 px-2 bg-primary/10 border border-primary/20 rounded-full">{item.category}</span>
+                                    </div>
+                                    <h3 className="font-black text-xl text-white tracking-widest uppercase group-hover:text-primary transition-colors">{item.name}</h3>
                                 </div>
+                                <p className="text-secondary font-black tracking-[0.2em] text-lg">Rs. {item.price.toLocaleString()}</p>
+                            </div>
+
+                            <div className="flex flex-row sm:flex-col items-center justify-between sm:justify-center gap-6 w-full sm:w-auto pt-6 sm:pt-0 border-t sm:border-t-0 sm:border-l border-white/5 sm:pl-8">
+                                <div className="flex items-center gap-4 bg-black/40 border border-white/5 p-2 px-3">
+                                    <button onClick={() => decrementQuantity(item.id)} className="text-text-dim hover:text-white"><Minus size={14} /></button>
+                                    <span className="font-mono font-black text-white text-sm w-4 text-center">{item.quantity}</span>
+                                    <button onClick={() => addToCart(item)} className="text-text-dim hover:text-white"><Plus size={14} /></button>
+                                </div>
+                                <button 
+                                    onClick={() => removeFromCart(item.id)} 
+                                    className="p-3 bg-red-500/10 text-red-500/40 hover:text-red-500 hover:bg-red-500/20 border border-red-500/20 transition-all text-xs font-black uppercase tracking-widest"
+                                >
+                                    REMOVE
+                                </button>
                             </div>
                         </div>
                     ))}
                 </div>
+
                 <div className="lg:col-span-1">
-                    <div className="bg-white rounded-[2.5rem] p-10 shadow-soft border border-gray-100 sticky top-30 text-center">
-                        <h2 className="text-2xl font-bold mb-8 font-display">Summary</h2>
-                        <div className="space-y-6 mb-10">
-                            <div className="flex justify-between text-text-dim font-medium"><span>Subtotal</span><span>Rs. {total().toLocaleString()}</span></div>
-                            <div className="pt-6 border-t border-dashed flex justify-between font-bold text-2xl text-primary"><span>Total</span><span>Rs. {total().toLocaleString()}</span></div>
+                    <div className="glass-panel hud-border p-8 py-10 space-y-10 sticky top-32 bg-black/40 text-center">
+                        <div className="scanline" />
+                        <h2 className="text-2xl font-black text-white tracking-[0.2em] uppercase relative z-10">SUMMARY</h2>
+                        
+                        <div className="space-y-6 relative z-10">
+                            <div className="flex justify-between items-center text-[10px] font-black font-mono text-text-dim uppercase tracking-[0.2em]">
+                                <span>NET_VALUE</span>
+                                <span>Rs. {total().toLocaleString()}</span>
+                            </div>
+                            <div className="h-[1px] w-full bg-white/5 mt-4" />
+                            <div className="flex justify-between items-end pt-4 font-black">
+                                <span className="text-[10px] text-primary uppercase tracking-[0.2em] mb-1">TOTAL_REQS</span>
+                                <span className="text-3xl text-white tracking-widest">Rs. {total().toLocaleString()}</span>
+                            </div>
                         </div>
-                        <button onClick={() => setStep('payment')} className="w-full bg-primary text-white py-5 rounded-2xl font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] transition-all">
-                            Complete Checkout
+
+                        <button 
+                            onClick={() => setStep('payment')} 
+                            className="w-full bg-primary text-black py-6 font-black uppercase tracking-[0.3em] text-xs hover:bg-white transition-all hover:shadow-glow relative z-10"
+                        >
+                            EXECUTE_CHECKOUT
                         </button>
+                        
+                        <div className="flex items-center justify-center gap-2 pt-4 opacity-30 relative z-10">
+                            <Shield size={12} className="text-secondary" />
+                            <span className="text-[8px] font-mono font-bold uppercase tracking-widest">Secure_Protocol_v2.0</span>
+                        </div>
                     </div>
                 </div>
             </div>

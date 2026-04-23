@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, User as UserIcon, BookOpen } from 'lucide-react';
+import { ShoppingBag, User as UserIcon, Terminal, Shield, Zap, Globe } from 'lucide-react';
 import { useAuthStore } from '../../store/useAuthStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -7,25 +7,25 @@ import { useState, useEffect } from 'react';
 const footerLinks = {
     marketplace: [
         { label: 'Browse Store', path: '/store' },
-        { label: 'New Releases', path: '/store' },
+        { label: 'Free Resources', path: '/free-resources' },
         { label: 'Creator Program', path: '/about' },
-        { label: 'Sell Your Assets', path: '/about' },
+        { label: '3D Models', path: '/store?category=3D' },
     ],
     resources: [
-        { label: 'Creator & Buyer Guides', path: '/guides' },
-        { label: 'How to Sell Assets', path: '/guides/how-to-sell-digital-assets-online' },
-        { label: 'Using 3D Assets in Unity', path: '/guides/how-to-use-3d-assets-in-game-development' },
-        { label: 'Beginner Game Art Guide', path: '/guides/beginner-guide-to-game-art-assets' },
+        { label: 'Education Center', path: '/guides' },
+        { label: 'Unity Tutorials', path: '/guides?filter=unity' },
+        { label: 'AI Tools Guide', path: '/guides?filter=ai' },
+        { label: 'Digital Assets 101', path: '/guides' },
     ],
     company: [
-        { label: 'About DigiNepal', path: '/about' },
-        { label: 'Contact Us', path: '/contact' },
-        { label: 'My Library', path: '/my-assets' },
+        { label: 'Our Mission', path: '/about' },
+        { label: 'Contact Support', path: '/contact' },
+        { label: 'User Dashboard', path: '/my-assets' },
     ],
     legal: [
         { label: 'Privacy Policy', path: '/privacy-policy' },
-        { label: 'Terms & Conditions', path: '/terms' },
-        { label: 'DMCA / Copyright', path: '/dmca' },
+        { label: 'Terms of Use', path: '/terms' },
+        { label: 'Copyright / DMCA', path: '/dmca' },
     ],
 };
 
@@ -43,199 +43,181 @@ export default function Layout() {
     }, []);
 
     return (
-        <div className="min-h-screen flex flex-col relative overflow-hidden bg-bg">
-            {/* Global Animated Background Blobs */}
+        <div className="min-h-screen flex flex-col relative bg-bg text-text-main scanline-container">
+            {/* HUD Scanline Overlay */}
+            <div className="scanline-moving" />
+            
+            {/* Global HUD Ambient Effects */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-                <div className="absolute top-0 left-[-10%] w-[500px] h-[500px] rounded-full bg-accent/5 blur-[120px] animate-blob mix-blend-multiply" />
-                <div className="absolute top-[20%] right-[-5%] w-[400px] h-[400px] rounded-full bg-secondary/20 blur-[100px] animate-blob animation-delay-2000 mix-blend-multiply" />
-                <div className="absolute bottom-[-10%] left-[20%] w-[600px] h-[600px] rounded-full bg-primary/5 blur-[150px] animate-blob animation-delay-4000 mix-blend-multiply" />
+                <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] animate-pulse-glow" />
+                <div className="absolute bottom-[-5%] left-[-5%] w-[400px] h-[400px] rounded-full bg-secondary/5 blur-[100px] animate-pulse-glow" style={{ animationDelay: '3s' }} />
             </div>
 
-            {/* Navbar: Premium Animated Glass Pill */}
+            {/* Navbar: HUD Interface Bar */}
             <motion.nav
                 initial={{ y: -100, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none"
+                className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 pointer-events-none"
             >
-                <motion.div
-                    animate={{
-                        width: scrolled ? '100%' : '100%',
-                        maxWidth: scrolled ? '800px' : '900px',
-                        paddingTop: scrolled ? '8px' : '12px',
-                        paddingBottom: scrolled ? '8px' : '12px',
-                        backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.85)' : 'rgba(255, 255, 255, 0.95)',
-                    }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="backdrop-blur-2xl border border-white/40 shadow-premium rounded-full px-4 md:px-6 flex items-center justify-between md:justify-start gap-4 md:gap-8 pointer-events-auto"
-                >
+                <div className="max-w-7xl mx-auto flex justify-center">
+                    <motion.div
+                        animate={{
+                            width: '100%',
+                            backgroundColor: scrolled ? 'rgba(15, 23, 42, 0.9)' : 'rgba(15, 23, 42, 0.7)',
+                            borderColor: scrolled ? 'rgba(34, 197, 94, 0.3)' : 'rgba(255, 255, 255, 0.05)',
+                        }}
+                        className="backdrop-blur-xl border rounded-[2rem] px-4 md:px-8 py-3 flex items-center justify-between shadow-glass pointer-events-auto transition-colors duration-500"
+                    >
+                        {/* Status Readout Left */}
+                        <div className="hidden lg:flex items-center gap-4 mr-6">
+                            <div className="flex flex-col">
+                                <span className="text-[8px] font-black uppercase tracking-[0.2em] text-primary/60">System.Status</span>
+                                <span className="text-[10px] font-mono font-bold text-primary animate-pulse">ACTIVE_ONLINE</span>
+                            </div>
+                            <div className="w-[1px] h-6 bg-white/10" />
+                        </div>
 
-                    {/* Logo */}
-                    <Link to="/" className="font-display font-bold text-lg md:text-xl text-primary tracking-tight flex items-center gap-2 shrink-0 group">
-                        <img src="/logo.png" alt="DigiNepal Logo" className="w-8 h-8 md:w-10 md:h-10 object-contain rounded-lg group-hover:scale-110 transition-transform duration-300" />
-                        <span className="hidden xs:block group-hover:text-accent transition-colors">Diginepal</span>
-                    </Link>
+                        {/* Brand Logo */}
+                        <Link to="/" className="flex items-center gap-3 group shrink-0">
+                            <div className="relative">
+                                <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full group-hover:bg-primary/40 transition-all" />
+                                <img src="/logo.png" alt="DigiNepal" className="relative w-8 h-8 md:w-10 md:h-10 object-contain rounded-xl invert brightness-200" />
+                            </div>
+                            <span className="font-display font-black text-lg md:text-xl tracking-tighter text-white group-hover:text-primary transition-colors">DIGINEPAL</span>
+                        </Link>
 
-                    {/* Links */}
-                    <div className="flex items-center gap-1 bg-secondary/20 p-1 rounded-full relative">
-                        {/* Animated background pill for active state could go here, for now using pure CSS */}
-                        {[
-                            { name: 'Home', path: '/' },
-                            { name: 'Store', path: '/store' },
-                            { name: 'Guides', path: '/guides' },
-                            { name: 'Library', path: '/my-assets' },
-                        ].map((item) => {
-                            const isActive = location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path));
-                            return (
-                                <Link
-                                    key={item.name}
-                                    to={item.path}
-                                    className={`relative px-3 md:px-5 py-1.5 md:py-2 rounded-full text-[10px] md:text-sm font-bold transition-all whitespace-nowrap overflow-hidden ${isActive ? 'text-primary' : 'text-text-dim hover:text-text-main hover:bg-white/50'}`}
-                                >
-                                    {isActive && (
-                                        <motion.div
-                                            layoutId="active-nav-pill"
-                                            className="absolute inset-0 bg-white shadow-soft rounded-full z-0"
-                                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                        />
-                                    )}
-                                    <span className="relative z-10">{item.name}</span>
-                                </Link>
-                            );
-                        })}
-                    </div>
+                        {/* Nav Links */}
+                        <div className="hidden md:flex items-center gap-1 mx-8 bg-white/5 p-1 rounded-2xl border border-white/5">
+                            {[
+                                { name: 'DASHBOARD', path: '/' },
+                                { name: 'STORE', path: '/store' },
+                                { name: 'RESOURCES', path: '/free-resources' },
+                                { name: 'GUIDES', path: '/guides' },
+                            ].map((item) => {
+                                const isActive = location.pathname === item.path;
+                                return (
+                                    <Link
+                                        key={item.name}
+                                        to={item.path}
+                                        className={`relative px-5 py-2 rounded-xl text-[11px] font-black tracking-widest transition-all ${isActive ? 'text-primary' : 'text-text-dim hover:text-white'}`}
+                                    >
+                                        {isActive && (
+                                            <motion.div
+                                                layoutId="nav-active"
+                                                className="absolute inset-0 bg-primary/10 border border-primary/20 rounded-xl z-0"
+                                            />
+                                        )}
+                                        <span className="relative z-10">{item.name}</span>
+                                    </Link>
+                                );
+                            })}
+                        </div>
 
-                    {/* Actions */}
-                    <div className="flex items-center gap-2 md:gap-3 ml-auto">
-                        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                            <Link to="/cart" className="p-2 md:p-2.5 rounded-full bg-secondary/30 hover:bg-secondary/50 transition-colors text-text-main relative flex items-center justify-center">
-                                <ShoppingBag size={16} className="md:w-[18px] md:h-[18px]" />
-                                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-accent rounded-full border-2 border-white"></span>
+                        {/* Actions */}
+                        <div className="flex items-center gap-4">
+                            <Link to="/cart" className="relative p-2.5 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 transition-all group">
+                                <ShoppingBag size={18} className="text-text-dim group-hover:text-primary transition-colors" />
+                                <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-bg text-[8px] font-black rounded-full flex items-center justify-center border border-bg shadow-glow-strong">2</span>
                             </Link>
-                        </motion.div>
 
-                        {isAuthenticated ? (
-                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                <Link to={user?.role === 'admin' ? '/admin' : '/my-assets'} className="w-8 h-8 md:w-9 md:h-9 bg-primary rounded-full flex items-center justify-center text-white hover:bg-primary/90 transition-all border-2 border-white shadow-soft shrink-0">
-                                    <UserIcon size={16} />
+                            {isAuthenticated ? (
+                                <Link to={user?.role === 'admin' ? '/admin' : '/my-assets'} className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary hover:bg-primary hover:text-bg transition-all">
+                                    <UserIcon size={18} />
                                 </Link>
-                            </motion.div>
-                        ) : (
-                            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                                <Link to="/login" className="px-5 py-2 md:py-2.5 rounded-full bg-primary text-white text-[10px] md:text-sm font-bold tracking-wide hover:shadow-glow hover:bg-accent transition-all duration-300">
-                                    Sign In
+                            ) : (
+                                <Link to="/login" className="px-6 py-2.5 rounded-xl bg-primary text-bg text-xs font-black tracking-widest hover:shadow-glow-strong hover:scale-105 transition-all active:scale-95">
+                                    INITIALIZE
                                 </Link>
-                            </motion.div>
-                        )}
-                    </div>
-                </motion.div>
+                            )}
+                        </div>
+                    </motion.div>
+                </div>
             </motion.nav>
 
-            {/* Content with Page Transitions */}
-            <main className="flex-1 pt-32 pb-20 px-6 max-w-[1600px] mx-auto w-full relative z-10">
-                <AnimatePresence initial={false}>
+            {/* Main Application Interface */}
+            <main className="flex-1 w-full max-w-[1440px] mx-auto px-4 pt-32 pb-20 relative z-10">
+                <AnimatePresence mode="wait">
                     <motion.div
                         key={location.pathname}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        initial={{ opacity: 0, scale: 0.98, filter: 'blur(10px)' }}
+                        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                        exit={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <Outlet />
                     </motion.div>
                 </AnimatePresence>
             </main>
 
-            {/* Rich Footer */}
-            <footer className="bg-white border-t border-gray-100 pt-16 pb-8 px-6 relative z-10 mt-auto">
-                <div className="max-w-[1400px] mx-auto">
-                    {/* Footer Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
-                        {/* Brand Column */}
-                        <div className="lg:col-span-1 space-y-5">
-                            <Link to="/" className="flex items-center gap-2 font-display font-bold text-xl text-primary">
-                                <img src="/logo.png" alt="DigiNepal" className="w-10 h-10 object-contain rounded-lg" />
-                                DigiNepal
-                            </Link>
-                            <p className="text-sm text-text-dim leading-relaxed">
-                                Nepal's premier digital asset marketplace for 3D models, textures, scripts, and creative resources.
-                            </p>
-                            <div className="flex items-center gap-2 text-xs font-bold text-green-600 bg-green-50 px-3 py-2 rounded-full w-fit">
-                                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                                All systems operational
+            {/* HUD Information Terminal (Footer) */}
+            <footer className="relative mt-auto border-t border-white/5 bg-surface/50 backdrop-blur-xl pt-16 pb-8">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+                        {/* Brand Interface */}
+                        <div className="lg:col-span-2 space-y-6">
+                            <div className="space-y-4">
+                                <Link to="/" className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-primary/10 border border-primary/30 rounded-xl flex items-center justify-center">
+                                        <Terminal size={20} className="text-primary" />
+                                    </div>
+                                    <span className="font-display font-black text-2xl tracking-tighter text-white">DIGINEPAL_CORE</span>
+                                </Link>
+                                <p className="text-text-dim text-sm leading-relaxed max-w-sm">
+                                    Nepal's advanced digital asset distribution nodes. Providing high-fidelity 3D models, AI-optimized tools, and creative scripts for the global development grid.
+                                </p>
+                            </div>
+                            
+                            <div className="flex flex-wrap gap-4">
+                                <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
+                                    <Shield size={14} className="text-primary" />
+                                    <span className="text-[10px] font-mono font-bold uppercase text-text-dim">Secured.v4</span>
+                                </div>
+                                <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
+                                    <Zap size={14} className="text-secondary" />
+                                    <span className="text-[10px] font-mono font-bold uppercase text-text-dim">Latency: 14ms</span>
+                                </div>
+                                <div className="flex items-center gap-2 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
+                                    <Globe size={14} className="text-accent" />
+                                    <span className="text-[10px] font-mono font-bold uppercase text-text-dim">Region: NP-KTM</span>
+                                </div>
                             </div>
                         </div>
 
-                        {/* Marketplace */}
-                        <div className="space-y-4">
-                            <h4 className="text-xs font-black uppercase tracking-widest text-text-dim">Marketplace</h4>
-                            <ul className="space-y-3">
-                                {footerLinks.marketplace.map(link => (
-                                    <li key={link.label}>
-                                        <Link to={link.path} className="text-sm text-text-dim hover:text-primary transition-colors">
-                                            {link.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Resources / Guides */}
-                        <div className="space-y-4">
-                            <h4 className="text-xs font-black uppercase tracking-widest text-text-dim flex items-center gap-1.5">
-                                <BookOpen size={12} /> Guides
-                            </h4>
-                            <ul className="space-y-3">
-                                {footerLinks.resources.map(link => (
-                                    <li key={link.label}>
-                                        <Link to={link.path} className="text-sm text-text-dim hover:text-primary transition-colors">
-                                            {link.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Company */}
-                        <div className="space-y-4">
-                            <h4 className="text-xs font-black uppercase tracking-widest text-text-dim">Company</h4>
-                            <ul className="space-y-3">
-                                {footerLinks.company.map(link => (
-                                    <li key={link.label}>
-                                        <Link to={link.path} className="text-sm text-text-dim hover:text-primary transition-colors">
-                                            {link.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* Legal */}
-                        <div className="space-y-4">
-                            <h4 className="text-xs font-black uppercase tracking-widest text-text-dim">Legal</h4>
-                            <ul className="space-y-3">
-                                {footerLinks.legal.map(link => (
-                                    <li key={link.label}>
-                                        <Link to={link.path} className="text-sm text-text-dim hover:text-primary transition-colors">
-                                            {link.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                        {/* Link Terminals */}
+                        {Object.entries(footerLinks).map(([title, links]) => (
+                            <div key={title} className="space-y-6">
+                                <h4 className="text-[11px] font-black uppercase tracking-[0.2em] text-primary">{title}</h4>
+                                <ul className="space-y-3">
+                                    {links.map((link) => (
+                                        <li key={link.label}>
+                                            <Link to={link.path} className="text-sm text-text-dim hover:text-white transition-colors flex items-center gap-2 group">
+                                                <span className="w-1.5 h-[1px] bg-white/20 group-hover:w-3 group-hover:bg-primary transition-all" />
+                                                {link.label}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
 
-                    {/* Bottom Bar */}
-                    <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-text-dim">
-                        <div className="flex flex-wrap items-center gap-4">
-                            <p>© {new Date().getFullYear()} DigiNepal. All rights reserved.</p>
-                            <span className="hidden md:inline text-gray-200">|</span>
-                            <p>Made with ♥ in Pokhara, Nepal 🇳🇵</p>
+                    {/* Meta Readout */}
+                    <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div className="flex flex-col gap-1">
+                            <p className="text-[10px] font-mono text-text-light uppercase tracking-widest leading-none">© {new Date().getFullYear()} DIGINEPAL OPS. ALL PARAMETERS RESERVED.</p>
+                            <p className="text-[9px] font-mono text-text-light/50 tracking-tighter">PROJECT_ID: DN-779-ALPHA | BUILT_IN_POKHARA_NP</p>
                         </div>
-                        <div className="flex flex-wrap items-center gap-4">
-                            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">🔒 SSL Secured</span>
-                            <span className="bg-green-50 text-green-700 px-3 py-1 rounded-full font-bold">✓ DMCA Protected</span>
-                            <Link to="/admin" className="hover:text-primary transition-colors">Admin</Link>
+                        
+                        <div className="flex items-center gap-6">
+                             <div className="flex items-center gap-2 text-[10px] font-bold text-primary px-4 py-2 border border-primary/20 rounded-full bg-primary/5">
+                                <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                                NODES_OPERATIONAL
+                             </div>
+                             <div className="hidden md:flex items-center gap-4">
+                                <a href="#" className="text-text-dim hover:text-primary transition-colors font-mono text-[10px]">X.COM</a>
+                                <a href="#" className="text-text-dim hover:text-primary transition-colors font-mono text-[10px]">DISCORD</a>
+                             </div>
                         </div>
                     </div>
                 </div>
@@ -243,3 +225,4 @@ export default function Layout() {
         </div>
     );
 }
+

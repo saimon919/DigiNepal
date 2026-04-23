@@ -7,28 +7,26 @@ export default {
     theme: {
         extend: {
             colors: {
-                // Ultra Premium Apple-esque Light Theme
-                bg: '#FAFAFC', // Crisp Off-White
-                surface: '#FFFFFF',
+                // Futuristic HUD Dark Theme
+                bg: '#020617', // Deep Midnight
+                surface: '#0F172A', // Slate 900
+                'surface-light': '#1E293B', // Slate 800
 
-                // Primary Palette
-                primary: '#0F172A', // Very dark slate (near black)
-                secondary: '#E2E8F0', // Soft cool gray
-                accent: '#4F46E5', // Vibrant Indigo
-                'accent-hover': '#4338CA',
-
-                // Deep Gradients
-                'gradient-start': '#E0E7FF',
-                'gradient-end': '#F5F3FF',
+                // HUD Accents (Glow colors)
+                primary: '#22c55e', // Neon Green
+                secondary: '#3b82f6', // Cyber Blue
+                accent: '#06b6d4', // Teal/Cyan
+                'accent-pink': '#d946ef', // HUD Pink for warnings
 
                 // Text
-                'text-main': '#020617', // Slate 950
-                'text-dim': '#64748B',  // Slate 500
-                'text-light': '#94A3B8', // Slate 400
+                'text-main': '#F8FAFC', // Near White
+                'text-dim': '#94A3B8',  // Slate 400
+                'text-light': '#64748B', // Slate 500
             },
             fontFamily: {
                 sans: ['Inter', 'system-ui', 'sans-serif'],
                 display: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+                mono: ['JetBrains Mono', 'monospace'],
             },
             borderRadius: {
                 '3xl': '1.5rem',
@@ -36,21 +34,35 @@ export default {
                 '5xl': '2.5rem',
             },
             boxShadow: {
-                'soft': '0 4px 20px -2px rgba(0,0,0,0.03)',
-                'glow': '0 0 40px -10px rgba(79, 70, 229, 0.15)',
-                'hover': '0 20px 40px -4px rgba(0,0,0,0.08)',
-                'premium': '0px 2px 40px rgba(0, 0, 0, 0.04), 0px 1px 3px rgba(0, 0, 0, 0.05)',
+                'hud': '0 0 15px rgba(34, 197, 94, 0.15)',
+                'hud-blue': '0 0 15px rgba(59, 130, 246, 0.15)',
+                'glow-strong': '0 0 30px rgba(34, 197, 94, 0.4)',
+                'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
             },
             backgroundImage: {
-                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'mesh': 'radial-gradient(at 40% 20%, hsla(258,100%,74%,0.15) 0px, transparent 50%), radial-gradient(at 80% 0%, hsla(189,100%,70%,0.15) 0px, transparent 50%), radial-gradient(at 0% 50%, hsla(333,100%,70%,0.15) 0px, transparent 50%)',
+                'hud-gradient': 'linear-gradient(180deg, rgba(34, 197, 94, 0.05) 0%, rgba(34, 197, 94, 0) 100%)',
+                'cyber-gradient': 'linear-gradient(135deg, #22c55e 0%, #3b82f6 100%)',
+                'glass-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%)',
             },
             animation: {
+                'scanline': 'scanline 6s linear infinite',
+                'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                'border-flow': 'border-flow 4s linear infinite',
                 'blob': 'blob 10s infinite',
-                'bounce-slow': 'bounce 3s infinite',
-                'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             },
             keyframes: {
+                scanline: {
+                    '0%': { transform: 'translateY(-100%)' },
+                    '100%': { transform: 'translateY(100%)' },
+                },
+                'pulse-glow': {
+                    '0%, 100%': { opacity: '0.4', filter: 'brightness(1)' },
+                    '50%': { opacity: '0.8', filter: 'brightness(1.5)' },
+                },
+                'border-flow': {
+                    '0%': { backgroundPosition: '0% 50%' },
+                    '100%': { backgroundPosition: '100% 50%' },
+                },
                 blob: {
                     '0%': { transform: 'translate(0px, 0px) scale(1)' },
                     '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
@@ -62,3 +74,4 @@ export default {
     },
     plugins: [],
 }
+
