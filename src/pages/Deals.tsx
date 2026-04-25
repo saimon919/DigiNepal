@@ -27,7 +27,7 @@ export default function Deals() {
 
             {/* Deals Grid */}
             <div className="max-w-4xl mx-auto space-y-24">
-                {affiliateProducts.map((product, idx) => (
+                {affiliateProducts.map((product) => (
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
