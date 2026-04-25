@@ -16,6 +16,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
 import DMCA from './pages/DMCA';
 import FreeResources from './pages/FreeResources';
+import Deals from './pages/Deals';
 import { useAuthStore } from './store/useAuthStore';
 
 // Protected Route Component
@@ -59,6 +60,7 @@ function App() {
                     <Route path="dmca" element={<DMCA />} />
                     <Route path="free-resources" element={<FreeResources />} />
                     <Route path="product/:id" element={<ProductDetail />} />
+                    <Route path="deals" element={<Deals />} />
                     <Route
                         path="my-assets"
                         element={

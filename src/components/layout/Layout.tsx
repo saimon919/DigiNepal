@@ -48,6 +48,7 @@ export default function Layout() {
         { name: 'LIBRARY', path: '/my-assets', icon: <Database size={20} /> },
         { name: 'GUIDES', path: '/guides', icon: <BookOpen size={20} /> },
         { name: 'FREE', path: '/free-resources', icon: <FolderArchive size={20} /> },
+        { name: 'DEALS', path: '/deals', icon: <Zap size={20} /> },
     ];
 
     return (
@@ -105,6 +106,7 @@ export default function Layout() {
                                         { name: 'DASHBOARD', path: '/' },
                                         { name: 'STORE', path: '/store' },
                                         { name: 'RESOURCES', path: '/free-resources' },
+                                        { name: 'DEALS', path: '/deals' },
                                         { name: 'GUIDES', path: '/guides' },
                                     ].map((item) => {
                                         const isActive = location.pathname === item.path;
