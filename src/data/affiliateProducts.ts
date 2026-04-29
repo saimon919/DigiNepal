@@ -34,5 +34,25 @@ export const affiliateProducts: AffiliateProduct[] = [
         idealUser: 'Commuters, students, office workers, and travelers who refuse to sweat through their shirts.',
         image: 'https://m.media-amazon.com/images/I/51dr7K2jXfL._AC_SX679_.jpg',
         disclosure: 'As an Amazon Associate, I earn from qualifying purchases.'
+    },
+    {
+        id: 'af-2',
+        slug: 'tula-glow-eye-balm',
+        title: 'TULA Skincare Glow & Get It Eye Balm',
+        headline: 'Erase Dark Circles Instantly! This Cooling Eye Balm is Your "Fake 8 Hours of Sleep" Hack ✨',
+        hook: 'Tired of looking exhausted? This probiotic-powered eye balm instantly cools, hydrates, and brightens your under-eye area, giving you that \'wide awake\' glow in seconds.',
+        affiliateLink: 'https://amzn.to/4n8Tmqn',
+        category: 'Skincare & Beauty',
+        features: [
+            'Probiotic Extracts: Soothes and deeply hydrates the delicate eye area.',
+            'Instant Cooling Effect: Refreshing sensation that immediately depuffs tired eyes.',
+            'Caffeine & Hyaluronic Acid: Firms, tightens, and plumps fine lines for a youthful look.',
+            'On-The-Go Glow: Perfect to apply under or over makeup for midday touch-ups.'
+        ],
+        pros: 'Very refreshing, easy to apply, instant brightening effect.',
+        cons: 'The cooling sensation might be strong for very sensitive skin.',
+        idealUser: 'Busy professionals, parents, and anyone looking for a quick fix for tired, puffy eyes.',
+        image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80',
+        disclosure: 'As an Amazon Associate, I earn from qualifying purchases.'
     }
 ];
