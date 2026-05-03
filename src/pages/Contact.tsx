@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Send, Headphones, MessageSquare, Instagram, Music2, Share2, Ghost, CheckCircle, Terminal, ShieldAlert, Cpu, Lock, Zap } from 'lucide-react';
+import { Mail, Send, Headphones, MessageSquare, Instagram, Music2, Share2, Ghost, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 

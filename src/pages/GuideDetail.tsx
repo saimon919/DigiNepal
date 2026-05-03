@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { ChevronLeft, Clock, ArrowRight, BookOpen, Share2, Shield, Zap, Terminal, Activity, Cpu, Globe, User, Calendar, HelpCircle } from 'lucide-react';
+import { ChevronLeft, Clock, ArrowRight, BookOpen, Share2, Zap, Terminal, Activity, Cpu, Globe, User, Calendar, HelpCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import AdBanner from '../components/AdBanner';
