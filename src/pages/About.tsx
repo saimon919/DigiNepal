@@ -1,4 +1,4 @@
-import { Target, Zap, Shield, Globe, Award, Database, Terminal, Server, Activity, Cpu, MapPin, Users } from 'lucide-react';
+import { Target, Zap, Terminal, Users, MapPin, Shield, Database } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 

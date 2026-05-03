@@ -1,4 +1,4 @@
-import { ShieldCheck, AlertTriangle, FileText, Activity, Terminal, Lock, Database, Cpu, Mail, MapPin } from 'lucide-react';
+import { ShieldCheck, AlertTriangle, FileText, Terminal, Lock, Mail, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 

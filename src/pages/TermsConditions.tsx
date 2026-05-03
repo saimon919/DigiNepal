@@ -1,4 +1,4 @@
-import { ShieldCheck, Activity, Lock, Database, Cpu, FileText, CheckCircle } from 'lucide-react';
+import { Lock, FileText, CheckCircle } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 export default function TermsConditions() {

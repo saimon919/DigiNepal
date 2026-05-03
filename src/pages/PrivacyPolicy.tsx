@@ -1,4 +1,4 @@
-import { ShieldCheck, Activity, Terminal, Lock, Database, Cpu, Mail, MapPin } from 'lucide-react';
+import { ShieldCheck, Terminal, Lock, Mail, MapPin } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 export default function PrivacyPolicy() {
