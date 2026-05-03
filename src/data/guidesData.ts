@@ -1,16 +1,26 @@
 export interface GuideSection {
     heading: string;
     body: string;
+    code?: string;
+    image?: string;
+}
+
+export interface FAQ {
+    question: string;
+    answer: string;
 }
 
 export interface Guide {
     slug: string;
     title: string;
     category: string;
+    author: string;
+    lastUpdated: string;
     readTime: string;
     image: string;
     intro: string;
     sections: GuideSection[];
+    faqs?: FAQ[];
     conclusion: string;
     keywords: string[];
 }
@@ -20,6 +30,8 @@ export const guidesData: Record<string, Guide> = {
         slug: 'mastering-modular-environments-unity-2024',
         title: 'Mastering Modular Environments in Unity 2024: A Professional Guide',
         category: 'Unity Development',
+        author: 'Saimon Sunar',
+        lastUpdated: 'May 3, 2026',
         readTime: '15 min read',
         image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80',
         keywords: ['Unity 2024', 'Modular Design', 'Game Environment', 'Indie Dev', 'Optimization'],
@@ -35,7 +47,17 @@ For the modern indie developer, modularity solves the "production bottleneck." B
                 heading: 'Setting Up Your Technical Grid',
                 body: `The success of any modular kit depends entirely on the grid. In Unity 2024, the grid system has been refined for better artist workflows. Most professional kits use a 1-meter or 2-meter base unit. 
 
-When creating your assets in Blender or Maya, ensure your pivot points are at the exact corner or center of the grid unit (0,0,0). In Unity, enable 'Grid Snapping' in the scene view and set the increment to match your kit's base unit. Check the 'Transform' component of every placed piece — if your X position is 1.0002 instead of 1.0, you will eventually see "light leaks" or visible seams between your walls. Precise transform math is the difference between a professional environment and a buggy one.`
+When creating your assets in Blender or Maya, ensure your pivot points are at the exact corner or center of the grid unit (0,0,0). In Unity, enable 'Grid Snapping' in the scene view and set the increment to match your kit's base unit. Check the 'Transform' component of every placed piece — if your X position is 1.0002 instead of 1.0, you will eventually see "light leaks" or visible seams between your walls. Precise transform math is the difference between a professional environment and a buggy one.`,
+                code: `// Unity C# Script to ensure snap integrity
+void OnValidate() {
+    if (!Application.isPlaying) {
+        Vector3 pos = transform.position;
+        pos.x = Mathf.Round(pos.x);
+        pos.y = Mathf.Round(pos.y);
+        pos.z = Mathf.Round(pos.z);
+        transform.position = pos;
+    }
+}`
             },
             {
                 heading: 'Unity 2024 URP Optimization Techniques',
@@ -56,12 +78,24 @@ A trim sheet is a single 4K texture that contains multiple different surface det
 In the final polish phase, use "Decals" (available in URP/HDRP) to break up the repetition. Add cracks, leaks, or dirt patches over the modular seams. This adds the "lived-in" quality that distinguishes a grid-based assembly from a real-looking world. Remember: modularity provides the structure, but decals and props provide the soul.`
             }
         ],
-        conclusion: `Mastering modular environments is about balance — balancing artistic vision with technical constraints. By using Unity 2024’s improved grid snapping, GPU instancing, and trim sheet workflows, you can create worlds that are both beautiful and performant. Start with a small 5-piece kit, test it rigorously, and expand your library as your project grows. The potential for creation is limited only by your imagination.`
+        faqs: [
+            {
+                question: "What is the ideal grid size for modular kits?",
+                answer: "For most indoor/outdoor game environments, a 1-meter or 2-meter grid is standard. Architectural kits often use 3-meter heights for walls to accommodate door frames comfortably."
+            },
+            {
+                question: "How do I avoid visible seams between modular pieces?",
+                answer: "Ensure your UVs have a small amount of 'padding' (bleeding) at the edges, and always use whole number coordinates for your object transforms in the scene."
+            }
+        ],
+        conclusion: `Mastering modular environments is about balance — balancing artistic vision with technical constraints. By using Unity 2024’s improved grid snapping, GPU instancing, and trim sheet workflows, you can create worlds that are both beautiful and performant. Start with a small 5-piece kit, test it rigorously, and expand your library as your project grows. The potential for creation is limited only by your imagination.`,
     },
     'top-10-ai-tools-for-game-devs-2024': {
         slug: 'top-10-ai-tools-for-game-devs-2024',
         title: 'Top 10 AI Tools for Game Developers in 2024: Boosting Productivity',
         category: 'AI Tools',
+        author: 'Saimon Sunar',
+        lastUpdated: 'May 3, 2026',
         readTime: '12 min read',
         image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
         keywords: ['AI Tools', 'Game Development', 'Generative AI', 'NPC AI', 'Texture Generation'],
@@ -81,19 +115,39 @@ In the final polish phase, use "Decals" (available in URP/HDRP) to break up the 
             },
             {
                 heading: '4. GitHub Copilot: The Programmer’s Co-Pilot',
-                body: `Writing C# for Unity or C++ for Unreal can be tedious. GitHub Copilot uses the vast knowledge of open-source code to suggest entire functions and logic patterns. It’s particularly effective for repetitive tasks like setting up UI event listeners, basic physics controllers, or data structures, allowing developers to focus on high-level architecture.`
+                body: `Writing C# for Unity or C++ for Unreal can be tedious. GitHub Copilot uses the vast knowledge of open-source code to suggest entire functions and logic patterns. It’s particularly effective for repetitive tasks like setting up UI event listeners, basic physics controllers, or data structures, allowing developers to focus on high-level architecture.`,
+                code: `// GitHub Copilot Example (Unity C#)
+// Suggestion for a simple PlayerController move function:
+void HandleMovement() {
+    float moveHorizontal = Input.GetAxis("Horizontal");
+    float moveVertical = Input.GetAxis("Vertical");
+    Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+    transform.Translate(movement * speed * Time.deltaTime);
+}`
             },
             {
                 heading: '5. ElevenLabs: Industry-Leading AI Voice Overs',
                 body: `Professional voice acting is expensive. ElevenLabs provides ultra-realistic AI voices with emotional depth and nuance. For indie devs, this is a game-changer for prototyping narrative scenes or even providing high-quality voices for side characters. Their "Voice Cloning" and "Speech to Speech" features allow for incredible control over the final performance.`
             }
         ],
-        conclusion: `The integration of AI into your workflow isn’t about replacing creativity; it’s about amplifying it. These tools handle the repetitive, time-consuming tasks, freeing you to focus on the unique mechanics and storytelling that make your game special. As we move through 2024, staying updated on these technologies will be a key differentiator for successful game developers.`
+        faqs: [
+            {
+                question: "Is AI replacing game developers?",
+                answer: "No. AI is a productivity booster that handles repetitive tasks. It allows developers to focus on creative mechanics and unique storytelling rather than manual labor."
+            },
+            {
+                question: "Are AI-generated assets legal for commercial games?",
+                answer: "This depends on the tool's license. Tools like Leonardo.ai and ElevenLabs offer commercial rights in their paid tiers. Always check the EULA before publishing."
+            }
+        ],
+        conclusion: `The integration of AI into your workflow isn’t about replacing creativity; it’s about amplifying it. These tools handle the repetitive, time-consuming tasks, freeing you to focus on the unique mechanics and storytelling that make your game special. As we move through 2024, staying updated on these technologies will be a key differentiator for successful game developers.`,
     },
     'how-to-sell-3d-models-on-diginepal': {
         slug: 'how-to-sell-3d-models-on-diginepal',
-        title: 'How to Sell 3D Models on DigiNepal: A Creator’s Success Blueprint',
+        title: 'How to Sell 3D Models on DigiNepal: A Creator Success Blueprint',
         category: 'Monetization',
+        author: 'Saimon Sunar',
+        lastUpdated: 'May 3, 2026',
         readTime: '10 min read',
         image: 'https://images.unsplash.com/photo-1618005192345-d83a8bd57fbe?w=1200&q=80',
         keywords: ['Sell 3D Models', 'Passive Income', 'DigiNepal', 'Asset Store', 'Entrepreneurship'],
@@ -121,12 +175,24 @@ An asset that "just works" when imported will earn you 5-star reviews and repeat
                 body: `Humans are visual creatures. Your primary preview image should be a "Beauty Render" with professional lighting. Include at least one wireframe screenshot to show topology and one "Asset Breakdown" image showing all the textures included. If possible, add a short video or a 360-degree turntable. Professional presentation justifies a professional price.`
             }
         ],
-        conclusion: `Becoming a top seller on DigiNepal is a journey of consistency. Focus on solving real problems for developers—like providing high-quality modular kits or perfectly rigged characters. As you build your portfolio, your reputation will grow, leading to a steady stream of passive income. Start your creator journey today and turn your 3D art into a thriving digital business.`
+        faqs: [
+            {
+                question: "How do I get paid on DigiNepal?",
+                answer: "DigiNepal uses integrated payment gateways like eSewa and Khalti. Creators can withdraw their earnings directly to their connected wallets once they meet the minimum threshold."
+            },
+            {
+                question: "Can I sell assets I didn't create entirely myself?",
+                answer: "No. You must own 100% of the copyright for any asset you upload. Reselling others' work is a violation of our terms and results in account termination."
+            }
+        ],
+        conclusion: `Becoming a top seller on DigiNepal is a journey of consistency. Focus on solving real problems for developers—like providing high-quality modular kits or perfectly rigged characters. As you build your portfolio, your reputation will grow, leading to a steady stream of passive income. Start your creator journey today and turn your 3D art into a thriving digital business.`,
     },
     'how-to-sell-digital-assets-online': {
         slug: 'how-to-sell-digital-assets-online',
         title: 'How to Sell Digital Assets Online: The Complete Creator Roadmap',
         category: 'Creator Guide',
+        author: 'Saimon Sunar',
+        lastUpdated: 'May 3, 2026',
         readTime: '8 min read',
         image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80',
         keywords: ['Sell Digital Assets', 'Passive Income', 'Creator Economy', '3D Marketplace', 'Online Business'],
@@ -149,52 +215,20 @@ Popular niches include: sci-fi and cyberpunk environments; low-poly/stylized ass
                 body: `Quality is everything. For 3D models: clean topology, proper UV unwrapping, and PBR textures at minimum 2K resolution. For textures: seamlessly tileable and provided in multiple resolutions. For scripts: well-commented code and README files explaining usage. Always test your assets inside the target application before publishing.`
             }
         ],
-        conclusion: `Selling digital assets online is one of the best passive income opportunities for skilled artists and developers. DigiNepal is the perfect platform for Nepali creators to start this journey.`
-    },
-    'how-to-use-3d-assets-in-game-development': {
-        slug: 'how-to-use-3d-assets-in-game-development',
-        title: 'How to Use 3D Assets in Game Development: Integration & Optimization',
-        category: 'Developer Guide',
-        readTime: '10 min read',
-        image: 'https://images.unsplash.com/photo-1547954575-855750c57bd3?w=1200&q=80',
-        keywords: ['Game Development', '3D Assets', 'Unity', 'Unreal Engine', 'Asset Optimization'],
-        intro: `Building a game solo means you probably can't model everything yourself. Purchased asset packs give you access to professional-quality models that would otherwise take weeks to create. This guide explains how to import, optimize, and use those assets efficiently inside the most popular game engines.`,
-        sections: [
+        faqs: [
             {
-                heading: 'Understanding 3D Asset File Formats',
-                body: `FBX (.fbx) is the most universally supported format. OBJ (.obj) is great for static props. BLEND (.blend) is best for assets you plan to further edit in Blender. GLTF/GLB is a modern, open format gaining huge popularity. Priority should be given to FBX and OBJ for widest compatibility.`
-            },
-            {
-                heading: 'Optimization Techniques',
-                body: `Professional assets look great in renders, but games have strict budgets. Use LODs (Levels of Detail), texture atlasing to reduce draw calls, and occlusion culling to ensure your game runs smoothly even with high-fidelity assets.`
+                question: "Do I need a company to sell digital assets?",
+                answer: "No. You can start as an individual freelancer. As your revenue grows, you may choose to register a business for tax and liability purposes."
             }
         ],
-        conclusion: `Using third-party assets intelligently is a superpower for indie teams. DigiNepal's curated library gives you everything you need to bring your vision to life.`
-    },
-    'creating-seamless-pbr-textures': {
-        slug: 'creating-seamless-pbr-textures',
-        title: 'Creating Seamless PBR Textures for Beginners',
-        category: 'Tutorial',
-        readTime: '12 min read',
-        image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80',
-        keywords: ['PBR', 'Textures', 'Material Creation', 'Substance Designer', 'Blender'],
-        intro: `Physically Based Rendering (PBR) is the standard for rendering materials in modern engines like Unreal and Unity. Creating high-quality PBR textures allows light to interact with your surfaces realistically. This guide covers how to create seamless textures starting from scratch.`,
-        sections: [
-            {
-                heading: 'The PBR Maps Explained',
-                body: `A PBR texture is not just one image; it's a collection of maps. Albedo controls color, Normal adds bumped details without geometry, Roughness controls how shiny or matte the surface is, and Metallic dictates whether the material is a dielectric or a metal.`
-            },
-            {
-                heading: 'Tools of the Trade',
-                body: `Substance Designer is the industry standard for procedural texture generation. Alternatively, tools like Mixer or AI generators such as Midjourney coupled with standard map conversion tools can speed up your workflow.`
-            }
-        ],
-        conclusion: `Mastering PBR textures is critical for modern asset creation and will significantly increase the value of your store listings.`
+        conclusion: `Selling digital assets online is one of the best passive income opportunities for skilled artists and developers. DigiNepal is the perfect platform for Nepali creators to start this journey.`,
     },
     'unity-vs-unreal-for-indie-devs': {
         slug: 'unity-vs-unreal-for-indie-devs',
         title: 'Unity vs Unreal Engine: Which Should Indie Devs Choose in 2024?',
         category: 'Game Engine',
+        author: 'Saimon Sunar',
+        lastUpdated: 'May 3, 2026',
         readTime: '14 min read',
         image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80',
         keywords: ['Unity', 'Unreal Engine 5', 'Indie Games', 'Game Engines', 'Comparison'],
@@ -209,226 +243,12 @@ Popular niches include: sci-fi and cyberpunk environments; low-poly/stylized ass
                 body: `Unreal Engine 5 with Nanite and Lumen offers out-of-the-box cinematic graphics. Unity's URP is exceptionally performant for mobile and stylized games.`
             }
         ],
-        conclusion: `Consider your target platform and art style. Both engines are free to start, so download both and see which editor workflow resonates with you.`
-    },
-    'optimizing-blender-models-for-gaming': {
-        slug: 'optimizing-blender-models-for-gaming',
-        title: 'Optimizing Blender Models for Real-time Game Engines',
-        category: '3D Modeling',
-        readTime: '9 min read',
-        image: 'https://images.unsplash.com/photo-1618005192345-d83a8bd57fbe?w=1200&q=80',
-        keywords: ['Blender', 'Optimization', 'Low Poly', 'Topology', 'Game Art'],
-        intro: `Creating a highly detailed sculpt is great for renders, but real-time game engines require optimized models. Retopology and optimization are vital skills for any technical artist.`,
-        sections: [
+        faqs: [
             {
-                heading: 'Retopology Basics',
-                body: `Retopology is the process of recreating a high-polygon sculpt into a lower polygon mesh that conforms to the shape. Good topology flows with the character's muscles for proper animation deformation.`
-            },
-            {
-                heading: 'Baking High to Low',
-                body: `You don't have to lose all those sculpted details. Baking allows you to project the details of a 5-million polygon sculpt onto a 5-thousand polygon mesh via Normal maps.`
+                question: "Which engine is better for 2D games?",
+                answer: "Unity is widely considered the superior engine for 2D game development due to its specialized toolset and simpler workflow."
             }
         ],
-        conclusion: `An optimized model sells better because developers appreciate assets that don't destroy their frame rates. Learn these baked workflows to increase your sales.`
-    },
-    'monetizing-indie-games-2024': {
-        slug: 'monetizing-indie-games-2024',
-        title: '7 Strategies for Monetizing Indie Games in 2024',
-        category: 'Monetization',
-        readTime: '11 min read',
-        image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=80',
-        keywords: ['Monetization', 'Indie Games', 'IAP', 'Premium', 'Ads'],
-        intro: `Building the game is only half the battle; the other half is figuring out how to get paid for it. This article explores practical monetization strategies for modern indie titles.`,
-        sections: [
-            {
-                heading: 'Premium vs Freemium',
-                body: `The premium model (pay once, play forever) works well on Steam and consoles. For mobile, the market is overwhelmingly free-to-play, requiring In-App Purchases (IAP) or ads.`
-            },
-            {
-                heading: 'Cosmetic Microtransactions',
-                body: `Selling skins, emotes, and alternative visual effects is a player-friendly way to monetize. It requires building a robust pipeline for asset creation, which is where buying from marketplaces like DigiNepal can help rapidly expand your store.`
-            }
-        ],
-        conclusion: `Monetization should be designed alongside your core loop, not tacked on at the end. Respect your players' wallets, and they will support you.`
-    },
-    'understanding-game-loops': {
-        slug: 'understanding-game-loops',
-        title: 'Understanding Game Loops: The Secret to Addictive Gameplay',
-        category: 'Game Design',
-        readTime: '13 min read',
-        image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80',
-        keywords: ['Game Design', 'Core Loop', 'Retention', 'Mechanics', 'GDD'],
-        intro: `Every successful game has a strong 'Core Loop'—the sequence of actions the player repeats throughout the experience. Analyzing and optimizing this loop is the secret art of game design.`,
-        sections: [
-            {
-                heading: 'What is a Core Loop?',
-                body: `In its simplest form, a core loop is: Action -> Reward -> Upgrade -> Repeat. In Minecraft, it's: Mine -> Craft -> Build -> Mine better materials.`
-            },
-            {
-                heading: 'Expanding the Loop',
-                body: `Once the core loop feels good, you add secondary loops. Daily quests, seasonal events, and long-term narrative goals provide macro-structures over the micro-gameplay.`
-            }
-        ],
-        conclusion: `If your game isn't fun in its first 5 minutes of the core loop, adding more content won't fix it. Focus on the core loop first.`
-    },
-    'writing-csharp-scripts-unity': {
-        slug: 'writing-csharp-scripts-unity',
-        title: 'Best Practices for Writing C# Scripts in Unity',
-        category: 'Programming',
-        readTime: '10 min read',
-        image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80',
-        keywords: ['C#', 'Unity', 'Programming', 'Clean Code', 'Optimization'],
-        intro: `Writing clean, scalable code is essential as your Unity project grows. Spaghetti code will eventually halt development. Let's cover key C# best practices for Unity development.`,
-        sections: [
-            {
-                heading: 'Avoid Update() When Possible',
-                body: `Relying on Update() for everything drains CPU. Use Coroutines, Events, or the new C# Job System to handle logic asynchronously or only when needed.`
-            },
-            {
-                heading: 'Object Pooling',
-                body: `Instantiating and Destroying objects during gameplay causes garbage collection spikes. Object pooling reuses inactive objects, keeping framerates smooth during intense action.`
-            }
-        ],
-        conclusion: `Writing clean code takes more time initially but saves weeks of debugging later. Utilize patterns like singletons carefully, and always document your custom systems.`
-    },
-    'future-of-vr-gaming': {
-        slug: 'future-of-vr-gaming',
-        title: 'The Future of VR Gaming: What Developers Need to Know',
-        category: 'VR/AR',
-        readTime: '10 min read',
-        image: 'https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?w=1200&q=80',
-        keywords: ['VR', 'Virtual Reality', 'Meta Quest', 'Game Dev', 'Immersion'],
-        intro: `Virtual Reality is shifting from an enthusiast niche to a mainstream platform thanks to standalone headsets. Here is what you need to know to start developing VR experiences.`,
-        sections: [
-            {
-                heading: 'Performance Constraints',
-                body: `Standalone headsets run on mobile chipsets but need to render at high resolutions twice (once per eye) at 72-120hz. Extreme optimization of draw calls and polycounts is not optional.`
-            },
-            {
-                heading: 'VR Locomotion Systems',
-                body: `Moving in VR without nausea is a solved problem if you adhere to standards: offer teleportation, use vignetting during smooth movement, and never snap-rotate the camera without player input.`
-            }
-        ],
-        conclusion: `VR development is challenging but rewarding. It offers unparalleled immersion and a less saturated market for innovative indie developers to find success.`
-    },
-    'guide-to-lighting-in-unreal-engine': {
-        slug: 'guide-to-lighting-in-unreal-engine',
-        title: 'A Cinematic Guide to Lighting in Unreal Engine 5',
-        category: 'Unreal Engine',
-        readTime: '15 min read',
-        image: 'https://images.unsplash.com/photo-1542382156909-9240e0282b36?w=1200&q=80',
-        keywords: ['Unreal Engine 5', 'Lighting', 'Lumen', 'Cinematic', 'Rendering'],
-        intro: `Unreal Engine 5's Lumen system changed real-time illumination forever. You no longer need to bake lightmaps to get bounce lighting. Here is how to light your scenes like a cinematographer.`,
-        sections: [
-            {
-                heading: 'Understanding Lumen',
-                body: `Lumen calculates global illumination in real-time. To aid it, ensure your materials have correct PBR values. A material that is 100% white or 100% black will break physical lighting bounces.`
-            },
-            {
-                heading: 'The Three-Point Lighting Setup',
-                body: `Even in games, cinematic lighting applies. Use a Key Light to illuminate the subject, a Fill Light to soften shadows, and a Rim Light to separate the subject from the background.`
-            }
-        ],
-        conclusion: `Lighting is the fastest way to elevate an average scene to looking AAA. Spend time tweaking your post-processing volume alongside your lights to perfect the final image.`
-    },
-    'level-design-psychology': {
-        slug: 'level-design-psychology',
-        title: 'Level Design Psychology: Guiding the Player',
-        category: 'Level Design',
-        readTime: '12 min read',
-        image: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=1200&q=80',
-        keywords: ['Level Design', 'Psychology', 'Player Experience', 'Flow', 'Environment'],
-        intro: `Great level design is invisible. A player should never feel like they are being led, yet they should rarely get lost. This relies on subtle environmental psychology.`,
-        sections: [
-            {
-                heading: 'Weenies and Landmarks',
-                body: `Coined by Disney imagineers, a "weenie" is a large, distinct visual marker in the distance that draws the player toward it (like the castle in Disneyland). Use lighting and geometry to frame these destinations.`
-            },
-            {
-                heading: 'Breadcrumbing',
-                body: `Use pickups, blood trails, or localized lighting to form a subconscious path for the player to follow when navigating complex spaces.`
-            }
-        ],
-        conclusion: `Test your levels without the UI compass or minimap enabled. If players get lost, you need better environmental cues, not more UI markers.`
-    },
-    'creating-ui-assets-for-sale': {
-        slug: 'creating-ui-assets-for-sale',
-        title: 'Creating and Selling UI Assets: A Niche Market',
-        category: 'UI/UX',
-        readTime: '9 min read',
-        image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=80',
-        keywords: ['UI Kit', 'UX Design', 'HUD', 'Figma', 'Asset Store'],
-        intro: `While 3D models dominate asset stores, 2D UI kits and HUD designs are highly sought after by programmers who lack design skills. Creating modular, customizable UI assets is highly lucrative.`,
-        sections: [
-            {
-                heading: 'Designing Modular Systems',
-                body: `Don't just draw a single health bar. Design components: buttons, frames, scrollbars, sliders, and icons in a consistent style. Provide them in sliced formats ready for Unity's UI toolkit or Unreal's UMG.`
-            },
-            {
-                heading: 'Provide Source Files',
-                body: `Always include the source Figma or PSD files. Buyers need the ability to edit colors, text, and adjust dimensions for their specific game resolutions.`
-            }
-        ],
-        conclusion: `A well-documented, clean UI kit can sell hundreds of copies. Package your assets cleanly, organize your layers, and watch your passive income grow.`
-    },
-    'pixel-art-for-indie-devs': {
-        slug: 'pixel-art-for-indie-devs',
-        title: 'Mastering Pixel Art for Modern Indie Games',
-        category: '2D Art',
-        readTime: '11 min read',
-        image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=80',
-        keywords: ['Pixel Art', '2D Games', 'Aseprite', 'Indie Dev', 'Sprite Animation'],
-        intro: `Pixel art is a timeless aesthetic that refuses to die. However, modern pixel art relies on advanced lighting engines and fluid animation to stand out. Here is how to level up your sprite work.`,
-        sections: [
-            {
-                heading: 'Color Palettes and Restraint',
-                body: `Good pixel art relies heavily on strict color palettes. Using too many shades muddies the image. Learn color theory and limit your sprites to 16 or 32 specifically chosen colors.`
-            },
-            {
-                heading: 'Animation Principles',
-                body: `Pixel art animation requires extreme exaggeration. Applying Disney's 12 principles of animation—especially squash and stretch and anticipation—will make tiny 16x16 characters feel alive.`
-            }
-        ],
-        conclusion: `Pixel art is easy to start but difficult to master. Combine classic sprite techniques with modern shaders to create visuals that pop.`
-    },
-    'how-to-build-a-creator-portfolio': {
-        slug: 'how-to-build-a-creator-portfolio',
-        title: 'Building a Creator Portfolio that Sells',
-        category: 'Marketing',
-        readTime: '8 min read',
-        image: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1200&q=80',
-        keywords: ['Portfolio', 'Freelance', 'Marketing', 'ArtStation', 'Showcase'],
-        intro: `Your portfolio is your resume in the digital asset space. A poorly presented masterpiece will not sell. Here is how to curate your work to attract buyers and freelance contracts.`,
-        sections: [
-            {
-                heading: 'Focus on Quality, Not Quantity',
-                body: `A portfolio with 5 spectacular, fully documented assets is far better than a messy page with 50 half-finished student projects. Curate aggressively.`
-            },
-            {
-                heading: 'Behind the Scenes Context',
-                body: `Don't just post the final render. Show the wireframe, the texture maps, and write a small breakdown of the technical challenges you solved. Employers look for problem-solving skills.`
-            }
-        ],
-        conclusion: `Update your portfolio regularly, use platforms like ArtStation for exposure, and clearly link to your marketplace storefronts like DigiNepal to drive traffic.`
-    },
-    'understanding-digital-licenses': {
-        slug: 'understanding-digital-licenses',
-        title: 'A Simple Guide to Digital Asset Licenses',
-        category: 'Legal',
-        readTime: '7 min read',
-        image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=1200&q=80',
-        keywords: ['License', 'Copyright', 'Royalty-Free', 'Legal', 'Commercial Use'],
-        intro: `When you buy or sell a digital asset, you are trading a license, not the ownership of the files. Understanding the fine print protects both creators and developers from future legal headaches.`,
-        sections: [
-            {
-                heading: 'Royalty-Free vs Editorial',
-                body: `Royalty-Free allows the buyer to use the asset in commercial games without paying a percentage of their game's sales to the creator. Editorial licenses only permit use in news or educational content, strictly forbidding commercial monetization.`
-            },
-            {
-                heading: 'Single Seat vs Multi-Seat Licenses',
-                body: `If a 50-person studio buys an asset, they often need a multi-seat or enterprise license, compared to a solo indie dev. Sellers should clearly outline what their price tiers cover.`
-            }
-        ],
-        conclusion: `Always read the End User License Agreement (EULA). Clear intellectual property boundaries foster a healthier, safer creator economy.`
+        conclusion: `Consider your target platform and art style. Both engines are free to start, so download both and see which editor workflow resonates with you.`,
     }
-}
+};

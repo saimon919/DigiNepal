@@ -3,27 +3,28 @@ import { ShoppingBag, User as UserIcon, Terminal, Shield, Zap, Globe, Activity, 
 import { useAuthStore } from '../../store/useAuthStore';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import Breadcrumbs from '../Breadcrumbs';
 
 const footerLinks = {
     MARKETPLACE: [
         { label: 'Browse Store', path: '/store' },
         { label: 'Free Resources', path: '/free-resources' },
-        { label: 'Creator Program', path: '/about' },
+        { label: 'Affiliate Deals', path: '/deals' },
         { label: 'Asset Library', path: '/store' },
     ],
     RESOURCES: [
-        { label: 'Data Cubes', path: '/guides' },
-        { label: 'Unity Sync', path: '/guides' },
-        { label: 'AI Protocols', path: '/guides' },
-        { label: 'Development Blog', path: '/guides' },
+        { label: 'Developer Guides', path: '/guides' },
+        { label: 'Unity Tutorials', path: '/guides' },
+        { label: 'AI in Game Dev', path: '/guides' },
+        { label: 'Asset Optimization', path: '/guides' },
     ],
     COMPANY: [
-        { label: 'Command Central', path: '/about' },
-        { label: 'Direct Uplink', path: '/contact' },
-        { label: 'Agent Dashboard', path: '/my-assets' },
+        { label: 'About Us', path: '/about' },
+        { label: 'Contact Support', path: '/contact' },
+        { label: 'My Dashboard', path: '/my-assets' },
     ],
-    LEGAL_MANIFEST: [
-        { label: 'Privacy Protocol', path: '/privacy-policy' },
+    LEGAL: [
+        { label: 'Privacy Policy', path: '/privacy-policy' },
         { label: 'Terms of Service', path: '/terms' },
         { label: 'DMCA Notice', path: '/dmca' },
     ],
@@ -197,6 +198,7 @@ export default function Layout() {
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     >
+                        <Breadcrumbs />
                         <Outlet />
                     </motion.div>
                 </AnimatePresence>
