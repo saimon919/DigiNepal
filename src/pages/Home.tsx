@@ -39,7 +39,7 @@ export default function Home() {
                 {/* Tech Status Badges */}
                 <div className="flex flex-wrap justify-center gap-4">
                     <div className="skeuo-inset px-5 py-2 rounded-full flex items-center gap-3">
-                        <div className="w-2 h-2 bg-primary rounded-full shadow-[0_0_8px_#8df2c0] animate-pulse" />
+                        <div className="w-2 h-2 bg-primary rounded-full shadow-[0_0_8px_var(--neon-glow)] animate-pulse" />
                         <span className="text-[10px] font-black tracking-[0.4em] text-primary uppercase text-tactical">SYSTEM_ONLINE</span>
                     </div>
                     <div className="hidden sm:flex skeuo-inset px-5 py-2 rounded-full items-center gap-3">
@@ -68,7 +68,7 @@ export default function Home() {
 
                 {/* Hero CTA */}
                 <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-6">
-                    <Link to="/store" className="group relative px-14 py-6 bg-primary rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(141,242,192,0.3)] transition-all hover:scale-105 active:scale-95">
+                    <Link to="/store" className="group relative px-14 py-6 bg-primary rounded-2xl overflow-hidden shadow-[0_0_30px_var(--neon-glow)] transition-all hover:scale-105 active:scale-95">
                         <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
                         <span className="relative text-deep font-black tracking-[0.3em] text-xs text-tactical">INITIALIZE_VAULT</span>
                     </Link>
@@ -261,7 +261,7 @@ export default function Home() {
                     </div>
                     <Link
                         to="/guides"
-                        className="relative z-10 bg-primary px-16 py-7 rounded-2xl text-deep font-black tracking-[0.4em] text-xs hover:scale-105 hover:shadow-[0_0_40px_rgba(141,242,192,0.4)] transition-all shrink-0 text-tactical"
+                        className="relative z-10 bg-primary px-16 py-7 rounded-2xl text-deep font-black tracking-[0.4em] text-xs hover:scale-105 hover:shadow-[0_0_40px_var(--neon-glow)] transition-all shrink-0 text-tactical"
                     >
                         SYNC_LEARNING
                     </Link>

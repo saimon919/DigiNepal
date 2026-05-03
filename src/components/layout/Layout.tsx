@@ -102,7 +102,7 @@ export default function Layout() {
                             {/* Right: Actions (Simplified for Mobile) */}
                             <div className="flex items-center gap-6">
                                 {/* Desktop Nav */}
-                                <nav className="hidden md:flex items-center gap-2 skeuo-inset p-1.5 rounded-2xl bg-deep/60">
+                                <nav className="hidden md:flex items-center gap-2 skeuo-inset p-1.5 rounded-2xl bg-deep/40">
                                     {[
                                         { name: 'DASHBOARD', path: '/' },
                                         { name: 'STORE', path: '/store' },
@@ -132,7 +132,7 @@ export default function Layout() {
                                 <div className="flex items-center gap-2 md:gap-4">
                                     <Link to="/cart" className="relative skeuo-panel p-2.5 md:p-3.5 rounded-xl border-white/5 hover:border-primary/40 transition-all group hover:scale-105 active:scale-95 bg-deep/40 shadow-xl">
                                         <ShoppingBag size={18} className="text-text-dim/60 group-hover:text-primary transition-colors" />
-                                        <span className="absolute -top-1 -right-1 w-4 h-4 md:w-5 md:h-5 bg-primary text-deep text-[8px] md:text-[10px] font-black rounded-full flex items-center justify-center border-2 border-deep shadow-[0_0_15px_rgba(141,242,192,0.4)]">2</span>
+                                        <span className="absolute -top-1 -right-1 w-4 h-4 md:w-5 md:h-5 bg-primary text-deep text-[8px] md:text-[10px] font-black rounded-full flex items-center justify-center border-2 border-deep shadow-[0_0_15px_var(--neon-glow)]">2</span>
                                     </Link>
 
                                     {isAuthenticated ? (
@@ -143,7 +143,7 @@ export default function Layout() {
                                             <UserIcon size={18} strokeWidth={2.5} />
                                         </Link>
                                     ) : (
-                                        <Link to="/login" className="skeuo-panel bg-primary text-deep px-5 md:px-8 py-2.5 md:py-3.5 rounded-xl text-[9px] md:text-[10px] font-black tracking-[0.4em] hover:shadow-[0_0_30px_rgba(141,242,192,0.3)] hover:scale-105 transition-all active:scale-95 text-tactical">
+                                        <Link to="/login" className="skeuo-panel bg-primary text-deep px-5 md:px-8 py-2.5 md:py-3.5 rounded-xl text-[9px] md:text-[10px] font-black tracking-[0.4em] hover:shadow-[0_0_30px_var(--neon-glow)] hover:scale-105 transition-all active:scale-95 text-tactical">
                                             <span className="hidden sm:inline">INITIALIZE</span>
                                             <span className="sm:hidden">GO</span>
                                         </Link>
